@@ -1,0 +1,91 @@
+﻿@model DrugsProject.Models.Doctor.DoctorVM
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Doctor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.licenseNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.licenseNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.specialization)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.specialization)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.userName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.privateName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.privateName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.familyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.familyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

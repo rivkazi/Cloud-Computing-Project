@@ -1,0 +1,50 @@
+﻿@model DrugsProject.Models.Patient.PatientVM
+@using DrugsProject.Models
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/scss/main.css?v=3">
+    <link rel="stylesheet" href="~/scss/skin.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="~/script/index.js?v=2"></script>
+</head>
+
+<body id="wrapper">
+    <section id="about" style="height:700px">
+        <div class="image-holder col-lg-6 col-md-6 col-sm-6 col-xs-12 pull-left">
+            <div class="background-imgholder">
+                <img src="~/img/user-background.jpg" alt="about" class="img-responsive" style="display:none;" />
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="col-md-7 col-md-offset-5 col-sm-8 col-sm-offset-2 col-xs-12 text-inner ">
+                <div class="text-block text-right" dir="rtl">
+                    <div class="section-heading">
+                        @Html.DisplayHeaderColorfulWithLink(Model.privateName, Model.familyName, 2, "fa fa-pencil", $"../Edit/{Model.Id}")
+                    </div>
+
+                    <ul class="aboutul">
+                        @Html.DisplayItemWithIcon(Model.idNumber, "fa fa-id-card-o")
+                        @Html.DisplayItemWithIcon(Model.birthDate, "fa fa-calendar")
+                        @Html.DisplayItemWithIcon(Model.age, "fa fa-user")
+                        @Html.DisplayItemWithIcon(Model.bloodType, "fa fa-tint")
+                        @Html.DisplayItemWithIcon(Model.medicalHistory, "fa fa-info")
+                        @Html.DisplayItemWithIcon(Model.phoneNumber, "fa fa-phone")
+                        @Html.DisplayItemWithIcon(Model.email, "fa fa-envelope")
+                    </ul>
+
+                    @Html.ActionLink("צפיה במרשמי לקוח", "Index", null, new { @class = "btn btn-primary slide" })
+                    @Html.ActionLink("חזרה לרשימה", "Index", null, new { @class = "btn btn-default m-12" })
+                </div>
+            </div>
+        </div>
+    </section>
+</body>

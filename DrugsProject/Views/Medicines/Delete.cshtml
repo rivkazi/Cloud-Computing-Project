@@ -1,0 +1,72 @@
+﻿@model DrugsProject.Models.MedicineVM
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/scss/main.css">
+    <link rel="stylesheet" href="~/scss/skin.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="~/script/index.js"></script>
+
+</head>
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Medicine</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.genericaName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.genericaName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.manufacturer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.manufacturer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.commercialName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.commercialName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.properties)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.properties)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imagePath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imagePath)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

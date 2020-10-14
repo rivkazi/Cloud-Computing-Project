@@ -1,0 +1,92 @@
+﻿@model IEnumerable<BE.Prescription>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PatientId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DoctorId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MedicineId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.startDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.endDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cause)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoctorId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MedicineId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.startDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.endDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cause)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+<section id="faq">
+    <div class="titlebar">
+        @{
+            foreach (var item in Model.GetPrescriptionsForPatient())
+            {
+                <div class="panel" dir="rtl">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <div class="icon-circle"> <i class="fa fa-heartbeat"></i></div>
+                            <a role="button" data-toggle="collapse" href="#@item.Id" aria-expanded="true" aria-controls="collapseOne">
+                                @item.GetMedicineForPrescription().genericaName<br />
+                                @item.startDate.ToString("dd/MM/yyyy")
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="@item.Id" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            @item.GetMedicineForPrescription().commercialName <br />
+                            הונפק ע"י: ד"ר @item.GetDoctorForPrescription().fullName <br />
+                            גורם: @item.cause
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</section>
