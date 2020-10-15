@@ -1,8 +1,14 @@
 ﻿@model DrugsProject.Models.MedicineVM
+@using DrugsProject.Models
 
-@{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/LayoutPage.cshtml";
+@{ if (RouteConfig.doctor != null)
+    {
+        Layout = "~/Views/Shared/DoctorLayoutPage.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/LayoutPage.cshtml";
+    }
 }
 
 <head>
@@ -14,53 +20,33 @@
     <script src="~/script/index.js"></script>
 
 </head>
-<div>
-    <h4>Medicine</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.genericaName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.genericaName)
-        </dd>
+<section id="about" style="height:650px">
+    <div class="image-holder col-lg-6 col-md-6 col-sm-6 col-xs-12 pull-left">
+        <div class="background-imgholder" style="background:url(../../img/colorful-backround.jpg)">
+            <img src="~/img/colorful-backround.jpg" alt="about" class="img-responsive" style="display:none;" />
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.manufacturer)
-        </dt>
+    <div class="container-fluid">
+        <div class="col-md-7 col-md-offset-5 col-sm-8 col-sm-offset-2 col-xs-12 text-inner ">
+            <div class="text-block text-right" dir="rtl">
+                <div class="section-heading">
+                    @Html.DisplayHeaderColorful(Model.genericaName, Model.commercialName, 2, "fa fa-pencil", $"../Edit/{Model.Id}")
+                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.manufacturer)
-        </dd>
+                <ul class="aboutul">
+                    @Html.DisplayItemWithIcon(Model.manufacturer, "fa fa-user")
+                    @Html.DisplayItemWithIcon(Model.properties, "fa fa-info")
+                    @Html.DisplayItemWithIcon(Model.NDC, "fa fa-check")
+                    @Html.DisplayImage(Model.fullImagePath, 200, "m-12 img-thumbnail")
+                </ul>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.commercialName)
-        </dt>
+                <div class="form-group btn-p-40">
+                    @Html.ActionLink("חזרה לרשימה", "Index", null, new { @class = "btn btn-default lef" })
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-        <dd>
-            @Html.DisplayFor(model => model.commercialName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.properties)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.properties)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.imagePath)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.imagePath)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

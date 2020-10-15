@@ -53,17 +53,19 @@ namespace DrugsProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(MedicineVM medicine)
+        public ActionResult Create(MedicineVM medicine, string gener)
         {
             if (ModelState.IsValid)
             {
                 IBL bL = new BlClass();
+                medicine.genericaName = gener;
                 bool IsAddOk = bL.AddMedicine(medicine.Current);
                 if (IsAddOk)
                     return RedirectToAction("Index");
                 else
-                    ViewBag.Error = "שגיאה מצערת בהוספת המרשם";
+                {
                     return View(medicine);
+                }                
             }
 
             return View(medicine);

@@ -1,12 +1,18 @@
 ﻿@model  DrugsProject.Models.Patient.PatientVM
-
-@{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/LayoutPage.cshtml";
+@using DrugsProject.Models
+  
+@{ if (RouteConfig.doctor != null)
+    {
+        Layout = "~/Views/Shared/DoctorLayoutPage.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/LayoutPage.cshtml";
+    }
 }
 
 <head>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/scss/main.css">
     <link rel="stylesheet" href="~/scss/skin.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -14,87 +20,102 @@
     <script src="~/script/index.js"></script>
 
 </head>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
-<div class="form-horizontal">
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.Id)
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.birthDate, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.birthDate, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.birthDate, "", new { @class = "text-danger" })
+    <section id="about" style="height:850px">
+        <div class="image-holder col-lg-6 col-md-6 col-sm-6 col-xs-12 pull-left">
+            <div class="background-imgholder">
+                <img src="~/img/user-background.jpg" alt="about" class="img-responsive" style="display:none;" />
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.bloodType, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EnumDropDownListFor(model => model.bloodType, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.bloodType, "", new { @class = "text-danger" })
-        </div>
-    </div>
+        <div class="container-fluid">
+            <div class="col-md-7 col-md-offset-5 col-sm-8 col-sm-offset-2 col-xs-12 text-inner ">
+                <div class="text-block text-right" dir="rtl">
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.Id)
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.medicalHistory, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.medicalHistory, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.medicalHistory, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                        <div class="section-heading">
+                            @Html.DisplayHeaderColorful("עדכון", "מטופל", 2)
+                        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.idNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.idNumber, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.idNumber, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                        <div class="form-group m-full-20">
+                            @Html.LabelFor(model => model.privateName, htmlAttributes: new { @class = "control-label rig required" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.privateName, new { htmlAttributes = new { @class = "form-control rig shadow-border" } })
+                                @Html.ValidationMessageFor(model => model.privateName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.privateName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.privateName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.privateName, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                        <div class="form-group m-full-20">
+                            @Html.LabelFor(model => model.familyName, htmlAttributes: new { @class = "control-label rig required" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.familyName, new { htmlAttributes = new { @class = "form-control rig shadow-border" } })
+                                @Html.ValidationMessageFor(model => model.familyName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.familyName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.familyName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.familyName, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                        <div class="form-group m-full-20">
+                            @Html.LabelFor(model => model.idNumber, htmlAttributes: new { @class = "control-label rig" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.idNumber, new { htmlAttributes = new { @class = "form-control rig shadow-border", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.idNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.phoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.phoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.phoneNumber, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                        <div class="form-group m-full-20">
+                            @Html.LabelFor(model => model.birthDate, htmlAttributes: new { @class = "control-label rig" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.birthDate, new { htmlAttributes = new { @class = "form-control rig shadow-border", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.birthDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                        <div class="form-group m-full-20">
+                            @Html.LabelFor(model => model.phoneNumber, htmlAttributes: new { @class = "control-label rig required" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.phoneNumber, new { htmlAttributes = new { @class = "form-control rig shadow-border" } })
+                                @Html.ValidationMessageFor(model => model.phoneNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="שמור שינויים" class="btn btn-default" />
+                        <div class="form-group m-full-20">
+                            @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label rig required" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control rig shadow-border" } })
+                                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group m-full-20">
+                            @Html.LabelFor(model => model.bloodType, htmlAttributes: new { @class = "control-label rig required" })
+                            <div class="col-md-9">
+                                @Html.EnumDropDownListFor(model => model.bloodType, htmlAttributes: new { @class = "form-control rig shadow-border" })
+                                @Html.ValidationMessageFor(model => model.bloodType, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group m-full-20">
+                            @Html.LabelFor(model => model.medicalHistory, htmlAttributes: new { @class = "control-label rig" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.medicalHistory, new { htmlAttributes = new { @class = "form-control rig shadow-border" } })
+                                @Html.ValidationMessageFor(model => model.medicalHistory, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="form-group">
+                            <div class="m-20">
+                                @Html.ActionLink("חזרה לרשימה", "Index", null, new { @class = "btn btn-primary rig m-0" })
+                                <input type="submit" value="עדכן מטופל" class="btn btn-default lef" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+    </section>  
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

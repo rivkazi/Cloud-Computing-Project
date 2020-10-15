@@ -1,10 +1,16 @@
 ﻿@model IEnumerable<DrugsProject.Models.MedicineVM>
-
-@{
+@using DrugsProject.Models
+ 
+@{ if (RouteConfig.doctor != null)
+    {
+        Layout = "~/Views/Shared/DoctorLayoutPage.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/LayoutPage.cshtml";
+    }
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/LayoutPage.cshtml";
 }
-
 <head>
     <link rel="stylesheet" href="~/scss/3D-hover-effect-big.css?v=2">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -27,7 +33,9 @@
                 <li class="rig m-12">
                     <a class='normal' href='@Url.Action("Details", new { id = item.Id })'>
                         <div class="div-gray">
-                            <div class="hed-image"><img class="p-image img-circle" src="@item.fullImagePath" width="220" height="190" alt="" /></div>                  
+                            <div class="hed-image">
+                               <img class="p-image img-circle" src="@item.fullImagePath" width="240" height="190" alt="" />
+                            </div>
                             <h3 class="colorful hed">@item.commercialName</h3>
                         </div>
                     </a>
@@ -38,33 +46,35 @@
                             @item.genericaName<br><br>
                             <br>
                             @item.manufacturer<br><br>
-                            <div class="panel-heading h">
-                                <h4 class="panel-title">
-                                    <a role="button">
-                                        @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "fa fa-pencil" }) |
-                                        @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "fa fa-eye" }) |
-                                        @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "fa fa-trash" })
-                                    </a>
-                                </h4>
-                            </div>
+                            <br />
+                            @item.NDC<br><br>
+                            @*<div class="panel-heading h">
+            <h4 class="panel-title">
+                <a role="button">
+                    @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "fa fa-pencil" }) |
+                    @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "fa fa-eye" }) |
+                    @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "fa fa-trash" })
+                </a>
+            </h4>
+        </div>*@
                         </p>
                     </div>
                 </li>
             }
 
-        <li class="rig m-12">
-            <a class='normal' href='@Url.Action("Create","Medicine", null)'>
+            <li class="rig m-12">
+                <a class='normal' href='@Url.Action("Create","Medicines")'>
                     <img class="hed-image" src="~/img/plus-med.jpg" alt="" />
                     <h3 class="colorful hed">הוספה</h3>
-            </a>
+                </a>
 
-            <div class='info btn-default' style="transform: rotate3d(1, 0, 0, 90deg);">
-                <h3>הוספת תרופה</h3>
-                <p>
-                    לחץ כאן להוספת תרופה חדשה למערכת
-                </p>
-            </div>
-        </li>
+                <div class='info btn-default' style="transform: rotate3d(1, 0, 0, 90deg);">
+                    <h3>הוספת תרופה</h3>
+                    <p>
+                        לחץ כאן להוספת תרופה חדשה למערכת
+                    </p>
+                </div>
+            </li>
         </ul>
     </div>
 </body>

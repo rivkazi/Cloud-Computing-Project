@@ -29,21 +29,20 @@ namespace DrugsProject.Models
             IBL bl = new BlClass();
             return new DoctorVM(bl.GetDoctor(pre.DoctorId));
         }
+        public static MvcHtmlString DisplayImage(this HtmlHelper html, string imgPath, int size = 150, string cla ="")
+        {
+            return new MvcHtmlString($"<img src='{imgPath}' class='{cla}' height='{size}' width='{size}'/>");
+        }
 
-        public static MvcHtmlString DisplayImage(this HtmlHelper html, string imgPath, int size = 150)
-        {
-            return new MvcHtmlString($"<img src='{imgPath}' height='{size}' width='{size}'/>");
-        }
-        public static MvcHtmlString DisplayRoundImage(this HtmlHelper html, string imgPath, int size = 150)
-        {
-            return new MvcHtmlString($"<img  class='round-img' src='{imgPath}' height='{size}' width='{size}'/>");
-        }
         public static MvcHtmlString DisplayHeader(this HtmlHelper html, string textForHeader, int size)
         {
             return new MvcHtmlString($"<h{size} class='panel-heading'>{textForHeader}</h{size}>");
         }
-        public static MvcHtmlString DisplayHeaderColorfulWithLink(this HtmlHelper html, string textForBlackHeader,string textForColorHeader, int size, string icon, string link)
+        public static MvcHtmlString DisplayHeaderColorful(this HtmlHelper html, string textForBlackHeader, string textForColorHeader, int size, string icon = "", string link = "")
         {
+            if (icon == "")
+                return new MvcHtmlString($"<h{size} class='panel-heading'>{ textForBlackHeader } <span> { textForColorHeader }</span></h{size}>");
+
             string Link = $"<a href='{link}'><i class='{icon}'></i></a>";
             string header = $"{ textForBlackHeader } <span> { textForColorHeader }</span>";
             return new MvcHtmlString($"<h{size} class='panel-heading'>{header} {Link}</h{size}>");
@@ -56,6 +55,23 @@ namespace DrugsProject.Models
             else if (text is BloodTypeEnum)
                 text = text.ToString().Replace('_', ' ');
             return new MvcHtmlString($"<li> <i class='{icon}' aria-hidden='true'></i> {text}</li>");
+        }
+
+        public static MvcHtmlString DropDownListForMedicinesName(this HtmlHelper htmlHelper)
+        {
+            IBL bl = new BlClass();
+            string options = $"<option disabled selected>בחר שם גנרי</option>";
+            /*change the NDC list*/
+            Dictionary<string, string> ndc = new Dictionary<string, string>() {
+                { "advil","01123"},
+                {"acamol","55678"},
+                {"optalgin","98989"},
+                {"med", "65177" } };
+            foreach (var number in ndc)
+            {
+                options += $"<option value ='{number.Key}'>{number.Key}</option>";
+            }
+            return new MvcHtmlString($"<select class='form-control'>{options}</select>");
         }
 
         //public static MvcHtmlString ShowPrescription(this HtmlHelper htmlHelper, Prescription prescription)

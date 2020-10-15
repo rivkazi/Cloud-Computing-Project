@@ -1,7 +1,7 @@
 ﻿function create_custom_dropdowns() {
     $('select').each(function (i, select) {
         if (!$(this).next().hasClass('dropdown-select')) {
-            $(this).after('<div class="dropdown-select wide ' + ($(this).attr('class') || '') + '" tabindex="0"><span class="current"></span><div class="list"><ul></ul></div></div>');
+            $(this).after('<div class="dropdown-select wide ' + ($(this).attr('class') || '') + '" tabindex="0"><span class="current"></span><div class="list" onselect=()><ul></ul></div></div>');
             var dropdown = $(this).next();
             var options = $(select).find('option');
             var selected = $(this).find('option:selected');
@@ -56,8 +56,12 @@ function filter() {
 $(document).on('click', '.dropdown-select .option', function (event) {
     $(this).closest('.list').find('.selected').removeClass('selected');
     $(this).addClass('selected');
+    
     var text = $(this).data('display-text') || $(this).text();
     $(this).closest('.dropdown-select').find('.current').text(text);
+    if (text != "בחר שם גנרי") {
+        $('#genericaName').val(text);
+    }
     $(this).closest('.dropdown-select').prev('select').val($(this).data('value')).trigger('change');
 });
 
@@ -102,3 +106,7 @@ $(document).on('keydown', '.dropdown-select', function (event) {
 $(document).ready(function () {
     create_custom_dropdowns();
 });
+
+function gg() {
+    document.getElementById("NDC").value = "ff";
+}

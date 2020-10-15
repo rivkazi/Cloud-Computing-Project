@@ -30,6 +30,7 @@
                 <div align="center">
                     <img class="img-circle" src="~/img/patients.jpg" height="180" />
                 </div>
+
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="rich-accordian">
                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -61,11 +62,19 @@
                                 @foreach (var item in Model)
                                 {
                             <tr>
-                                 <td class="p-8 center-row">
-                                       @Html.DisplayFor(modelItem => item.fullName)                                
+                                 <td>
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            @Html.DisplayFor(modelItem => item.fullName)
+                                        </h4>
+                                    </div>
                                  </td>
                                  <td>
-                                       @Html.DisplayFor(modelItem => item.age)       
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            @Html.DisplayFor(modelItem => item.age)
+                                        </h4>
+                                    </div>
                                  </td>
                                  <td>
                                     <div class="panel-heading">

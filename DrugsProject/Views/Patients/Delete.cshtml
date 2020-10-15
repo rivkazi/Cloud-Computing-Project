@@ -1,8 +1,15 @@
 ﻿@model  DrugsProject.Models.Patient.PatientVM
+@using DrugsProject.Models
 
-@{
-    ViewBag.Title = "Delete";
-    Layout = "~/Views/Shared/LayoutPage.cshtml";
+@{ if (RouteConfig.doctor != null)
+    {
+        Layout = "~/Views/Shared/DoctorLayoutPage.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/LayoutPage.cshtml";
+    }
+    ViewBag.Title = "Index";
 }
 
 <head>
@@ -84,7 +91,8 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

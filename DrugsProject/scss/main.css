@@ -5,6 +5,10 @@
 * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
 */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+.required::after {
+	content: " *";
+	color: #a94442;
+}
 
 html {
 	font-family: sans-serif !important;
@@ -22,6 +26,16 @@ body {
 
 .lef {
 	float:left !important;
+}
+
+.m-0 {
+	margin:0px !important;
+}
+
+.shadow-border {
+	border-radius: 6px !important;
+	border: solid 1px #eee !important;
+	box-shadow: 0px 2px 5px 0px rgba(155, 155, 155, 0.5) !important; 
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
@@ -1361,6 +1375,14 @@ html {
 	padding-top: 10px;
 }
 
+
+.btn-p-40 {
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-bottom: 40px;
+	padding-top: 10px;
+}
+
 .p-image {
 	margin-right: 0px;
 	margin-left: 0px;
@@ -1393,6 +1415,11 @@ html {
 
 .p-8 {
 	padding-top: 8px;
+}
+
+.p-rig-lef {
+	padding-right: 10px !important;
+	padding-left: 10px !important;
 }
 
 .center-row {
@@ -1655,11 +1682,11 @@ a.text-warning:hover, a.text-warning:focus {
 }
 
 .text-danger {
-	color: #a94442;
+	color: #a94442 !important;
 }
 
 a.text-danger:hover, a.text-danger:focus {
-	color: #843534;
+	color: #843534 !important;
 }
 
 .bg-primary {

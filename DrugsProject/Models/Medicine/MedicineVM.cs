@@ -3,6 +3,7 @@ using BL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Razor.Parser;
@@ -16,13 +17,27 @@ namespace DrugsProject.Models
         {
             Current = medicine;
         }
+        public MedicineVM()
+        {
+            Current = new BE.Medicine();
+        }
+
+        [Key]
         public int Id 
         {
             get { return Current.Id; }
             set { Current.Id = value; }
         }
 
+        [ReadOnlyAttribute(true)]
+        public string NDC
+        {
+            get { return Current.NDC; }
+            set { Current.NDC = value; }
+        }
+
         [DisplayName("שם גנרי")]
+        [Required(ErrorMessage = "חובה להזין שם גנרי")]
         public string genericaName
         {
             get { return Current.genericaName; }
@@ -37,6 +52,7 @@ namespace DrugsProject.Models
         }
 
         [DisplayName("שם מסחרי")]
+        [Required(ErrorMessage = "חובה להזין שם מסחרי")]
         public string commercialName
         {
             get { return Current.commercialName; }
@@ -44,6 +60,7 @@ namespace DrugsProject.Models
         }
 
         [DisplayName("מאפיינים")]
+        [Required(ErrorMessage = "חובה להזין מאפיינים")]
         public string properties
         {
             get { return Current.properties; }
