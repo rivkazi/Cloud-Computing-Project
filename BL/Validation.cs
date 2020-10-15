@@ -87,5 +87,35 @@ namespace BL
                 return false;
             return true;
         }
+
+        public static bool IsPhone(string phoneNumber)
+        {
+            if (phoneNumber == "")
+                return false;
+
+            string sub;
+            if (phoneNumber.Length == 10)
+            {
+                sub = phoneNumber.Substring(2, 8);
+                if (phoneNumber[0] != '0' || phoneNumber[1] != '5')
+                    return false;
+            }
+            if (phoneNumber.Length == 9)
+            {
+                sub = phoneNumber.Substring(1, 8);
+                if (phoneNumber[0] != '0')
+                    return false;
+            }
+            
+            bool flag = true;
+            for (int i = 0; i < phoneNumber.Length && flag; i++)
+            {
+                if (phoneNumber[i] < '0' || phoneNumber[i] > '9')
+                    flag = false;
+            }
+            if (flag)
+                return true;
+            return false;
+        }
     }
 }
