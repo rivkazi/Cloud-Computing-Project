@@ -27,3 +27,32 @@ C:\Users\iyar\Documents\תרגילי בית\שנה ג\מיחשוב ענן\Projec
 C:\Users\iyar\Documents\תרגילי בית\שנה ג\מיחשוב ענן\Project\DrugsProject\BL\bin\Debug\System.Memory.xml
 C:\Users\iyar\Documents\תרגילי בית\שנה ג\מיחשוב ענן\Project\DrugsProject\BL\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\iyar\Documents\תרגילי בית\שנה ג\מיחשוב ענן\Project\DrugsProject\BL\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\BL.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\BL.pdb
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\BE.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\DAL.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\Grpc.Core.Api.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\System.Buffers.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\System.Memory.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\RestSharp.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\EntityFramework.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\Newtonsoft.Json.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\BE.pdb
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\DAL.pdb
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\DAL.dll.config
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\Grpc.Core.Api.pdb
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\Grpc.Core.Api.xml
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\System.Buffers.xml
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\System.Memory.xml
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\RestSharp.xml
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\EntityFramework.xml
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\Newtonsoft.Json.xml
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\obj\Debug\BL.csprojAssemblyReference.cache
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\obj\Debug\BL.csproj.CoreCompileInputs.cache
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\obj\Debug\BL.csproj.CopyComplete
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\obj\Debug\BL.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\obj\Debug\BL.pdb

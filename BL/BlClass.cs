@@ -13,21 +13,33 @@ namespace BL
     public class BlClass : IBL
     {
         #region ADD
+
         public bool AddCronicalDisease(CronicalDisease cronicalDisease)
         {
             IDAL dal = new DalClass();
+            IEnumerable<CronicalDisease> diseases = dal.GetCronicalDiseases(cd => cd.description == cronicalDisease.description);
+            if (diseases.Count() == 0)
+                return false;
             return dal.AddCronicalDisease(cronicalDisease);
         }
 
         public bool AddDoctor(Doctor doctor)
         {
+            if (!PersonValidation(doctor))
+                return false;
             IDAL dal = new DalClass();
+            IEnumerable <Doctor> doctors = dal.GetDoctors(doc => doc.idNumber == doctor.idNumber);
+            if (doctors.Count() == 0)
+                return false;
             return dal.AddDoctor(doctor);
         }
 
         public bool AddMedicine(Medicine medicine)
         {
             IDAL dal = new DalClass();
+            IEnumerable<Medicine> medicines = dal.GetMedicines(med => med.commercialName == medicine.commercialName);
+            if (medicines.Count() == 0)
+                return false;
             bool IsOkImage = ValidateImage(medicine.imagePath);
             if (IsOkImage)
                 return dal.AddMedicine(medicine);
@@ -37,13 +49,20 @@ namespace BL
 
         public bool AddPatient(Patient patient)
         {
+            if (!PersonValidation(patient))
+                return false;
             IDAL dal = new DalClass();
+            IEnumerable<Patient> patients = dal.GetPatients(p => p.idNumber == patient.idNumber);
+            if (patients.Count() == 0)
+                return false;
             return dal.AddPatient(patient);
         }
 
         public bool AddPrescription(Prescription prescription)
         {
             IDAL dal = new DalClass();
+            if (prescription.endDate < prescription.startDate)
+                return false;
             List<string> NDCforPatientMedicines = GetNDCForAllActiveMedicine(prescription.PatientId);
             List<string> Result = IsConflict(NDCforPatientMedicines);
             bool isConflict = Result[1] == "true" ? true : false;
@@ -52,6 +71,15 @@ namespace BL
             else
                 return dal.AddPrescription(prescription);
         }
+
+        public bool PersonValidation(Person person)
+        {
+            if (Validation.IsId(person.idNumber) && Validation.IsPhone(person.phoneNumber) &&
+                  Validation.IsName(person.familyName) && Validation.IsName(person.privateName))
+                return true;
+            return false;
+        }
+
         #endregion
 
         #region UPDATE
@@ -78,18 +106,27 @@ namespace BL
         public bool DeleteDoctor(int? id)
         {
             IDAL dal = new DalClass();
+            Doctor doctor = dal.GetDoctor(id);
+            if (doctor == null)
+                return false;
             return dal.DeleteDoctor(id);
         }
 
         public bool DeleteMedicine(int? id)
         {
             IDAL dal = new DalClass();
+            Medicine medicine = dal.GetMedicine(id);
+            if (medicine == null)
+                return false;
             return dal.DeleteMedicine(id);
         }
 
         public bool DeletePatient(int? id)
         {
             IDAL dal = new DalClass();
+            Patient patient = dal.GetPatient(id);
+            if (patient == null)
+                return false;
             return dal.DeletePatient(id);
         }
         #endregion

@@ -10,61 +10,61 @@ namespace BL
     public interface IBL
     {
         //ADD
-        bool AddDoctor(Doctor doctor);
-        bool AddMedicine(Medicine medicine);
-        bool AddPatient(Patient patient);
-        bool AddPrescription(Prescription prescription);
-        bool AddCronicalDisease(CronicalDisease prescription);
+        bool AddDoctor(Doctor doctor); //This function adds a doctor to the system
+        bool AddMedicine(Medicine medicine); //This function adds a medicine to the system
+        bool AddPatient(Patient patient); //This function adds a patient to the system
+        bool AddPrescription(Prescription prescription); //This function adds a prescription to the system
+        bool AddCronicalDisease(CronicalDisease prescription); //This function adds a chronical disease to the system
 
         //UPDATE
-        bool UpdateDoctor(Doctor doctor);
-        bool UpdateMedicine(Medicine medicine);
-        bool UpdatePatient(Patient patient);
+        bool UpdateDoctor(Doctor doctor); //This function updates a chosen doctor from the system
+        bool UpdateMedicine(Medicine medicine); //This function updates a chosen doctor from the system
+        bool UpdatePatient(Patient patient); //This function updates a chosen patient from the system
 
         //DELETE
-        bool DeleteDoctor(int? id);
-        bool DeleteMedicine(int? id);
-        bool DeletePatient(int? id);
+        bool DeleteDoctor(int? id); //This function deletes a chosen doctor from the system
+        bool DeleteMedicine(int? id); //This function deletes a chosen medicine from the system
+        bool DeletePatient(int? id); //This function deletes a chosen patient from the system
 
         //GET
-        Doctor GetDoctor(int? id);
-        Medicine GetMedicine(int? id);
-        Patient GetPatient(int? id);
-        Prescription GetPrescription(int? id);
-        IEnumerable<Person> GetAllPerson(Func<Person, bool> predicat = null);
-        IEnumerable<Doctor> GetDoctors(Func<Doctor, bool> predicat = null);
-        IEnumerable<Medicine> GetMedicines(Func<Medicine, bool> predicat = null);
-        IEnumerable<Patient> GetPatients(Func<Patient, bool> predicat = null);
-        IEnumerable<Prescription> GetPrescriptions(Func<Prescription, bool> predicat = null);
-        IEnumerable<CronicalDisease> GetCronicalDiseases(Func<CronicalDisease, bool> predicat = null);
-        List<string> GetNDCForAllActiveMedicine(int patientID);
+        Doctor GetDoctor(int? id); //This function returns a single doctor by his ID
+        Medicine GetMedicine(int? id); //This function returns a single medicine by an ID
+        Patient GetPatient(int? id); //This function returns a single patient by his ID
+        Prescription GetPrescription(int? id); //This function returns a prescription by an ID
+        IEnumerable<Person> GetAllPerson(Func<Person, bool> predicat = null); //This function returns a collection of all the persons in the system
+        IEnumerable<Doctor> GetDoctors(Func<Doctor, bool> predicat = null); //This function returns a collection of all the doctors in the system
+        IEnumerable<Medicine> GetMedicines(Func<Medicine, bool> predicat = null); //This function returns a collection of all the medicines in the system
+        IEnumerable<Patient> GetPatients(Func<Patient, bool> predicat = null); //This function returns a collection of all the patients in the system
+        IEnumerable<Prescription> GetPrescriptions(Func<Prescription, bool> predicat = null); //This function returns a collection of all the prescriptions in the system
+        IEnumerable<CronicalDisease> GetCronicalDiseases(Func<CronicalDisease, bool> predicat = null); //This function returns a collection of all the chronical diseases in the system
+        List<string> GetNDCForAllActiveMedicine(int patientID); //This function returns a collection of all the NDC codes of the medicines in the system
 
         //FILTER
-        IEnumerable<Prescription> FilterPrescriptionsForPatient(int patientID);
-        IEnumerable<Prescription> FilterActivePrescriptionsForPatient(int patientID);
-        IEnumerable<Medicine> FilterActiveMedicinesForPatient(int patientID);
-        IEnumerable<CronicalDisease> FilterCronicalDiseasesForPatient(int patientID);
+        IEnumerable<Prescription> FilterPrescriptionsForPatient(int patientID); //This function returns all the prescriptions of a specific patient by his ID
+        IEnumerable<Prescription> FilterActivePrescriptionsForPatient(int patientID); //This function returns all the current prescriptions of a specific patient by his ID
+        IEnumerable<Medicine> FilterActiveMedicinesForPatient(int patientID); //This function returns all the current medicines of a specific patient by his ID
+        IEnumerable<CronicalDisease> FilterCronicalDiseasesForPatient(int patientID); //This function returns all the chronical diseases of a specific patient by his ID
 
         //DISPOSE
         void Dispose(bool disp);
 
         //SEND
-        void SendMail(string mailAdress,string subject, string receiverName, string message);
+        void SendMail(string mailAdress,string subject, string receiverName, string message); //This function responsible for sending a mail
 
         //CODE
-        int GetRandomCode();
-        bool CheckOneTimeCode(int randonCode, int codeEntered);
+        int GetRandomCode(); //This function randomize a five digits code
+        bool CheckOneTimeCode(int randonCode, int codeEntered); //This function returns rather the randomize code equal to a given code or not
 
         //ACCOUNT
-        bool SignIn(string userName, string password);
-        void SignUp(Person person);
-        void ForgotPassword(string mail);
+        bool SignIn(string userName, string password); //This function returns rather a person signed in is allowed
+        void SignUp(Person person); //This function represent signing up
+        void ForgotPassword(string mail); //This function responsible for reseting the password if the person forgot it
 
         //Image Service
-        bool ValidateImage(string path);
-        string ConvertStringToUrl(string path);
+        bool ValidateImage(string path); //This function returns rather an image is allowed or not
+        string ConvertStringToUrl(string path); //This function returns a url link to an image path
 
         //CONFLICT DRUGS SERVICE 
-        List<string> IsConflict(List<string> NDC);
+        List<string> IsConflict(List<string> NDC); //This function returns rather there is a conflict between medicines in the prescription or not
     }
 }
