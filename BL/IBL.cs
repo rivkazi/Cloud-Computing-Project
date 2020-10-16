@@ -17,9 +17,9 @@ namespace BL
         bool AddCronicalDisease(CronicalDisease prescription); //This function adds a chronical disease to the system
 
         //UPDATE
-        bool UpdateDoctor(Doctor doctor); //This function updates a chosen doctor from the system
+        Dictionary<string, string> UpdateDoctor(Doctor doctor); //This function updates a chosen doctor from the system
         bool UpdateMedicine(Medicine medicine); //This function updates a chosen doctor from the system
-        bool UpdatePatient(Patient patient); //This function updates a chosen patient from the system
+        Dictionary<string, string> UpdatePatient(Patient patient); //This function updates a chosen patient from the system
 
         //DELETE
         bool DeleteDoctor(int? id); //This function deletes a chosen doctor from the system
@@ -51,10 +51,6 @@ namespace BL
 
         //SEND
         void SendMail(string mailAdress,string subject, string receiverName, string message); //This function responsible for sending a mail
-
-        //CODE
-        int GetRandomCode(); //This function randomize a five digits code
-        bool CheckOneTimeCode(int randonCode, int codeEntered); //This function returns rather the randomize code equal to a given code or not
 
         //ACCOUNT
         bool SignIn(string userName, string password); //This function returns rather a person signed in is allowed

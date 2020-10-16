@@ -1,5 +1,5 @@
-﻿@model IEnumerable<BE.Prescription>
-
+﻿@model DrugsProject.Models.Patient.PatientVM
+@using DrugsProject.Models
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/LayoutPage.cshtml";
@@ -7,7 +7,7 @@
 
 <h2>Index</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
@@ -62,7 +62,7 @@
         </tr>
     }
 
-</table>
+</table>*@
 <section id="faq">
     <div class="titlebar">
         @{

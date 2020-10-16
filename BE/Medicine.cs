@@ -10,6 +10,7 @@ namespace BE
     {
         public int Id { get; set; }
         public string NDC { get; set; }
+        public int size { get; set; }
         public string genericaName { get; set; }
         public string manufacturer { get; set; }
         public string commercialName  { get; set; }

@@ -13,7 +13,6 @@ namespace BL
     public class BlClass : IBL
     {
         #region ADD
-
         public bool AddCronicalDisease(CronicalDisease cronicalDisease)
         {
             IDAL dal = new DalClass();
@@ -29,19 +28,24 @@ namespace BL
             if (result.Count != 0)
                 return result;
             IDAL dal = new DalClass();
-            IEnumerable <Doctor> doctors = dal.GetDoctors(doc => doc.idNumber == doctor.idNumber);
+            IEnumerable<Doctor> doctors = dal.GetDoctors(doc => doc.idNumber == doctor.idNumber);
             //if (doctors.Count() == 0)
-            //חלון קופץ משתמש קיים
+            //חלון קופץ משתמש קיים או שגיאת מערכת אם חזר פולס מהדאל
+            //הוספה
             return result;
         }
 
+
         public bool AddMedicine(Medicine medicine)
         {
-
             IDAL dal = new DalClass();
+            medicine.NDC = GetNDCForMedicine(medicine.genericaName);
             bool IsOkImage = ValidateImage(medicine.imagePath);
             if (IsOkImage)
+            {
+                medicine.manufacturer = medicine.manufacturer == null ? "לא ידוע" : medicine.manufacturer;
                 return dal.AddMedicine(medicine);
+            }
             else
                 return false;
         }
@@ -51,10 +55,13 @@ namespace BL
             Dictionary<string, string> result = PersonValidation(patient);
             if (result.Count != 0)
                 return result;
+
+            patient.medicalHistory = patient.medicalHistory == null ? "לא נמסר מידע" : patient.medicalHistory;
             IDAL dal = new DalClass();
             IEnumerable<Patient> patients = dal.GetPatients(p => p.idNumber == patient.idNumber);
             //if (doctors.Count() == 0)
-            //חלון קופץ משתמש קיים
+            //חלון קופץ משתמש קיים או שגיאת מערכת אם חזר פולס מהדאל
+            //הוספה
             return result;
         }
 
@@ -71,6 +78,7 @@ namespace BL
             else
                 return dal.AddPrescription(prescription);
         }
+
         #endregion
 
         #region VALIDATION
@@ -91,22 +99,45 @@ namespace BL
         #endregion
 
         #region UPDATE
-        public bool UpdateDoctor(Doctor doctor)
+        public Dictionary<string, string> UpdateDoctor(Doctor doctor)
         {
+            Dictionary<string, string> result = PersonValidation(doctor);
+            if (result.Count != 0)
+                return result;
             IDAL dal = new DalClass();
-            return dal.UpdateDoctor(doctor);
+            IEnumerable<Doctor> doctors = dal.GetDoctors(doc => doc.idNumber == doctor.idNumber);
+            //if (doctors.Count() == 0)
+            //חלון קופץ משתמש קיים או שגיאת מערכת אם חזר פולס מהדאל
+            //עדכון
+            return result;
         }
 
         public bool UpdateMedicine(Medicine medicine)
         {
             IDAL dal = new DalClass();
-            return dal.UpdateMedicine(medicine);
+            bool IsOkImage = ValidateImage(medicine.imagePath);
+            if (IsOkImage)
+            {
+                medicine.manufacturer = medicine.manufacturer == null ? "לא ידוע" : medicine.manufacturer;
+                return dal.UpdateMedicine(medicine);
+            }
+            else
+                return false;
         }
 
-        public bool UpdatePatient(Patient patient)
+        public Dictionary<string, string> UpdatePatient(Patient patient)
         {
+            Dictionary<string, string> result = PersonValidation(patient);
+            if (result.Count != 0)
+                return result;
+
+            patient.medicalHistory = patient.medicalHistory == null ? "לא נמסר מידע" : patient.medicalHistory;
             IDAL dal = new DalClass();
-            return dal.UpdatePatient(patient);
+            IEnumerable<Patient> patients = dal.GetPatients(p => p.idNumber == patient.idNumber);
+            //if (doctors.Count() != 0)
+            //חלון קופץ משתמש קיים או שגיאת מערכת אם חזר פולס מהדאל
+            //עדכן
+            return result;
         }
         #endregion
 
@@ -210,11 +241,12 @@ namespace BL
             IDAL dal = new DalClass();
             return dal.GetPrescription(id);
         }
-
         public string GetNDCForMedicine(string genericName)
         {
-            return null;
+            IDAL dal = new DalClass();
+            return dal.GetNDCForMedicine(genericName);
         }
+
         #endregion
 
         #region FILTER
@@ -246,10 +278,10 @@ namespace BL
         #endregion
 
         #region ACCOUNT
-        public bool SignIn(string userName, string password)
+        public bool SignIn(string mail, string password)
         {
             IDAL dal = new DalClass();
-            Doctor doctor = dal.GetDoctors(doc => doc.userName == userName).FirstOrDefault();
+            Doctor doctor = dal.GetDoctors(doc => doc.email == mail).FirstOrDefault();
             if (doctor != null && doctor.password == password)
                 return true;
             return false;
@@ -269,7 +301,7 @@ namespace BL
                 int newPassword = random.Next(10000, 1000000000);
                 SendMail(doctor.email, doctor.privateName + " " + doctor.familyName, "איפוס סיסמה", "הסיסמה שלך אופסה, הסיסמה החדשה היא:" + "<br/>" + newPassword + "<br/>" + "אנא שנה סיסמה בהקדם האפשרי");
                
-                //Edit(user.Id, Password);
+                //Edit Password
                 doctor.password = newPassword.ToString();
                 UpdateDoctor(doctor);
             }
@@ -294,18 +326,6 @@ namespace BL
             smtp.Send(mail);
         }
 
-        #endregion
-
-        #region CODE
-        public int GetRandomCode()
-        {
-            Random random = new Random();
-            return random.Next(10000, 99999); //5 digits code
-        }
-        public bool CheckOneTimeCode(int randonCode, int codeEntered)
-        {
-            return randonCode == codeEntered;
-        }
         #endregion
 
         #region IMAGE SERVICE

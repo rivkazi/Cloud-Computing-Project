@@ -38,13 +38,13 @@
                 <ul class="aboutul">
                     @Html.DisplayItemWithIcon(Model.manufacturer, "fa fa-user")
                     @Html.DisplayItemWithIcon(Model.properties, "fa fa-info")
+                    @Html.DisplayItemWithIcon(Model.size, "fa fa-circle-o-notch")
                     @Html.DisplayItemWithIcon(Model.NDC, "fa fa-check")
                     @Html.DisplayImage(Model.fullImagePath, 200, "m-12 img-thumbnail")
                 </ul>
 
-                <div class="form-group btn-p-40">
-                    @Html.ActionLink("חזרה לרשימה", "Index", null, new { @class = "btn btn-default lef" })
-                </div>
+                @Html.ActionLink("צפיה בנתוני צריכה", "Index", null, new { @class = "btn btn-primary slide" })
+                @Html.ActionLink("חזרה לרשימה", "Index", null, new { @class = "btn btn-default m-12" })
             </div>
         </div>
     </div>

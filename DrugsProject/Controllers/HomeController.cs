@@ -21,16 +21,14 @@ namespace DrugsProject.Controllers
             return View();
         }
 
-        public ActionResult Log(string usName, string pass)
+        public ActionResult Log(string mail, string pass)
         {
             IBL bl = new BlClass();
-            //var usName = Request["usName"].ToString();
-            //var pass = Request["pass"].ToString();
 
-            bool succeeded = bl.SignIn(usName, pass);
+            bool succeeded = bl.SignIn(mail, pass);
             if (succeeded)
             {
-                Doctor doctor = bl.GetDoctors(doc => doc.userName == usName).FirstOrDefault();
+                Doctor doctor = bl.GetDoctors(doc => doc.email == mail).FirstOrDefault();
                 RouteConfig.doctor = doctor;
                 return View("~/Views/Home/Index.cshtml");
             }
@@ -39,6 +37,20 @@ namespace DrugsProject.Controllers
                 ViewBag.messageError = "שם משתמש או סיסמה שגויים";
                 return View("LogIn");
             }
+        }
+
+        public ActionResult SignUp(string id, string mail, string pass)
+        {
+            { 
+                return View("LogIn");
+            }
+        }
+
+        public ActionResult ForgotPassword(string mail)
+        {
+            IBL Bl = new BlClass();
+            Bl.ForgotPassword(mail);
+            return View("~/Views/Home/Index.cshtml");
         }
 
         public ActionResult LogOut()

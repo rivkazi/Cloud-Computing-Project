@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<DrugsProject.Models.MedicineVM>
 @using DrugsProject.Models
- 
+
 @{ if (RouteConfig.doctor != null)
     {
         Layout = "~/Views/Shared/DoctorLayoutPage.cshtml";
@@ -21,11 +21,10 @@
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="~/script/index.js"></script>
 </head>
+<div align="center">
+    @Html.DisplayHeaderColorful("ניהול תרופות", "", 2, "fa fa-plus", "Create")
+</div>
 <body onpageshow="loadHoverEffectPage()">
-    <p>
-        @Html.ActionLink("הוסף תרופה", "Create", null, new { @class = "btn-default" })
-    </p>
-
     <div dir="rtl" class="content contain">
         <ul>
             @foreach (var item in Model)
@@ -34,30 +33,18 @@
                     <a class='normal' href='@Url.Action("Details", new { id = item.Id })'>
                         <div class="div-gray">
                             <div class="hed-image">
-                               <img class="p-image img-circle" src="@item.fullImagePath" width="240" height="190" alt="" />
+                                <img class="p-image img-circle" src="@item.fullImagePath" width="240" height="190" alt="" />
                             </div>
                             <h3 class="colorful hed">@item.commercialName</h3>
                         </div>
                     </a>
 
                     <div class='info btn-default' style="transform: rotate3d(1, 0, 0, 90deg);">
-                        <h3>@item.commercialName</h3>
-                        <p>
-                            @item.genericaName<br><br>
-                            <br>
-                            @item.manufacturer<br><br>
-                            <br />
-                            @item.NDC<br><br>
-                            @*<div class="panel-heading h">
-            <h4 class="panel-title">
-                <a role="button">
-                    @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "fa fa-pencil" }) |
-                    @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "fa fa-eye" }) |
-                    @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "fa fa-trash" })
-                </a>
-            </h4>
-        </div>*@
-                        </p>
+                        @Html.DisplayHeader(@item.commercialName, 3)
+                        @Html.DisplayHeader("שם גנרי: " + @item.genericaName, 4)
+                        @Html.DisplayHeader("יצרן: " + @item.manufacturer, 4)
+                        @Html.DisplayHeader("כמות: " + @item.size, 4)
+                        @Html.DisplayHeader("קוד תרופה: " + @item.NDC, 4)
                     </div>
                 </li>
             }
@@ -69,10 +56,8 @@
                 </a>
 
                 <div class='info btn-default' style="transform: rotate3d(1, 0, 0, 90deg);">
-                    <h3>הוספת תרופה</h3>
-                    <p>
-                        לחץ כאן להוספת תרופה חדשה למערכת
-                    </p>
+                    @Html.DisplayHeader("הוספת תרופה", 3)
+                    @Html.DisplayHeader("לחץ כאן להוספת תרופה חדשה למאגר התרופות", 4)
                 </div>
             </li>
         </ul>

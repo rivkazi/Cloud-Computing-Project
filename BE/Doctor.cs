@@ -10,7 +10,6 @@ namespace BE
     {
         public int licenseNumber { get; set; }
         public string specialization { get; set; }
-        public string userName { get; set; }
         public string password { get; set; }
     }
 }

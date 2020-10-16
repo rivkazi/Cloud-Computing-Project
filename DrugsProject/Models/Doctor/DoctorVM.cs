@@ -73,6 +73,7 @@ namespace DrugsProject.Models.Doctor
         }
 
         [DisplayName("מייל")]
+        [DataType(DataType.EmailAddress)]
         [Required(ErrorMessage = "חובה להזין כתובת מייל ליצירת קשר")]
         public string email
         {
@@ -80,21 +81,24 @@ namespace DrugsProject.Models.Doctor
             set { Current.email = value; }
         }
 
+        [DisplayName("מספר רשיון")]
+        [Required(ErrorMessage = "חובה להזין מספר רשיון רופא")]
         public int licenseNumber
         {
             get { return Current.licenseNumber; }
             set { Current.licenseNumber = value; }
         }
+
+        [DisplayName("התמחות")]
+        [Required(ErrorMessage = "חובה להזין תחום התמחות")]
         public string specialization
         {
             get { return Current.specialization; }
             set { Current.specialization = value; }
         }
-        public string userName
-        {
-            get { return Current.userName; }
-            set { Current.userName = value; }
-        }
+
+        [DisplayName("סיסמה")]
+        [DataType(DataType.Password)]
         public string password
         {
             get { return Current.password; }
