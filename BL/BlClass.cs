@@ -315,13 +315,13 @@ namespace BL
             SmtpClient smtp;
             mail = new MailMessage();
             mail.To.Add(mailAdress);
-            mail.From = new MailAddress("deamlandapp@gmail.com");  //openMail
+            mail.From = new MailAddress("MyProject4Ever@gmail.com");  
             mail.Subject = subject;
             mail.Body = $"שלום {receiverName}, <br>" + message;
             mail.IsBodyHtml = true;
             smtp = new SmtpClient();
             smtp.Host = "smtp.gmail.com";
-            smtp.Credentials = new System.Net.NetworkCredential("deamlandapp@gmail.com", "0533151327");
+            smtp.Credentials = new System.Net.NetworkCredential("MyProject4Ever@gmail.com", "bla/*123*/bla");
             smtp.EnableSsl = true;
             smtp.Send(mail);
         }
