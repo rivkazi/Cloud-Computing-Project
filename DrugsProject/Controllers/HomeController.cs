@@ -41,9 +41,10 @@ namespace DrugsProject.Controllers
 
         public ActionResult SignUp(string id, string mail, string pass)
         {
-            { 
-                return View("LogIn");
-            }
+            IBL bl = new BlClass();
+            bool resultOK = bl.IsOKPerson(id, mail, pass); 
+            bl.SignUp(id, mail, pass);
+            return View("LogIn");
         }
 
         public ActionResult ForgotPassword(string mail)

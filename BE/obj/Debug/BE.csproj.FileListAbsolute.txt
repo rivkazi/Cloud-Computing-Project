@@ -8,4 +8,3 @@ C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-a
 C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BE\obj\Debug\BE.csproj.CoreCompileInputs.cache
 C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BE\obj\Debug\BE.dll
 C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BE\obj\Debug\BE.pdb
-C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BE\obj\Debug\BE.csprojAssemblyReference.cache

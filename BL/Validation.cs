@@ -88,6 +88,21 @@ namespace BL
             return true;
         }
 
+        public static bool IsPassword(string password)
+        {
+            if (password == "")
+                return false;
+
+            bool flag = true;
+            for(int i=0; i< password.Length && flag; i++)
+            {
+                if (char.IsWhiteSpace(password[i]))
+                    flag = false;
+            }
+            if (flag)
+                return true;
+            return false;
+        }
         public static bool IsPhone(string phoneNumber)
         {
             if (phoneNumber == "")

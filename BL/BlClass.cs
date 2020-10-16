@@ -286,9 +286,29 @@ namespace BL
                 return true;
             return false;
         }
-        public void SignUp(Person person)
+        public void SignUp(string id, string mail, string pass)
         {
-            throw new NotImplementedException();
+            IDAL dal = new DalClass();
+            Doctor doctor= dal.GetDoctors(doc => doc.idNumber == id).FirstOrDefault();
+            if (doctor != null && doctor.password == null)
+            {
+                doctor.password = pass;
+                dal.UpdateDoctor(doctor);
+                SendMail(doctor.email, doctor.privateName + " " + doctor.familyName, "ההרשמה עברה בהצלחה", "ברוכים הבאים לאתר שלנו, שמחים שהצטרפת." + "<br/>"
+                         + "נשמח לעמוד לעזרתך בכל פניה ובקשה ומקווים שתהיה לך חוויה נעימה." + "<br/>" + "תודה, צוות WiseCare");
+                return;
+            }
+            else if(doctor == null)
+            {
+                SendMail(mail, "ההרשמה נכשלה", "", "לצערנו, נסיון ההרשמה שלך לאתרנו נכשל." + "<br/>"
+                         + "אנא נסה שוב בעוד חצי שנה ונשמח לעמוד לעזרתך." + "<br/>" + "תודה, צוות WiseCare");
+                return;
+            }
+            else
+            {
+                throw new NotImplementedException();
+                //הינך כבר רשום למערכת, אנא התחבר
+            }
         }
         public void ForgotPassword(string mail)
         {
@@ -306,6 +326,13 @@ namespace BL
                 UpdateDoctor(doctor);
             }
         }
+
+        public bool IsOKPerson(string id, string mail, string pass)
+        {
+            if (Validation.IsId(id) && Validation.IsEmail(mail) && Validation.IsPassword(pass))
+                return true;
+            return false;
+        }
         #endregion
 
         #region SEND
@@ -315,7 +342,7 @@ namespace BL
             SmtpClient smtp;
             mail = new MailMessage();
             mail.To.Add(mailAdress);
-            mail.From = new MailAddress("MyProject4Ever@gmail.com");  
+            mail.From = new MailAddress("MyProject4Ever@gmail.com");
             mail.Subject = subject;
             mail.Body = $"שלום {receiverName}, <br>" + message;
             mail.IsBodyHtml = true;
@@ -325,6 +352,7 @@ namespace BL
             smtp.EnableSsl = true;
             smtp.Send(mail);
         }
+
 
         #endregion
 

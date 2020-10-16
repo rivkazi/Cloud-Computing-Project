@@ -54,7 +54,8 @@ namespace BL
 
         //ACCOUNT
         bool SignIn(string userName, string password); //This function returns rather a person signed in is allowed
-        void SignUp(Person person); //This function represent signing up
+        void SignUp(string id, string mail, string pass); //This function represent signing up
+        bool IsOKPerson(string id, string mail, string pass); //This function returns rather a person is OK by his input details or not
         void ForgotPassword(string mail); //This function responsible for reseting the password if the person forgot it
 
         //Image Service
