@@ -17,23 +17,29 @@
 </head>
 
 <body onpageshow="LogIn()">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
     <div class="container right-panel-active">
         <!-- Sign Up -->
         <div class="container__form container--signup" dir="rtl">
-            <form action="~/Views/Home/LogIn" method="post" class="form" id="form1">
+            <form action="SignUp" method="post" class="form">
                 <h2 class="form__title">הרשמה</h2>
-                <input name="id" type="text" placeholder="מספר ת.ז." class="input" />
-                <input name="mail" type="email" placeholder="מייל" class="input" />
-                <input name="pass" type="password" placeholder="סיסמה" class="input" />
+
+                <input name="id" type="text" placeholder="מספר ת.ז." class="input" required />
+                 @*@Html.ValidationMessage("שדה חובה", new { @class = "text-danger" })*@
+
+                <input name="mail" type="email" placeholder="מייל" class="input" required />
+                <input name="pass" type="password" placeholder="סיסמה" class="input" required />
                 <button class="btn-default">הרשמה</button>
             </form>
         </div>
 
         <!-- Sign In -->
         <div class="container__form container--signin" dir="rtl">
-            <form class="form" @*id="form2"*@ action="Log" method="post">
+            <form class="form" action="Log" method="post">
                 <h2 class="form__title">התחברות</h2>
-                <input name="mail" type="text" placeholder="מייל" class="input" />
+                <input name="mail" type="text" placeholder="מייל" class="input" required/>
                 <input name="pass" type="password" placeholder="סיסמה" class="input" />
                 <a href='@Url.Action("ForgotPassword")' class="link">שכחת סיסמה?</a>
                 <input type="submit" value="התחברות" class="btn-default" />
