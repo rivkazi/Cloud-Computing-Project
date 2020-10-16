@@ -1,91 +1,54 @@
 ﻿@model DrugsProject.Models.Doctor.DoctorVM
+@using DrugsProject.Models
 
-@{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/LayoutPage.cshtml";
+@{ if (RouteConfig.doctor != null)
+    {
+        Layout = "~/Views/Shared/DoctorLayoutPage.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/LayoutPage.cshtml";
+    }
 }
 
-<h2>Details</h2>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/scss/main.css?v=3">
+    <link rel="stylesheet" href="~/scss/skin.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="~/script/index.js?v=2"></script>
+</head>
 
-<div>
-    <h4>Doctor</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.licenseNumber)
-        </dt>
+<section id="about" style="height:700px">
+    <div class="image-holder col-lg-6 col-md-6 col-sm-6 col-xs-12 pull-left">
+        <div class="background-imgholder">
+            <img src="~/img/user-background.jpg" alt="about" class="img-responsive" style="display:none;" />
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.licenseNumber)
-        </dd>
+    <div class="container-fluid">
+        <div class="col-md-7 col-md-offset-5 col-sm-8 col-sm-offset-2 col-xs-12 text-inner ">
+            <div class="text-block text-right" dir="rtl">
+                <div class="section-heading">
+                    @Html.DisplayHeaderColorful("דוקטור " + Model.privateName, Model.familyName, 2, "fa fa-pencil", $"../Edit/{Model.Id}")
+                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.specialization)
-        </dt>
+                <ul class="aboutul">
+                    @Html.DisplayItemWithIcon(Model.idNumber, "fa fa-id-card-o")
+                    @Html.DisplayItemWithIcon(Model.licenseNumber, "fa fa-address-card-o")
+                    @Html.DisplayItemWithIcon(Model.specialization, "fa fa-graduation-cap")
+                    @Html.DisplayItemWithIcon(Model.phoneNumber, "fa fa-phone")
+                    @Html.DisplayItemWithIcon(Model.email, "fa fa-envelope")
+                    @Html.DisplayItemWithIcon(Model.password, "fa fa-key")
+                </ul>
 
-        <dd>
-            @Html.DisplayFor(model => model.specialization)
-        </dd>
+                <div class="form-group btn-p-40">
+                    @Html.ActionLink("חזרה לרשימה", "Index", null, new { @class = "btn btn-default lef" })
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.userName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.userName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.password)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.idNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.idNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.privateName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.privateName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.familyName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.familyName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.phoneNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.phoneNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.email)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

@@ -315,7 +315,7 @@ namespace DAL
         {
             using (var ctx = new DrugsContext())
             {
-                return ctx.Doctors.Find(id); ;
+                return ctx.Doctors.Find(id); 
             }
         }
 
@@ -323,7 +323,7 @@ namespace DAL
         {
             using (var ctx = new DrugsContext())
             {
-                return ctx.Medicines.Find(id); ;
+                return ctx.Medicines.Find(id); 
             }
         }
 
@@ -331,7 +331,7 @@ namespace DAL
         {
             using (var ctx = new DrugsContext())
             {
-                return ctx.Patients.Find(id); ;
+                return ctx.Patients.Find(id); 
             }
         }
 
@@ -339,7 +339,14 @@ namespace DAL
         {
             using (var ctx = new DrugsContext())
             {
-                return ctx.Prescriptions.Find(id); ;
+                return ctx.Prescriptions.Find(id); 
+            }
+        }
+        public string GetNDCForMedicine(string genericName)
+        {
+            using (var ctx = new DrugsContext())
+            {
+                return ctx.Name_NDC.Where(med => med.genericName == genericName).Select(med => med.NDCnumber).FirstOrDefault(); 
             }
         }
         #endregion

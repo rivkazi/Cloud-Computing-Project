@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using BE;
 using BL;
+using DrugsProject.Models.Patient;
 
 namespace DrugsProject.Controllers
 {
@@ -18,8 +19,10 @@ namespace DrugsProject.Controllers
         public ActionResult Index()
         {
             IBL bl = new BlClass();
-            var prescriptions = bl.GetPrescriptions();
-            return View(prescriptions);
+            //var prescriptions = bl.GetPrescriptions();
+            //return View(prescriptions);
+            Patient pat = bl.GetPatient(1);
+            return View(new PatientVM(pat));
         }
 
         // GET: Prescriptions/Details/5

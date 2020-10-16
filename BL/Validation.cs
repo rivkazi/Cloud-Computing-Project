@@ -35,7 +35,7 @@ namespace BL
 
         public static bool IsId(object idn)
         {
-            if (idn == null || idn == "000000000")
+            if (idn == null || idn.ToString() == "000000000")
                 return false;
             string idnumber = "";
             if (idn is string)

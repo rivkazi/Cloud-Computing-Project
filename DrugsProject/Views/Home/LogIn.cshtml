@@ -22,48 +22,21 @@
         <div class="container__form container--signup" dir="rtl">
             <form action="~/Views/Home/LogIn" method="post" class="form" id="form1">
                 <h2 class="form__title">הרשמה</h2>
-                <input type="text" placeholder="שם משתמש" class="input" />
-                <input type="email" placeholder="מייל" class="input" />
-                <input type="password" placeholder="סיסמה" class="input" />
+                <input name="id" type="text" placeholder="מספר ת.ז." class="input" />
+                <input name="mail" type="email" placeholder="מייל" class="input" />
+                <input name="pass" type="password" placeholder="סיסמה" class="input" />
                 <button class="btn-default">הרשמה</button>
             </form>
         </div>
-
-        @*<div class="form-bottom">
-            <form role="form" action="" class="login-form">
-                <div class="input-group form-group">
-                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
-                    <input type="text" class="form-control" placeholder="First Name" aria-describedby="basic-addon1">
-                </div>
-                <div class="input-group form-group">
-                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
-                    <input type="text" class="form-control" placeholder="Last Name" aria-describedby="basic-addon1">
-                </div>
-                <div class="input-group form-group">
-                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-envelope"></i></span>
-                    <input type="text" class="form-control" placeholder="Email" aria-describedby="basic-addon1">
-                </div>
-                <div class="input-group form-group">
-                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-phone"></i></span>
-                    <input type="tel" class="form-control" placeholder="Phone No." aria-describedby="basic-addon1">
-                </div>
-                <div class="input-group form-group">
-
-                    <textarea rows="4" cols="70" class="form-control" placeholder="Message"></textarea>
-
-                </div>
-                <button type="submit" class="btn">Sign me up!</button>
-            </form>
-        </div>*@
 
         <!-- Sign In -->
         <div class="container__form container--signin" dir="rtl">
             <form class="form" @*id="form2"*@ action="Log" method="post">
                 <h2 class="form__title">התחברות</h2>
-                <input name="usName" type="text" placeholder="שם משתמש" class="input" />
+                <input name="mail" type="text" placeholder="מייל" class="input" />
                 <input name="pass" type="password" placeholder="סיסמה" class="input" />
-                <a href="#" class="link">Forgot your password?</a>
-                <input type="submit" value="התחברות" class="btn-default"/>
+                <a href='@Url.Action("ForgotPassword")' class="link">שכחת סיסמה?</a>
+                <input type="submit" value="התחברות" class="btn-default" />
             </form>
         </div>
 

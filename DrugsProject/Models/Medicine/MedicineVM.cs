@@ -44,6 +44,14 @@ namespace DrugsProject.Models
             set { Current.genericaName = value; }
         }
 
+        [DisplayName("גודל")]
+        [Required(ErrorMessage = "חובה להזין כמות")]
+        public int size
+        {
+            get { return Current.size; }
+            set { Current.size = value; }
+        }
+
         [DisplayName("יצרן")]
         public string manufacturer
         {

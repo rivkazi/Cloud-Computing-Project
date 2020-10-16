@@ -47,6 +47,7 @@
     <Compile Include="ImageDetails.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="Medicine.cs" />
+    <Compile Include="MedicineWrraper.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Prescription.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

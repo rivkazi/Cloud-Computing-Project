@@ -31,7 +31,7 @@ namespace DAL
         Medicine GetMedicine(int? id);
         Patient GetPatient(int? id);
         Prescription GetPrescription(int? id);
-
+        string GetNDCForMedicine(string genericName); 
         IEnumerable<Doctor> GetDoctors(Func<Doctor, bool> predicat = null);
         IEnumerable<Medicine> GetMedicines(Func<Medicine, bool> predicat = null);
         IEnumerable<Patient> GetPatients(Func<Patient, bool> predicat = null);
