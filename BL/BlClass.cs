@@ -23,23 +23,22 @@ namespace BL
             return dal.AddCronicalDisease(cronicalDisease);
         }
 
-        public bool AddDoctor(Doctor doctor)
+        public Dictionary<string, string> AddDoctor(Doctor doctor)
         {
-            if (!PersonValidation(doctor))
-                return false;
+            Dictionary<string, string> result = PersonValidation(doctor);
+            if (result.Count != 0)
+                return result;
             IDAL dal = new DalClass();
             IEnumerable <Doctor> doctors = dal.GetDoctors(doc => doc.idNumber == doctor.idNumber);
-            if (doctors.Count() == 0)
-                return false;
-            return dal.AddDoctor(doctor);
+            //if (doctors.Count() == 0)
+            //חלון קופץ משתמש קיים
+            return result;
         }
 
         public bool AddMedicine(Medicine medicine)
         {
+
             IDAL dal = new DalClass();
-            IEnumerable<Medicine> medicines = dal.GetMedicines(med => med.commercialName == medicine.commercialName);
-            if (medicines.Count() == 0)
-                return false;
             bool IsOkImage = ValidateImage(medicine.imagePath);
             if (IsOkImage)
                 return dal.AddMedicine(medicine);
@@ -47,15 +46,16 @@ namespace BL
                 return false;
         }
 
-        public bool AddPatient(Patient patient)
+        public Dictionary<string, string> AddPatient(Patient patient)
         {
-            if (!PersonValidation(patient))
-                return false;
+            Dictionary<string, string> result = PersonValidation(patient);
+            if (result.Count != 0)
+                return result;
             IDAL dal = new DalClass();
             IEnumerable<Patient> patients = dal.GetPatients(p => p.idNumber == patient.idNumber);
-            if (patients.Count() == 0)
-                return false;
-            return dal.AddPatient(patient);
+            //if (doctors.Count() == 0)
+            //חלון קופץ משתמש קיים
+            return result;
         }
 
         public bool AddPrescription(Prescription prescription)
@@ -71,13 +71,21 @@ namespace BL
             else
                 return dal.AddPrescription(prescription);
         }
+        #endregion
 
-        public bool PersonValidation(Person person)
+        #region VALIDATION
+        public Dictionary<string, string> PersonValidation(Person person)
         {
-            if (Validation.IsId(person.idNumber) && Validation.IsPhone(person.phoneNumber) &&
-                  Validation.IsName(person.familyName) && Validation.IsName(person.privateName))
-                return true;
-            return false;
+            Dictionary<string, string> result = new Dictionary<string, string>();
+            if (!Validation.IsId(person.idNumber))
+                result.Add("idNumber", "מספר תעודת הזהות אינו תקין");
+            if (!Validation.IsPhone(person.phoneNumber))
+                result.Add("phoneNumber", "מספר הטלפון אינו תקין");
+            if (!Validation.IsName(person.familyName))
+                result.Add("familyName", "שם זה אינו תקין");
+            if (!Validation.IsName(person.privateName))
+                result.Add("privateName", "שם זה אינו תקין");
+            return result;
         }
 
         #endregion
@@ -201,6 +209,11 @@ namespace BL
         {
             IDAL dal = new DalClass();
             return dal.GetPrescription(id);
+        }
+
+        public string GetNDCForMedicine(string genericName)
+        {
+            return null;
         }
         #endregion
 

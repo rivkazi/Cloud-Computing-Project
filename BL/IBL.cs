@@ -10,9 +10,9 @@ namespace BL
     public interface IBL
     {
         //ADD
-        bool AddDoctor(Doctor doctor); //This function adds a doctor to the system
+        Dictionary<string, string> AddDoctor(Doctor doctor); //This function adds a doctor to the system
         bool AddMedicine(Medicine medicine); //This function adds a medicine to the system
-        bool AddPatient(Patient patient); //This function adds a patient to the system
+        Dictionary<string, string> AddPatient(Patient patient); //This function adds a patient to the system
         bool AddPrescription(Prescription prescription); //This function adds a prescription to the system
         bool AddCronicalDisease(CronicalDisease prescription); //This function adds a chronical disease to the system
 
@@ -31,6 +31,7 @@ namespace BL
         Medicine GetMedicine(int? id); //This function returns a single medicine by an ID
         Patient GetPatient(int? id); //This function returns a single patient by his ID
         Prescription GetPrescription(int? id); //This function returns a prescription by an ID
+        string GetNDCForMedicine(string genericName); //This function returns NDC code for a medicine by it's generic name
         IEnumerable<Person> GetAllPerson(Func<Person, bool> predicat = null); //This function returns a collection of all the persons in the system
         IEnumerable<Doctor> GetDoctors(Func<Doctor, bool> predicat = null); //This function returns a collection of all the doctors in the system
         IEnumerable<Medicine> GetMedicines(Func<Medicine, bool> predicat = null); //This function returns a collection of all the medicines in the system

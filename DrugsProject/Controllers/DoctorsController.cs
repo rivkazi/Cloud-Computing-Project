@@ -56,8 +56,12 @@ namespace DrugsProject.Controllers
             if (ModelState.IsValid)
             {
                 IBL bL = new BlClass();
-                bL.AddDoctor(doctor.Current);
-                return RedirectToAction("Index");
+                Dictionary<string, string> errorMessege = bL.AddDoctor(doctor.Current);
+                foreach(var item in errorMessege)
+                {
+                    ModelState.AddModelError(item.Key, item.Value);
+                }
+                return (errorMessege.Count == 0 ?  View("Index"): View(doctor));
             }
             return View(doctor);
         }

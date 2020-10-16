@@ -73,6 +73,7 @@ namespace DrugsProject.Models.Patient
         }
 
         [DisplayName("מייל")]
+        [DataType(DataType.EmailAddress)]
         [Required(ErrorMessage = "חובה להזין כתובת מייל ליצירת קשר")]
         public string email
         {
