@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="CronicalDisease.cs" />
     <Compile Include="Doctor.cs" />
+    <Compile Include="DoctorSign.cs" />
     <Compile Include="EnumClass.cs" />
     <Compile Include="ImageDetails.cs" />
     <Compile Include="Manager.cs" />

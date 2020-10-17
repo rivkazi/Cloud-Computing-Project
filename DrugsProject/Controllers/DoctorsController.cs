@@ -56,9 +56,13 @@ namespace DrugsProject.Controllers
             if (ModelState.IsValid)
             {
                 IBL bL = new BlClass();
-                Dictionary<string, string> errorMessege = bL.AddDoctor(doctor.Current);
+                Dictionary<string, string> errorMessege = bL.PersonValidation(doctor.Current);
                 if (errorMessege.Count == 0)
+                {
+                    bL.AddDoctor(doctor.Current);
                     return RedirectToAction("Index");
+                }
+
                 foreach (var item in errorMessege)
                 {
                     ModelState.AddModelError(item.Key, item.Value);
@@ -95,9 +99,13 @@ namespace DrugsProject.Controllers
             if (ModelState.IsValid)
             {
                 IBL bL = new BlClass();
-                Dictionary<string, string> errorMessege = bL.UpdateDoctor(doctor.Current);
+                Dictionary<string, string> errorMessege = bL.PersonValidation(doctor.Current);
                 if (errorMessege.Count == 0)
+                {
+                    bL.UpdateDoctor(doctor.Current);
                     return RedirectToAction("Index");
+                }
+           
                 foreach (var item in errorMessege)
                 {
                     ModelState.AddModelError(item.Key, item.Value);

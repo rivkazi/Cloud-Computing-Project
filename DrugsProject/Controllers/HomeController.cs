@@ -39,11 +39,20 @@ namespace DrugsProject.Controllers
             }
         }
 
-        public ActionResult SignUp(string id, string mail, string pass)
+        public ActionResult SignUp(DoctorSign doctorSign)
         {
             IBL bl = new BlClass();
-            bool resultOK = bl.IsOKPerson(id, mail, pass); 
-            bl.SignUp(id, mail, pass);
+            Dictionary<string, string> errorMessege = bl.SignValidation(doctorSign);
+            if (errorMessege.Count == 0)
+            {
+                bl.SignUp(doctorSign);
+                return RedirectToAction("Index");
+            }
+
+            foreach (var item in errorMessege)
+            {
+                ModelState.AddModelError(item.Key, item.Value);
+            }          
             return View("LogIn");
         }
 

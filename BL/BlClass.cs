@@ -22,17 +22,17 @@ namespace BL
             return dal.AddCronicalDisease(cronicalDisease);
         }
 
-        public Dictionary<string, string> AddDoctor(Doctor doctor)
+        public bool AddDoctor(Doctor doctor)
         {
-            Dictionary<string, string> result = PersonValidation(doctor);
-            if (result.Count != 0)
-                return result;
+            //Dictionary<string, string> result = PersonValidation(doctor);
+            //if (result.Count != 0)
+            //    return result;
             IDAL dal = new DalClass();
             IEnumerable<Doctor> doctors = dal.GetDoctors(doc => doc.idNumber == doctor.idNumber);
             //if (doctors.Count() == 0)
             //חלון קופץ משתמש קיים או שגיאת מערכת אם חזר פולס מהדאל
             //הוספה
-            return result;
+            return dal.AddDoctor(doctor);
         }
 
 
@@ -50,11 +50,11 @@ namespace BL
                 return false;
         }
 
-        public Dictionary<string, string> AddPatient(Patient patient)
+        public bool AddPatient(Patient patient)
         {
-            Dictionary<string, string> result = PersonValidation(patient);
-            if (result.Count != 0)
-                return result;
+            //Dictionary<string, string> result = PersonValidation(patient);
+            //if (result.Count != 0)
+            //    return result;
 
             patient.medicalHistory = patient.medicalHistory == null ? "לא נמסר מידע" : patient.medicalHistory;
             IDAL dal = new DalClass();
@@ -62,7 +62,7 @@ namespace BL
             //if (doctors.Count() == 0)
             //חלון קופץ משתמש קיים או שגיאת מערכת אם חזר פולס מהדאל
             //הוספה
-            return result;
+            return dal.AddPatient(patient);
         }
 
         public bool AddPrescription(Prescription prescription)
@@ -87,6 +87,8 @@ namespace BL
             Dictionary<string, string> result = new Dictionary<string, string>();
             if (!Validation.IsId(person.idNumber))
                 result.Add("idNumber", "מספר תעודת הזהות אינו תקין");
+            if (!Validation.IsEmail(person.email))
+                result.Add("email", "כתובת המייל אינה תקינה");
             if (!Validation.IsPhone(person.phoneNumber))
                 result.Add("phoneNumber", "מספר הטלפון אינו תקין");
             if (!Validation.IsName(person.familyName))
@@ -96,20 +98,37 @@ namespace BL
             return result;
         }
 
+        public Dictionary<string, string> SignValidation(DoctorSign doctorSign)
+        {
+            Dictionary<string, string> result = new Dictionary<string, string>();
+            if (doctorSign.idNumber == null)
+                result.Add("idNumber", "חובה להזין מספר ת.ז.");
+            else if (!Validation.IsId(doctorSign.idNumber))
+                result.Add("idNumber", "מספר תעודת הזהות אינו תקין");
+            if (doctorSign.email == null)
+                result.Add("email", "חובה להזין כתובת מייל");
+            else if (!Validation.IsEmail(doctorSign.email))
+                result.Add("email", "כתובת המייל אינה תקינה");
+            if (doctorSign.password == null)
+                result.Add("password", "חובה לבחור סיסמה");
+            else if (!Validation.IsPassword(doctorSign.password))
+                result.Add("password", "סיסמה אינה תקינה");
+            return result;
+        }
         #endregion
 
         #region UPDATE
-        public Dictionary<string, string> UpdateDoctor(Doctor doctor)
+        public bool UpdateDoctor(Doctor doctor)
         {
-            Dictionary<string, string> result = PersonValidation(doctor);
-            if (result.Count != 0)
-                return result;
+            //Dictionary<string, string> result = PersonValidation(doctor);
+            //if (result.Count != 0)
+            //    return result;
             IDAL dal = new DalClass();
             IEnumerable<Doctor> doctors = dal.GetDoctors(doc => doc.idNumber == doctor.idNumber);
             //if (doctors.Count() == 0)
             //חלון קופץ משתמש קיים או שגיאת מערכת אם חזר פולס מהדאל
             //עדכון
-            return result;
+            return dal.UpdateDoctor(doctor);
         }
 
         public bool UpdateMedicine(Medicine medicine)
@@ -125,11 +144,11 @@ namespace BL
                 return false;
         }
 
-        public Dictionary<string, string> UpdatePatient(Patient patient)
+        public bool UpdatePatient(Patient patient)
         {
-            Dictionary<string, string> result = PersonValidation(patient);
-            if (result.Count != 0)
-                return result;
+            //Dictionary<string, string> result = PersonValidation(patient);
+            //if (result.Count != 0)
+            //    return result;
 
             patient.medicalHistory = patient.medicalHistory == null ? "לא נמסר מידע" : patient.medicalHistory;
             IDAL dal = new DalClass();
@@ -137,7 +156,7 @@ namespace BL
             //if (doctors.Count() != 0)
             //חלון קופץ משתמש קיים או שגיאת מערכת אם חזר פולס מהדאל
             //עדכן
-            return result;
+            return dal.UpdatePatient(patient);
         }
         #endregion
 
@@ -286,13 +305,13 @@ namespace BL
                 return true;
             return false;
         }
-        public void SignUp(string id, string mail, string pass)
+        public void SignUp(DoctorSign doctorSign)
         {
             IDAL dal = new DalClass();
-            Doctor doctor= dal.GetDoctors(doc => doc.idNumber == id).FirstOrDefault();
+            Doctor doctor= dal.GetDoctors(doc => doc.idNumber == doctorSign.idNumber).FirstOrDefault();
             if (doctor != null && doctor.password == null)
             {
-                doctor.password = pass;
+                doctor.password = doctorSign.password;
                 dal.UpdateDoctor(doctor);
                 SendMail(doctor.email, doctor.privateName + " " + doctor.familyName, "ההרשמה עברה בהצלחה", "ברוכים הבאים לאתר שלנו, שמחים שהצטרפת." + "<br/>"
                          + "נשמח לעמוד לעזרתך בכל פניה ובקשה ומקווים שתהיה לך חוויה נעימה." + "<br/>" + "תודה, צוות WiseCare");
@@ -300,7 +319,7 @@ namespace BL
             }
             else if(doctor == null)
             {
-                SendMail(mail, "ההרשמה נכשלה", "", "לצערנו, נסיון ההרשמה שלך לאתרנו נכשל." + "<br/>"
+                SendMail(doctorSign.email, "ההרשמה נכשלה", "", "לצערנו, נסיון ההרשמה שלך לאתרנו נכשל." + "<br/>"
                          + "אנא נסה שוב בעוד חצי שנה ונשמח לעמוד לעזרתך." + "<br/>" + "תודה, צוות WiseCare");
                 return;
             }
@@ -325,13 +344,6 @@ namespace BL
                 doctor.password = newPassword.ToString();
                 UpdateDoctor(doctor);
             }
-        }
-
-        public bool IsOKPerson(string id, string mail, string pass)
-        {
-            if (Validation.IsId(id) && Validation.IsEmail(mail) && Validation.IsPassword(pass))
-                return true;
-            return false;
         }
         #endregion
 
