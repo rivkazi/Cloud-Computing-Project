@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace BL
 {
@@ -11,7 +12,7 @@ namespace BL
     {
         //ADD
         bool AddDoctor(Doctor doctor); //This function adds a doctor to the system
-        bool AddMedicine(Medicine medicine); //This function adds a medicine to the system
+        bool AddMedicine(Medicine medicine, HttpPostedFileBase httpPostedFile); //This function adds a medicine to the system
         bool AddPatient(Patient patient); //This function adds a patient to the system
         bool AddPrescription(Prescription prescription); //This function adds a prescription to the system
         bool AddCronicalDisease(CronicalDisease prescription); //This function adds a chronical disease to the system

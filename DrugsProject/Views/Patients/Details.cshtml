@@ -32,7 +32,7 @@
         <div class="col-md-7 col-md-offset-5 col-sm-8 col-sm-offset-2 col-xs-12 text-inner ">
             <div class="text-block text-right" dir="rtl">
                 <div class="section-heading">
-                    @Html.DisplayHeaderColorful(Model.privateName, Model.familyName, 2, "fa fa-pencil", $"../Edit/{Model.Id}")
+                    @Html.DisplayHeaderColorful(Model.privateName, Model.familyName, 2, "fa fa-pencil", $"../Edit/{Model.Id}", "fa fa-trash", $"../Delete/{Model.Id}")
                 </div>
 
                 <ul class="aboutul">
@@ -48,7 +48,7 @@
                 <div class="form-group">
                     <div class="m-20">
                         @Html.ActionLink("חזרה לרשימה", "Index", null, new { @class = "btn btn-primary m-0" })
-                        @Html.ActionLink("צפיה במרשמי לקוח", "Index", null, new { @class = "btn btn-default slide lef" })
+                        @Html.ActionLink("צפיה במרשמי מטופל", "Index", null, new { @class = "btn btn-default slide lef" })
                     </div>
                 </div>
             </div>

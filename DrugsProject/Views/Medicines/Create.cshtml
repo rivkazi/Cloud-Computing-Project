@@ -24,7 +24,7 @@
     <script src='~/script/index.js?v=2' type='text/javascript'></script>
     <script src='~/script/dropdown-search.js?v=4' type='text/javascript'></script>
 </head>
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Medicines", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -89,7 +89,7 @@
                                 @Html.ValidationMessageFor(model => model.properties, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <input type="file" name="ImagePath" id="fileElem" multiple accept="image"/>
+                        <input type="file" name="img" id="fileElem" multiple accept="image" />
 
                         <br />
                         <div class="form-group">

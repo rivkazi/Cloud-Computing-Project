@@ -1,4 +1,4 @@
-﻿@model  DrugsProject.Models.Patient.PatientVM
+﻿@model DrugsProject.Models.Patient.PatientVM
 @using DrugsProject.Models
 
 @{ if (RouteConfig.doctor != null)
@@ -9,95 +9,52 @@
     {
         Layout = "~/Views/Shared/LayoutPage.cshtml";
     }
-    ViewBag.Title = "Index";
 }
 
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="~/scss/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/scss/main.css?v=3">
     <link rel="stylesheet" href="~/scss/skin.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <script src="~/script/index.js"></script>
-
+    <script src="~/script/index.js?v=2"></script>
 </head>
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.birthDate)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.birthDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.bloodType)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.bloodType)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.medicalHistory)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.medicalHistory)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.idNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.idNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.privateName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.privateName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.familyName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.familyName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.phoneNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.phoneNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.email)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+<section id="about" style="height:700px">
+    <div class="image-holder col-lg-6 col-md-6 col-sm-6 col-xs-12 pull-left">
+        <div class="background-imgholder">
+            <img src="~/img/user-background.jpg" alt="about" class="img-responsive" style="display:none;" />
         </div>
-    }
-</div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="col-md-7 col-md-offset-5 col-sm-8 col-sm-offset-2 col-xs-12 text-inner ">
+            <div class="text-block text-right" dir="rtl">
+                <div class="section-heading">
+                    @Html.DisplayHeaderColorful(Model.privateName, Model.familyName, 2)
+                </div>
+
+                <ul class="aboutul">
+                    @Html.DisplayItemWithIcon(Model.idNumber, "fa fa-id-card-o")
+                    @Html.DisplayItemWithIcon(Model.birthDate, "fa fa-calendar")
+                    @Html.DisplayItemWithIcon(Model.age, "fa fa-user")
+                    @Html.DisplayItemWithIcon(Model.bloodType, "fa fa-tint")
+                    @Html.DisplayItemWithIcon(Model.medicalHistory, "fa fa-info")
+                    @Html.DisplayItemWithIcon(Model.phoneNumber, "fa fa-phone")
+                    @Html.DisplayItemWithIcon(Model.email, "fa fa-envelope")
+                </ul>
+
+                <div class="form-group">
+                    <div class="m-20">
+                        @Html.ActionLink("חזרה לרשימה", "Index", null, new { @class = "btn btn-primary m-0" })
+                        @Html.ActionLink("מחיקת מטופל", "Delete", null, new { @class = "btn btn-default slide lef" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

@@ -36,14 +36,19 @@ namespace BL
         }
 
 
-        public bool AddMedicine(Medicine medicine)
+        public bool AddMedicine(Medicine medicine, HttpPostedFileBase httpPostedFile)
         {
             IDAL dal = new DalClass();
             medicine.NDC = GetNDCForMedicine(medicine.genericaName);
+            medicine.imagePath = httpPostedFile.FileName;
             bool IsOkImage = ValidateImage(medicine.imagePath);
+
             if (IsOkImage)
             {
                 medicine.manufacturer = medicine.manufacturer == null ? "לא ידוע" : medicine.manufacturer;
+
+                GoogleDriveAPITool.FileUpload(httpPostedFile);
+
                 return dal.AddMedicine(medicine);
             }
             else

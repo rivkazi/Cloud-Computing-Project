@@ -137,6 +137,8 @@ namespace DAL
                     ctx.Entry(medicine).State = EntityState.Deleted;
                     ctx.SaveChanges();          
                 }
+                GoogleDriveAPITool.DeleteGoogleFileByName(medicine.imagePath);
+
             }
             catch (Exception)
             {

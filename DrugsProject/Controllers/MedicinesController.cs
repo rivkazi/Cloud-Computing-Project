@@ -53,18 +53,18 @@ namespace DrugsProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(MedicineVM medicine)
+        public ActionResult Create(MedicineVM medicine, HttpPostedFileBase img)
         {
             if (ModelState.IsValid)
             {
                 IBL bL = new BlClass();
-                bool IsAddOk = bL.AddMedicine(medicine.Current);
+                bool IsAddOk = bL.AddMedicine(medicine.Current, img);
                 if (IsAddOk)
                     return RedirectToAction("Index");
                 else
                 {
                     return View(medicine);
-                }                
+                }
             }
 
             return View(medicine);
