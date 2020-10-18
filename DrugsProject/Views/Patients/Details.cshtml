@@ -45,8 +45,12 @@
                     @Html.DisplayItemWithIcon(Model.email, "fa fa-envelope")
                 </ul>
 
-                @Html.ActionLink("צפיה במרשמי לקוח", "Index", null, new { @class = "btn btn-primary slide" })
-                @Html.ActionLink("חזרה לרשימה", "Index", null, new { @class = "btn btn-default m-12" })
+                <div class="form-group">
+                    <div class="m-20">
+                        @Html.ActionLink("חזרה לרשימה", "Index", null, new { @class = "btn btn-primary m-0" })
+                        @Html.ActionLink("צפיה במרשמי לקוח", "Index", null, new { @class = "btn btn-default slide lef" })
+                    </div>
+                </div>
             </div>
         </div>
     </div>

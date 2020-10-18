@@ -164,27 +164,18 @@ namespace BL
         public bool DeleteDoctor(int? id)
         {
             IDAL dal = new DalClass();
-            Doctor doctor = dal.GetDoctor(id);
-            if (doctor == null)
-                return false;
             return dal.DeleteDoctor(id);
         }
 
         public bool DeleteMedicine(int? id)
         {
             IDAL dal = new DalClass();
-            Medicine medicine = dal.GetMedicine(id);
-            if (medicine == null)
-                return false;
             return dal.DeleteMedicine(id);
         }
 
         public bool DeletePatient(int? id)
         {
             IDAL dal = new DalClass();
-            Patient patient = dal.GetPatient(id);
-            if (patient == null)
-                return false;
             return dal.DeletePatient(id);
         }
         #endregion

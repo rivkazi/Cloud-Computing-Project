@@ -127,11 +127,15 @@ namespace DAL
             bool Result = true;
             try
             {
-                Medicine medicine = GetMedicine(id); 
+                Medicine medicine = GetMedicine(id);
+                if (medicine == null)
+                    return false;
                 using (var ctx = new DrugsContext())
                 {
-                    ctx.Medicines.Remove(medicine);
-                    ctx.SaveChanges();
+                    ctx.Configuration.ValidateOnSaveEnabled = false;
+                    ctx.Medicines.Attach(medicine);
+                    ctx.Entry(medicine).State = EntityState.Deleted;
+                    ctx.SaveChanges();          
                 }
             }
             catch (Exception)
@@ -149,9 +153,13 @@ namespace DAL
             try
             {
                 Patient patient = GetPatient(id);
+                if (patient == null)
+                    return false;
                 using (var ctx = new DrugsContext())
                 {
-                    ctx.Patients.Remove(patient);
+                    ctx.Configuration.ValidateOnSaveEnabled = false;
+                    ctx.Patients.Attach(patient);
+                    ctx.Entry(patient).State = EntityState.Deleted;
                     ctx.SaveChanges();
                 }
             }
@@ -170,9 +178,13 @@ namespace DAL
             try
             {
                 Doctor doctor = GetDoctor(id);
+                if (doctor == null)
+                    return false;
                 using (var ctx = new DrugsContext())
                 {
-                    ctx.Doctors.Remove(doctor);
+                    ctx.Configuration.ValidateOnSaveEnabled = false;
+                    ctx.Doctors.Attach(doctor);
+                    ctx.Entry(doctor).State = EntityState.Deleted;
                     ctx.SaveChanges();
                 }
             }

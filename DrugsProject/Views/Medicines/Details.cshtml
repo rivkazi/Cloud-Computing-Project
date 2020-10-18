@@ -21,7 +21,7 @@
 
 </head>
 
-<section id="about" style="height:650px">
+<section id="about" style="height:800px">
     <div class="image-holder col-lg-6 col-md-6 col-sm-6 col-xs-12 pull-left">
         <div class="background-imgholder" style="background:url(../../img/colorful-backround.jpg)">
             <img src="~/img/colorful-backround.jpg" alt="about" class="img-responsive" style="display:none;" />
@@ -43,8 +43,12 @@
                     @Html.DisplayImage(Model.fullImagePath, 200, "m-12 img-thumbnail")
                 </ul>
 
-                @Html.ActionLink("צפיה בנתוני צריכה", "Index", null, new { @class = "btn btn-primary slide" })
-                @Html.ActionLink("חזרה לרשימה", "Index", null, new { @class = "btn btn-default m-12" })
+                <div class="form-group">
+                    <div class="m-20">
+                        @Html.ActionLink("חזרה לרשימה", "Index", null, new { @class = "btn btn-primary m-0" })
+                        @Html.ActionLink("צפיה בנתוני צריכה", "Chart", new { Model.Id }, new { @class = "btn btn-default lef slide" })
+                    </div>
+                </div>
             </div>
         </div>
     </div>

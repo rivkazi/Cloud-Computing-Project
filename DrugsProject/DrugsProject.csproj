@@ -157,6 +157,7 @@
     <Content Include="script\hover.js" />
     <Content Include="script\index.js" />
     <Content Include="script\log.js" />
+    <Content Include="script\test.js" />
     <Content Include="script\utils.js" />
     <Content Include="scss\3D-hover-effect-big.css" />
     <Content Include="scss\3D-hover-effect.css" />
@@ -164,6 +165,7 @@
     <Content Include="scss\log.css" />
     <Content Include="scss\main.css" />
     <Content Include="scss\skin.css" />
+    <Content Include="scss\test.css" />
     <Content Include="Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\LogIn.cshtml" />
@@ -220,7 +222,7 @@
     <Content Include="Views\Doctors\Details.cshtml" />
     <Content Include="Views\Doctors\Edit.cshtml" />
     <Content Include="Views\Doctors\Index.cshtml" />
-    <Content Include="Views\Home\Chart.cshtml" />
+    <Content Include="Views\Medicines\Chart.cshtml" />
     <Content Include="script\Chart.min.js" />
     <Content Include="Views\Home\Test.cshtml" />
     <None Include="Web.Debug.config">

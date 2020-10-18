@@ -1,46 +1,38 @@
 ﻿
-@{
-    ViewBag.Title = "Test";
-    Layout = "~/Views/Shared/LayoutPage.cshtml";
-}
+<head>
+    <script>
+        function earase(delete_button) {
+            //alert(delete_button.getAttribute("donation-id"));
+            document.getElementById("modal-donation-id").value = delete_button.getAttribute("donation-id");
 
-<h2>Test</h2>
+        }
+    </script>
+</head>
+<a onclick="earase(this)" donation-id="1" data-toggle="modal" data-target="#popup1" style="color:#C7187D; width:20px; height:20px; font-family:'Segoe UI';right:1000px"><i class="fa fa-trash" style="font-size:24px"></i>בלהבלהלהלה</a>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src='select2/dist/js/select2.min.js' type='text/javascript'></script>
-<script src='~/script/index.js?v=2' type='text/javascript'></script>
-<script src='~/script/dropdown-search.js?v=2' type='text/javascript'></script>
-
-
-<!-- CSS -->
-<link href='select2/dist/css/select2.min.css' rel='stylesheet' type='text/css'>
-<link href='~/scss/dropdown-search.css?v=2' rel='stylesheet' type='text/css'>
-@*<select id='selUser' style='width: 200px;'>
-    <option value='0'>Select User</option>
-    <option value='1'>Yogesh singh</option>
-    <option value='2'>Sonarika Bhadoria</option>
-    <option value='3'>Anil Singh</option>
-    <option value='4'>Vishal Sahu</option>
-    <option value='5'>Mayank Patidar</option>
-    <option value='6'>Vijay Mourya</option>
-    <option value='7'>Rakesh sahu</option>
-</select>
-
-<input type='button' value='Seleted option' id='but_read'>
-
-<br />
-<div id='result'></div>*@
-
-
-
-<div class="container">
-    <div class="main">
-        <select name="">
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-            <option value="4">Four</option>
-        </select>
+<div class="modal fade" id="popup1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" hidden>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form dir="rtl" style="font-family:'Segoe UI';" name="example" action="~/Management/earaseDonation" method="post">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="text-align:left" value="מחיקת תרומה">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="text-align:center;">
+                    <label>האם אתה בטוח שברצונך למחוק תרומה זו?</label>
+                    <h6>באם תרומה זו משויכת לתורם יישלח מייל לתורם זה</h6>
+                </div>
+                <div class="modal-footer" style="text-align:left">
+                    @{
+                       <input id="modal-donation-id" name="DonationId" type="hidden" required />
+                            <input class="btn btn-outline-secondary" type="submit" style="background-color:#cff491" value="אישור" />
+                 <input class="btn btn-outline-secondary" data-dismiss="modal" type="button" value="אישור" style="background-color:#cff491" data-toggle="modal" data-target="#popup" />
+                   
+                    }
+                    <button class="btn btn-outline-secondary" data-dismiss="modal">סגור</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-

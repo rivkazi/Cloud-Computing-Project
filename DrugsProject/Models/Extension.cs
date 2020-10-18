@@ -36,16 +36,15 @@ namespace DrugsProject.Models
 
         public static MvcHtmlString DisplayHeader(this HtmlHelper html, string textForHeader, int size)
         {
-            return new MvcHtmlString($"<h{size} class='panel-heading'>{textForHeader}</h{size}>");
+            return new MvcHtmlString($"<h{size} class='panel-heading bold'>{textForHeader}</h{size}>");
         }
         public static MvcHtmlString DisplayHeaderColorful(this HtmlHelper html, string textForBlackHeader, string textForColorHeader, int size, string icon = "", string link = "")
         {
             if (icon == "")
                 return new MvcHtmlString($"<h{size} class='panel-heading'>{ textForBlackHeader } <span> { textForColorHeader }</span></h{size}>");
-
             string Link = $"<a href='{link}'><i class='{icon}'></i></a>";
             string header = $"{ textForBlackHeader } <span> { textForColorHeader }</span>";
-            return new MvcHtmlString($"<h{size} class='panel-heading'>{header} {Link}</h{size}>");
+            return new MvcHtmlString($"<h{size} class='panel-heading bold'>{header} {Link}</h{size}>");
         }
 
         public static MvcHtmlString DisplayItemWithIcon(this HtmlHelper html, Object text, string icon)

@@ -20,16 +20,16 @@
     <script src="~/script/index.js"></script>
 </head>
 
-<section id="features-page" dir="rtl">
+<section id="features-page">
     <div class="subsection4">
         <div class="container">
-            <div align="center">
-                @Html.DisplayHeaderColorful("ניהול רופאים", "", 2, "fa fa-plus", "Create")
-            </div>
             <div class="col span_12">
                 <div class="wpb_column column_container">
                     <div class="wpb_wrapper">
-                        <div class="contain" style="margin-top: 30px; display: flex; flex-wrap: wrap;">
+                        <div align="center" dir="rtl">
+                            @Html.DisplayHeaderColorful("ניהול ", "רופאים", 2, "fa fa-plus", "/doctors/create")
+                        </div>
+                        <div class="contain" style="margin-top: 30px; display: flex; flex-wrap: wrap;"  dir="rtl">
                             @foreach (var item in Model)
                             {
                                 <div class="wpb_column vc_column_container col-sm-4 block grow m-full-20" style="height:400px; width:330px;">

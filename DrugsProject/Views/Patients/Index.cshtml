@@ -21,15 +21,12 @@
 
 </head>
 <body id="wrapper">
-    <p>
-        @Html.ActionLink("הוסף פציינט", "Create", null, new { @class = "btn-default" })
-    </p>
     <section id="faq">
         <div class="titlebar">
             <div class="contain">
-                <div align="center">
+                <div align="center" dir="rtl">
                     <img class="img-circle" src="~/img/patients.jpg" height="180" />
-                    @Html.DisplayHeaderColorful("ניהול מטופלים", "", 2, "fa fa-plus", "Create")
+                    @Html.DisplayHeaderColorful("ניהול ", "מטופלים", 2, "fa fa-plus", "/patients/create")
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

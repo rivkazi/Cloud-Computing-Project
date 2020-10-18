@@ -132,6 +132,26 @@ namespace DrugsProject.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Chart(int? id)
+        {
+            string[] Months = { " ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני", "יולי", "אוגוסט", "ספטמבר", "אוקטובר" };
+            List<int> list = new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+            IBL bl = new BlClass();
+            Medicine medicine = bl.GetMedicine(id);
+            ViewBag.ChartTitle = medicine.commercialName;
+
+            IEnumerable<Prescription> prescriptions = bl.GetPrescriptions(pre => pre.startDate > new DateTime(2020,01,01));
+            var prescriptionsForMedicine = prescriptions.Where(pr => bl.GetMedicine(pr.MedicineId).commercialName == medicine.commercialName);
+            foreach (var item in prescriptionsForMedicine)
+            {
+                list[item.startDate.Month-1]++;
+
+            }
+
+            return View(list);
+        }
+
         protected override void Dispose(bool disposing)
         {
             IBL bL = new BlClass();

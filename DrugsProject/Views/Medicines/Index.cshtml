@@ -21,8 +21,8 @@
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="~/script/index.js"></script>
 </head>
-<div align="center">
-    @Html.DisplayHeaderColorful("ניהול תרופות", "", 2, "fa fa-plus", "Create")
+<div align="center" dir="rtl">
+    @Html.DisplayHeaderColorful("ניהול ", "תרופות", 2, "fa fa-plus", "/medicines/create")
 </div>
 <body onpageshow="loadHoverEffectPage()">
     <div dir="rtl" class="content contain">
@@ -49,17 +49,17 @@
                 </li>
             }
 
-            <li class="rig m-12">
-                <a class='normal' href='@Url.Action("Create","Medicines")'>
-                    <img class="hed-image" src="~/img/plus-med.jpg" alt="" />
-                    <h3 class="colorful hed">הוספה</h3>
-                </a>
+        <li class="rig m-12">
+            <a class='normal' href='@Url.Action("Create","Medicines")'>
+                <img class="hed-image" src="~/img/plus-med.jpg" alt="" />
+                <h3 class="colorful hed">הוספת תרופה</h3>
+            </a>
 
-                <div class='info btn-default' style="transform: rotate3d(1, 0, 0, 90deg);">
-                    @Html.DisplayHeader("הוספת תרופה", 3)
-                    @Html.DisplayHeader("לחץ כאן להוספת תרופה חדשה למאגר התרופות", 4)
-                </div>
-            </li>
+            <div class='info btn-default' style="transform: rotate3d(1, 0, 0, 90deg);">
+                @Html.DisplayHeader("הוספת תרופה", 3)
+                @Html.DisplayHeader("לחץ כאן להוספת תרופה חדשה למאגר התרופות", 4)
+            </div>
+        </li>
         </ul>
     </div>
 </body>
