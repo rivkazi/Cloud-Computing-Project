@@ -162,6 +162,7 @@
     <Content Include="scss\3D-hover-effect-big.css" />
     <Content Include="scss\3D-hover-effect.css" />
     <Content Include="scss\dropdown-search.css" />
+    <Content Include="scss\image-select.css" />
     <Content Include="scss\log.css" />
     <Content Include="scss\main.css" />
     <Content Include="scss\skin.css" />
@@ -187,6 +188,7 @@
     <Compile Include="Models\Medicine\MedicineVM.cs" />
     <Compile Include="Models\Patient\PatientModel.cs" />
     <Compile Include="Models\Patient\PatientVM.cs" />
+    <Compile Include="Models\Prescription\PrescriptionVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -215,7 +217,6 @@
     <Content Include="Views\Patients\Index.cshtml" />
     <Content Include="Views\Shared\DoctorLayoutPage.cshtml" />
     <Content Include="Views\Prescriptions\Create.cshtml" />
-    <Content Include="Views\Prescriptions\Details.cshtml" />
     <Content Include="Views\Prescriptions\Index.cshtml" />
     <Content Include="Views\Doctors\Create.cshtml" />
     <Content Include="Views\Doctors\Delete.cshtml" />
@@ -224,7 +225,7 @@
     <Content Include="Views\Doctors\Index.cshtml" />
     <Content Include="Views\Medicines\Chart.cshtml" />
     <Content Include="script\Chart.min.js" />
-    <Content Include="Views\Home\Test.cshtml" />
+    <Content Include="Views\Shared\ManagerLayoutPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -65,7 +65,6 @@ namespace BL
                 else
                     throw new Exception("תמונה זו אינה מתארת תרופה. אנא נסה שוב עם תוכן מתאים יותר." + "\n"
                          + " המלצתנו היא שתבחר תמונה אחרת לתרופה שברצונך להוסיף למערכת.");
-                    ///throw new Exception($"תמונה זו אינה מתארת תרופה. אנא נסה שוב עם תוכן מתאים יותר.\n המלצתנו היא שתבחר תמונה אחרת לתרופה שברצונך להוסיף למערכת");
             }
             catch (Exception ex)
             {
@@ -95,8 +94,10 @@ namespace BL
         public void AddPrescription(Prescription prescription)
         {
             IDAL dal = new DalClass();
-            if (prescription.endDate < prescription.startDate)
+            if (prescription.startDate < DateTime.Now)
                 throw new Exception("תאריך תחילת המרשם חייב להיות החל מהיום");
+            if (prescription.endDate < prescription.startDate)
+                throw new Exception("תאריך תחילת המרשם חייב להיות טרם סיומו");
 
             //Obtaining a NDC number of all active prescriptions for this patient
             List<string> NDCforPatientMedicines = GetNDCForAllActiveMedicine(prescription.PatientId);
@@ -133,16 +134,19 @@ namespace BL
             try
             {
                 IDAL dal = new DalClass();
-                medicine.imagePath = httpPostedFile.FileName;
                 bool IsOkImage = ValidateImage(medicine.imagePath);
 
                 if (IsOkImage)
                 {
                     medicine.manufacturer = medicine.manufacturer == null ? "לא ידוע" : medicine.manufacturer;
-
                     dal.UpdateMedicine(medicine, httpPostedFile);
                 }
+                else
+                   throw new Exception("תמונה זו אינה מתארת תרופה. אנא נסה שוב עם תוכן מתאים יותר." + "\n"
+                             + " המלצתנו היא שתבחר תמונה אחרת לתרופה שברצונך להוסיף למערכת.");
+                
             }
+
             catch (Exception ex)
             {
 
@@ -339,9 +343,9 @@ namespace BL
             {
                 IDAL dal = new DalClass();
                 Doctor doctor = dal.GetDoctors(doc => doc.email == doctorSign.email).FirstOrDefault();
-                if (doctor == null)
+                if (doctor == null && doctorSign.email != "MyProject4Ever@gmail.com")
                     throw new Exception("כתובת המייל לא זוהתה במערכת. אנא בדוק אותה או בצע הרשמה");
-                else if (doctorSign.password != doctor.password)
+                else if (doctor == null || doctorSign.password != doctor.password)
                     throw new Exception("סיסמה שגויה, נסה שנית");
             }
             catch (Exception ex)
@@ -357,7 +361,7 @@ namespace BL
             {
                 doctor.password = doctorSign.password;
                 dal.UpdateDoctor(doctor);
-                SendMail(doctor.email, doctor.privateName + " " + doctor.familyName, "ההרשמה עברה בהצלחה", "ברוכים הבאים לאתר שלנו, שמחים שהצטרפת." + "<br/>"
+                SendMail(doctor.email, "ההרשמה עברה בהצלחה", doctor.privateName + " " + doctor.familyName, "ברוכים הבאים לאתר שלנו, שמחים שהצטרפת." + "<br/>"
                          + "נשמח לעמוד לעזרתך בכל פניה ובקשה ומקווים שתהיה לך חוויה נעימה." + "<br/>" + "תודה, צוות WiseCare");
             }
             else if(doctor == null)
@@ -381,7 +385,7 @@ namespace BL
                 {
                     Random random = new Random();
                     int newPassword = random.Next(10000, 1000000000);
-                    SendMail(doctor.email, doctor.privateName + " " + doctor.familyName, "איפוס סיסמה", "הסיסמה שלך אופסה, הסיסמה החדשה היא:" + "<br/>" + newPassword + "<br/>" + "אנא שנה סיסמה בהקדם האפשרי");
+                    SendMail(doctor.email, "איפוס סיסמה", doctor.privateName + " " + doctor.familyName, "הסיסמה שלך אופסה, הסיסמה החדשה היא:" + "<br/>" + newPassword + "<br/>" + "אנא שנה סיסמה בהקדם האפשרי");
 
                     //Edit Password
                     doctor.password = newPassword.ToString();

@@ -1,21 +1,23 @@
 ﻿@model DrugsProject.Models.Patient.PatientVM
 @using DrugsProject.Models
-
 @{ if (RouteConfig.doctor != null)
     {
         Layout = "~/Views/Shared/DoctorLayoutPage.cshtml";
+    }
+    else if (RouteConfig.IsManager == true)
+    {
+        Layout = "~/Views/Shared/ManagerLayoutPage.cshtml";
     }
     else
     {
         Layout = "~/Views/Shared/LayoutPage.cshtml";
     }
 }
-
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/scss/main.css?v=3">
-    <link rel="stylesheet" href="~/scss/skin.css"> 
+    <link rel="stylesheet" href="~/scss/skin.css">
     <script src="~/script/index.js?v=2"></script>
 </head>
 

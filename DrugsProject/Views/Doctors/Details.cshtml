@@ -1,9 +1,12 @@
 ﻿@model DrugsProject.Models.Doctor.DoctorVM
 @using DrugsProject.Models
-
 @{ if (RouteConfig.doctor != null)
     {
         Layout = "~/Views/Shared/DoctorLayoutPage.cshtml";
+    }
+    else if (RouteConfig.IsManager == true)
+    {
+        Layout = "~/Views/Shared/ManagerLayoutPage.cshtml";
     }
     else
     {

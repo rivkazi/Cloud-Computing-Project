@@ -1,16 +1,18 @@
 ﻿@model IEnumerable<DrugsProject.Models.Doctor.DoctorVM>
 @using DrugsProject.Models
-
 @{ if (RouteConfig.doctor != null)
     {
         Layout = "~/Views/Shared/DoctorLayoutPage.cshtml";
+    }
+    else if (RouteConfig.IsManager == true)
+    {
+        Layout = "~/Views/Shared/ManagerLayoutPage.cshtml";
     }
     else
     {
         Layout = "~/Views/Shared/LayoutPage.cshtml";
     }
 }
-
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/scss/main.css?v=2">
@@ -27,7 +29,7 @@
                         <div align="center" dir="rtl">
                             @Html.DisplayHeaderColorful("ניהול ", "רופאים", 2, "fa fa-plus", "/doctors/create")
                         </div>
-                        <div class="contain" style="margin-top: 30px; display: flex; flex-wrap: wrap;"  dir="rtl">
+                        <div class="contain" style="margin-top: 30px; display: flex; flex-wrap: wrap;" dir="rtl">
                             @foreach (var item in Model)
                             {
                                 <div class="wpb_column vc_column_container col-sm-4 block grow m-full-20" style="height:400px; width:330px;">

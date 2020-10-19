@@ -27,8 +27,14 @@ namespace DrugsProject.Controllers
             {
                 IBL bl = new BlClass();
                 Dictionary<string, string> errorMessege = bl.SignValidation(doctorSign);
-                if (errorMessege.Count == 0)
+                if (errorMessege.Count == 1)
                 {
+                    if (doctorSign.email == "MyProject4Ever@gmail.com" && doctorSign.password == "מנהל")
+                    {
+                        RouteConfig.IsManager = true;
+                        return View("~/Views/Home/Index.cshtml");
+                    }
+
                     bl.SignIn(doctorSign);
                     Doctor doctor = bl.GetDoctors(doc => doc.email == doctorSign.email).FirstOrDefault();
                     RouteConfig.doctor = doctor;
@@ -101,16 +107,10 @@ namespace DrugsProject.Controllers
         public ActionResult LogOut()
         {
             RouteConfig.doctor = null;
+            RouteConfig.IsManager = false;
             return View("~/Views/Home/Index.cshtml");
         }
 
-
-
-        public ActionResult Test()
-        {
-          
-            return View();
-        }
 
     }
 }

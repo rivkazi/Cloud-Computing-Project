@@ -1,16 +1,18 @@
 ﻿@model IEnumerable<DrugsProject.Models.Patient.PatientVM>
 @using DrugsProject.Models
-
 @{ if (RouteConfig.doctor != null)
     {
         Layout = "~/Views/Shared/DoctorLayoutPage.cshtml";
+    }
+    else if (RouteConfig.IsManager == true)
+    {
+        Layout = "~/Views/Shared/ManagerLayoutPage.cshtml";
     }
     else
     {
         Layout = "~/Views/Shared/LayoutPage.cshtml";
     }
 }
-
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/scss/main.css?v=1">
@@ -57,68 +59,68 @@
                                 </tr>
                                 @foreach (var item in Model)
                                 {
-                            <tr>
-                                 <td>
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            @Html.DisplayFor(modelItem => item.fullName)
-                                        </h4>
-                                    </div>
-                                 </td>
-                                 <td>
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            @Html.DisplayFor(modelItem => item.age)
-                                        </h4>
-                                    </div>
-                                 </td>
-                                 <td>
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            @Html.DisplayFor(modelItem => item.bloodType).ToString().Replace('_', ' ')
-                                        </h4>
-                                    </div>
-                                 </td>
-                                 <td>
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            @Html.DisplayFor(modelItem => item.phoneNumber)
-                                        </h4>
-                                    </div>
-                                 </td>
-                                 <td>
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            @Html.DisplayTextFor(modelItem => item.email)
-                                        </h4>
-                                    </div>
-                                 </td>
-                                 <td>
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            @Html.DisplayFor(modelItem => item.medicalHistory)
-                                        </h4>
-                                    </div>
-                                 </td>
-                                 <td>
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            @Html.DisplayFor(modelItem => item.birthDate)
-                                        </h4>
-                                    </div>
-                                 </td>
-                                 <td>
-                                    <div class="panel-heading h">
-                                        <h4 class="panel-title">
-                                            <a role="button">
-                                                @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "fa fa-pencil" }) |
-                                                @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "fa fa-eye" }) |
-                                                @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "fa fa-trash" })
-                                            </a>
-                                        </h4>
-                                    </div>
-                                </td>
-                            </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    @Html.DisplayFor(modelItem => item.fullName)
+                                                </h4>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    @Html.DisplayFor(modelItem => item.age)
+                                                </h4>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    @Html.DisplayFor(modelItem => item.bloodType).ToString().Replace('_', ' ')
+                                                </h4>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    @Html.DisplayFor(modelItem => item.phoneNumber)
+                                                </h4>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    @Html.DisplayTextFor(modelItem => item.email)
+                                                </h4>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    @Html.DisplayFor(modelItem => item.medicalHistory)
+                                                </h4>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    @Html.DisplayFor(modelItem => item.birthDate)
+                                                </h4>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="panel-heading h">
+                                                <h4 class="panel-title">
+                                                    <a role="button">
+                                                        @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "fa fa-pencil" }) |
+                                                        @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "fa fa-eye" }) |
+                                                        @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "fa fa-trash" })
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                        </td>
+                                    </tr>
                                 }
                             </table>
                         </div>

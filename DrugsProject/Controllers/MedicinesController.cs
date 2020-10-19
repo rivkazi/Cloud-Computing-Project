@@ -54,7 +54,6 @@ namespace DrugsProject.Controllers
         {
             try
             {
-                medicine.imagePath = medicine.img.FileName;
                 if (ModelState.IsValid)
                 {
                     IBL bL = new BlClass();
@@ -100,7 +99,6 @@ namespace DrugsProject.Controllers
         {
             try
             {
-                medicine.imagePath = medicine.img.FileName;
                 if (ModelState.IsValid)
                 {
                     IBL bL = new BlClass();
@@ -160,7 +158,6 @@ namespace DrugsProject.Controllers
 
         public ActionResult Chart(int? id)
         {
-            string[] Months = { " ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני", "יולי", "אוגוסט", "ספטמבר", "אוקטובר" };
             List<int> list = new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
             IBL bl = new BlClass();

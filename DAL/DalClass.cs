@@ -251,14 +251,14 @@ namespace DAL
         {
             try
             {
+                Medicine med = GetMedicine(medicine.Id);
+                GoogleDriveAPITool.DeleteGoogleFileByName(med.imagePath);
                 using (var ctx = new DrugsContext())
                 {
                     ctx.Entry(medicine).State = EntityState.Modified;
                     ctx.SaveChanges();
                 }
-                GoogleDriveAPITool.FileUpload(httpPostedFile);
-                GoogleDriveAPITool.DeleteGoogleFileByName(medicine.imagePath);
-
+                GoogleDriveAPITool.FileUpload(httpPostedFile);             
             }
             catch (Exception ex)
             {

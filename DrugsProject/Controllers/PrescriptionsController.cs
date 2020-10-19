@@ -1,6 +1,8 @@
 ﻿using BE;
 using BL;
 using DrugsProject.Models.Patient;
+using DrugsProject.Models.Prescription;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
@@ -10,13 +12,11 @@ namespace DrugsProject.Controllers
     {
 
         // GET: Prescriptions
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
             IBL bl = new BlClass();
-            //var prescriptions = bl.GetPrescriptions();
-            //return View(prescriptions);
-            Patient pat = bl.GetPatient(1);
-            return View(new PatientVM(pat));
+            var prescriptions = bl.GetPrescriptions(pre => pre.PatientId == id).Select(pr => new PrescriptionVM(pr));
+            return View(prescriptions);   
         }
 
         // GET: Prescriptions/Details/5
@@ -38,9 +38,11 @@ namespace DrugsProject.Controllers
         }
 
         // GET: Prescriptions/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            return View();
+            Prescription pre = new Prescription();
+            pre.PatientId = (int)id;
+            return View(new PrescriptionVM(pre));
         }
 
         // POST: Prescriptions/Create
@@ -48,17 +50,28 @@ namespace DrugsProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Prescription prescription)
+        public ActionResult Create(PrescriptionVM prescription)
         {
-            if (ModelState.IsValid)
+            try
             {
-                IBL bL = new BlClass();
-                bool IsAddOk = false;
-                bL.AddPrescription(prescription);
-                if (IsAddOk)
-                    return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    IBL bL = new BlClass();
+                    prescription.DoctorId = 1;//RouteConfig.doctor.Id;
+                    bL.AddPrescription(prescription.Current);
+                    ViewBag.TitlePopUp = "עבר בהצלחה";
+                    ViewBag.Message = "המרשם נוסף בהצלחה";
+                    return View("../Home/Index");
+                }
+                return View(prescription);
             }
-            return View(prescription);
+            catch (System.Exception ex)
+            {
+                ViewBag.TitlePopUp = "שגיאה";
+                ViewBag.Message = ex.Message;
+                return View(prescription);
+            }
+
         }
 
         protected override void Dispose(bool disposing)
