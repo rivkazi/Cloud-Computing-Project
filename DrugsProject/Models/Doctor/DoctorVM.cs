@@ -1,12 +1,5 @@
-﻿using BE;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
 namespace DrugsProject.Models.Doctor
 {
@@ -14,7 +7,7 @@ namespace DrugsProject.Models.Doctor
     {
         public BE.Doctor Current { get; set; }
         public DoctorVM(BE.Doctor doctor)
-        {           
+        {
             Current = doctor;
         }
         public DoctorVM()
@@ -31,7 +24,7 @@ namespace DrugsProject.Models.Doctor
 
         [DisplayName("מספר תעודת זהות")]
         [Required(ErrorMessage = "חובה להזין מספר תעודת זהות")]
-        [StringLength(9, MinimumLength =7, ErrorMessage = "{0} חייב להיות בין {2} ל-{1} ספרות")]
+        [StringLength(9, MinimumLength = 7, ErrorMessage = "{0} חייב להיות בין {2} ל-{1} ספרות")]
         public string idNumber
         {
             get { return Current.idNumber; }
@@ -73,7 +66,6 @@ namespace DrugsProject.Models.Doctor
         }
 
         [DisplayName("מייל")]
-        [DataType(DataType.EmailAddress)]
         [Required(ErrorMessage = "חובה להזין כתובת מייל ליצירת קשר")]
         public string email
         {

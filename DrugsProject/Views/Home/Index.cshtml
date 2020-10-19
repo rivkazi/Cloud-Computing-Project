@@ -1,6 +1,11 @@
-﻿@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/LayoutPage.cshtml";
+﻿@{ if (RouteConfig.doctor != null)
+    {
+        Layout = "~/Views/Shared/DoctorLayoutPage.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/LayoutPage.cshtml";
+    }
 }
 
 <!DOCTYPE html>
@@ -13,9 +18,6 @@
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="~/scss/main.css">
     <link type="text/css" rel="stylesheet" href="~/scss/skin.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/script/index.js"></script>
 </head>
 
@@ -206,6 +208,6 @@
             </div>
         </div>
     </section>
- </body>
+</body>
 </html>
 

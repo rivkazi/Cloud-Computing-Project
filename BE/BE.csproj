@@ -43,7 +43,9 @@
   <ItemGroup>
     <Compile Include="CronicalDisease.cs" />
     <Compile Include="Doctor.cs" />
+    <Compile Include="DoctorSign.cs" />
     <Compile Include="EnumClass.cs" />
+    <Compile Include="GoogleDriveFile.cs" />
     <Compile Include="ImageDetails.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="Medicine.cs" />

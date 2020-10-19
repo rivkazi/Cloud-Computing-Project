@@ -5,9 +5,6 @@
     Layout = "~/Views/Shared/LayoutPage.cshtml";
 }
 
-<h2>Chart</h2>
-
-
 <!doctype html>
 <html>
 <head>
@@ -16,8 +13,6 @@
     <link rel="stylesheet" href="~/scss/main.css">
     <link rel="stylesheet" href="~/scss/skin.css">
     <script type="text/javascript" src="~/script/hover.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="~/script/index.js"></script>
     <script src="~/script/Chart.min.js"></script>
     <script src="~/script/utils.js"></script>
@@ -31,8 +26,8 @@
 </head>
 
 <body>
-	<div id="chcolor" class="colorful">;k;lk;'
-	;
+	<div id="chcolor">
+	
 	</div>
     <div class="contain">
         <canvas id="canvas"></canvas>
@@ -41,12 +36,11 @@
     <br>
     <script>
 		var config = {
-			type: 'bar',
+            type: 'bar',
 			data: {
                 labels: ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר'],
 				datasets: [{
-					label: "@ViewBag.ChartTitle",
-					
+					label: "@ViewBag.ChartTitle",			
 					borderColor: window.chartColors.red,
 					data: [
 						@{ foreach (var item in Model)
@@ -62,7 +56,7 @@
 				responsive: true,
 				title: {
 					display: true,
-					text: 'גרף הנפקת מרשמים עבור תרופות בחודשים החולפים',
+                    text: 'גרף הנפקת מרשמים עבור תרופות בחודשים החולפים',
 				},
 				tooltips: {
 					mode: 'index',

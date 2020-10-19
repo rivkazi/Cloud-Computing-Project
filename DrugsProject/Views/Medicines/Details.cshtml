@@ -15,13 +15,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/scss/main.css">
     <link rel="stylesheet" href="~/scss/skin.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="~/script/index.js"></script>
 
 </head>
 
-<section id="about" style="height:650px">
+<section id="about" style="height:800px">
     <div class="image-holder col-lg-6 col-md-6 col-sm-6 col-xs-12 pull-left">
         <div class="background-imgholder" style="background:url(../../img/colorful-backround.jpg)">
             <img src="~/img/colorful-backround.jpg" alt="about" class="img-responsive" style="display:none;" />
@@ -32,7 +30,7 @@
         <div class="col-md-7 col-md-offset-5 col-sm-8 col-sm-offset-2 col-xs-12 text-inner ">
             <div class="text-block text-right" dir="rtl">
                 <div class="section-heading">
-                    @Html.DisplayHeaderColorful(Model.genericaName, Model.commercialName, 2, "fa fa-pencil", $"../Edit/{Model.Id}")
+                    @Html.DisplayHeaderColorful(Model.genericaName, Model.commercialName, 2, "fa fa-pencil", $"../Edit/{Model.Id}", "fa fa-trash", $"../Delete/{Model.Id}")
                 </div>
 
                 <ul class="aboutul">
@@ -43,8 +41,12 @@
                     @Html.DisplayImage(Model.fullImagePath, 200, "m-12 img-thumbnail")
                 </ul>
 
-                @Html.ActionLink("צפיה בנתוני צריכה", "Index", null, new { @class = "btn btn-primary slide" })
-                @Html.ActionLink("חזרה לרשימה", "Index", null, new { @class = "btn btn-default m-12" })
+                <div class="form-group">
+                    <div class="m-20">
+                        @Html.ActionLink("חזרה לרשימה", "Index", null, new { @class = "btn btn-primary m-0" })
+                        @Html.ActionLink("צפיה בנתוני צריכה", "Chart", new { Model.Id }, new { @class = "btn btn-default lef slide" })
+                    </div>
+                </div>
             </div>
         </div>
     </div>

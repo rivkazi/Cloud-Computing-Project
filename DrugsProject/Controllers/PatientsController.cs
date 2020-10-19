@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using BE;
+﻿using BE;
 using BL;
 using DrugsProject.Models.Patient;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Web.Mvc;
 
 namespace DrugsProject.Controllers
 {
@@ -54,18 +50,34 @@ namespace DrugsProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(PatientVM patient)
         {
-            if (ModelState.IsValid)
+            try
             {
-                IBL bL = new BlClass();
-                Dictionary<string, string> errorMessege = bL.AddPatient(patient.Current);
-                if (errorMessege.Count == 0)
-                    return RedirectToAction("Index");
-                foreach (var item in errorMessege)
+                if (ModelState.IsValid)
                 {
-                    ModelState.AddModelError(item.Key, item.Value);
+                    IBL bL = new BlClass();
+                    Dictionary<string, string> errorMessege = bL.PersonValidation(patient.Current);
+                    if (errorMessege.Count == 0)
+                    {
+                        bL.AddPatient(patient.Current);
+                        ViewBag.TitlePopUp = "עבר בהצלחה";
+                        ViewBag.Message = "המטופל.ת התווספ.ה בהצלחה למאגר המטופלים";
+                        return View("Index", new PatientModel().getPatientVms());
+
+                    }
+
+                    foreach (var item in errorMessege)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
                 }
+                return View(patient);
             }
-            return View(patient);
+            catch (Exception ex)
+            {
+                ViewBag.TitlePopUp = "שגיאה";
+                ViewBag.Message = ex.Message;
+                return View("Index", new PatientModel().getPatientVms());
+            }
         }
 
         // GET: Patients/Edit/5
@@ -77,7 +89,7 @@ namespace DrugsProject.Controllers
             }
 
             IBL bL = new BlClass();
-            Patient patient = bL.GetPatient(id); 
+            Patient patient = bL.GetPatient(id);
 
             if (patient == null)
             {
@@ -93,18 +105,34 @@ namespace DrugsProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(PatientVM patient)
         {
-            if (ModelState.IsValid)
+            try
             {
-                IBL bL = new BlClass();
-                Dictionary<string, string> errorMessege = bL.UpdatePatient(patient.Current);
-                if (errorMessege.Count == 0)
-                    return RedirectToAction("Index");
-                foreach (var item in errorMessege)
+                if (ModelState.IsValid)
                 {
-                    ModelState.AddModelError(item.Key, item.Value);
+                    IBL bL = new BlClass();
+                    Dictionary<string, string> errorMessege = bL.PersonValidation(patient.Current);
+                    if (errorMessege.Count == 0)
+                    {
+                        bL.UpdatePatient(patient.Current);
+                        ViewBag.TitlePopUp = "עבר בהצלחה";
+                        ViewBag.Message = "המטופל.ת עודכנ.ה בהצלחה במאגר המטופלים";
+                        return View("Index", new PatientModel().getPatientVms());
+
+                    }
+
+                    foreach (var item in errorMessege)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
                 }
+                return View(patient);
             }
-            return View(patient);
+            catch (Exception ex)
+            {
+                ViewBag.TitlePopUp = "שגיאה";
+                ViewBag.Message = ex.Message;
+                return View("Index", new PatientModel().getPatientVms());
+            }
         }
 
         // GET: Patients/Delete/5
@@ -130,16 +158,20 @@ namespace DrugsProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            IBL bL = new BlClass();
-            bL.DeletePatient(id);
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            IBL bL = new BlClass();
-            bL.Dispose(disposing);
-            base.Dispose(disposing);
+            try
+            {
+                IBL bL = new BlClass();
+                bL.DeletePatient(id);
+                ViewBag.TitlePopUp = "עבר בהצלחה";
+                ViewBag.Message = "המטופלץת נמחק.ה בהצלחה ממאגר המטופלים";
+                return View("Index", new PatientModel().getPatientVms());
+            }
+            catch (Exception ex)
+            {
+                ViewBag.TitlePopUp = "שגיאה";
+                ViewBag.Message = ex.Message;
+                return View("Index", new PatientModel().getPatientVms());
+            }
         }
     }
 }

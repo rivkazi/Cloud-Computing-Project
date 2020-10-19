@@ -5,36 +5,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/scss/main.css">
+    <link rel="stylesheet" href="/scss/main.css?v=2">
     <link rel="stylesheet" href="/scss/skin.css?v=2">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    @if (ViewBag.Message != null)
+    {
+        <script>
+                /*open*/
+                $(function () {
+                    $("#custom-modal").modal("show");
+                });
+
+                /* Close the popup when the a selection is made */
+                $("#selectCity").on("change", function () {
+                    $("#custom-modal").modal("hide");
+                });
+            
+        </script>
+    }
 </head>
 
-
-
 <body id="wrapper" class="body_main cyan">
-    @*<section id="top-header">
-            <div class="contain navbar-fixed-top">
-                <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-12 top-header-links">
-                        <ul class="contact_links">
-                            <li><i class="fa fa-phone"></i><a href="#">+91 848 594 5080</a></li>
-                            <li><i class="fa fa-envelope"></i><a href="#">sales@aspiresoftware.in</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <ul class="social_links">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                            <li><a href="#"><i class="fa fa-skype"></i></a></li>
-                        </ul>
-                    </div>
+    <div name="popUp" id="custom-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content" dir="rtl">
+                <div class="modal-header">
+                    <button type="button" class="close lef" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">@ViewBag.TitlePopUp</h4>
+                </div>
+                <div class="modal-body text-right">
+                    @ViewBag.Message
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-ok lef" data-dismiss="modal">אישור</button>
                 </div>
             </div>
-        </section>*@
+        </div>
+    </div>
 
     <header>
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -47,10 +56,9 @@
                 <div id="navbar" class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
                         <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home"? "active" : "")"><a href="~/Home/index">בית</a></li>
-                        <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Patients" ? "active" : "")"><a href="~/Patients/Index">מטופלים</a></li>
-                        <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Medicines" ? "active" : "")"><a href="~/Medicines/Index">תרופות</a></li>
-                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "SelectImage" ? "active" : "")"><a href="~/Home/SelectImage">תמונה</a></li>
-                        <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Doctors" ? "active" : "")"><a href="~/Doctors/Index">רופאים</a></li>
+                        <li class="@(ViewContext.RouteData.Values["controller"].ToString().ToUpper() == "PATIENTS" ? "active" : "")"><a href="~/Patients/Index">מטופלים</a></li>
+                        <li class="@(ViewContext.RouteData.Values["controller"].ToString().ToUpper() == "MEDICINES" ? "active" : "")"><a href="~/Medicines/Index">תרופות</a></li>
+                        <li class="@(ViewContext.RouteData.Values["controller"].ToString().ToUpper() == "DOCTORS" ? "active" : "")"><a href="~/Doctors/Index">רופאים</a></li>
                     </ul>
                 </div>
                 <div class="lef m-20">
@@ -164,5 +172,4 @@
     </div>
 </body>
 </html>
-
 
