@@ -5,6 +5,10 @@
     {
         Layout = "~/Views/Shared/DoctorLayoutPage.cshtml";
     }
+    else if (RouteConfig.IsManager == true)
+    {
+        Layout = "~/Views/Shared/ManagerLayoutPage.cshtml";
+    }
     else
     {
         Layout = "~/Views/Shared/LayoutPage.cshtml";
@@ -15,15 +19,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/scss/main.css">
     <link rel="stylesheet" href="~/scss/skin.css">
+    <link href='~/scss/image-select.css?n=2' rel='stylesheet' type='text/css'>
     <script src="~/script/index.js"></script>
-
+    <script>
+        function showname() {
+            var name = document.getElementById('fileInput');
+            document.getElementById("imagePath").value = name.files.item(0).name;
+            document.getElementById("image_to_show").src = "/img/" + name.files.item(0).name;
+        };
+    </script>
 </head>
 
 @using (Html.BeginForm("Edit", "Medicines", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
-    <section id="about" style="height:650px">
+    <section id="about" style="height:850px">
         <div class="image-holder col-lg-6 col-md-6 col-sm-6 col-xs-12 pull-left">
             <div class="background-imgholder" style="background:url(../../img/colorful-backround.jpg)">
                 <img src="~/img/colorful-backround.jpg" alt="about" class="img-responsive" style="display:none;" />
@@ -90,7 +101,17 @@
                                 @Html.ValidationMessageFor(model => model.properties, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <input type="file" name="img" id="fileElem" multiple accept="image" required />
+
+                        @Html.HiddenFor(model => model.imagePath, new { htmlAttributes = new { @class = "form-control rig shadow-border" } })
+
+                        <div class="wrapper">
+                            <input type="file" id="fileInput" name="img" multiple accept="image" onchange="showname()" />
+                            <label for="fileInput" class="btn-3">
+                                <p class="bold">בחר תמונה</p>
+                            </label>
+                        </div>
+
+                        <img id="image_to_show" src=@Model.fullImagePath class="m-12" height='150' width='200' />
 
                         <br />
                         <div class="form-group">

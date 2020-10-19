@@ -1,15 +1,17 @@
 ﻿@model IEnumerable<DrugsProject.Models.MedicineVM>
 @using DrugsProject.Models
-
 @{ if (RouteConfig.doctor != null)
     {
         Layout = "~/Views/Shared/DoctorLayoutPage.cshtml";
+    }
+    else if (RouteConfig.IsManager == true)
+    {
+        Layout = "~/Views/Shared/ManagerLayoutPage.cshtml";
     }
     else
     {
         Layout = "~/Views/Shared/LayoutPage.cshtml";
     }
-    ViewBag.Title = "Index";
 }
 <head>
     <link rel="stylesheet" href="~/scss/3D-hover-effect-big.css?v=2">
@@ -55,7 +57,8 @@
 
                 <div class='info btn-default' style="transform: rotate3d(1, 0, 0, 90deg);">
                     @Html.DisplayHeader("הוספת תרופה", 3)
-                    @Html.DisplayHeader("לחץ כאן להוספת תרופה חדשה למאגר התרופות", 4)
+                    @Html.DisplayHeader("לחץ כאן להוספת תרופה", 4)
+                    @Html.DisplayHeader(" חדשה למאגר התרופות", 4)
                 </div>
             </li>
         </ul>

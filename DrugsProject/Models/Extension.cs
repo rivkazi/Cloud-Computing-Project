@@ -2,6 +2,7 @@
 using BL;
 using DrugsProject.Models.Doctor;
 using DrugsProject.Models.Patient;
+using DrugsProject.Models.Prescription;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -10,17 +11,17 @@ namespace DrugsProject.Models
 {
     public static class Extension
     {
-        public static IEnumerable<Prescription> GetPrescriptionsForPatient(this PatientVM patVM)
+        public static IEnumerable<BE.Prescription> GetPrescriptionsForPatient(this PatientVM patVM)
         {
             IBL bl = new BlClass();
             return bl.FilterPrescriptionsForPatient(patVM.Current.Id);
         }
-        public static BE.Medicine GetMedicineForPrescription(this Prescription pre)
+        public static BE.Medicine GetMedicineForPrescription(this PrescriptionVM pre)
         {
             IBL bl = new BlClass();
             return bl.GetMedicine(pre.MedicineId);
         }
-        public static DoctorVM GetDoctorForPrescription(this Prescription pre)
+        public static DoctorVM GetDoctorForPrescription(this PrescriptionVM pre)
         {
             IBL bl = new BlClass();
             return new DoctorVM(bl.GetDoctor(pre.DoctorId));
@@ -38,9 +39,13 @@ namespace DrugsProject.Models
         {
             if (icon == "")
                 return new MvcHtmlString($"<h{size} class='panel-heading'>{ textForBlackHeader } <span> { textForColorHeader }</span></h{size}>");
-            string Link1 = $"<a href='{link}'><i class='{icon}'></i></a><a href='{link2}'><i class='{icon2}'></i></a>";
             string header = $"{ textForBlackHeader } <span> { textForColorHeader }</span>";
-            return new MvcHtmlString($"<h{size} class='panel-heading bold'>{header} {Link1}</h{size}>");
+            if (RouteConfig.IsManager == true)
+            {
+                string Link1 = $"<a href='{link}'><i class='{icon}'></i></a><a href='{link2}'><i class='{icon2}'></i></a>";
+                return new MvcHtmlString($"<h{size} class='panel-heading bold'>{header} {Link1}</h{size}>");
+            }
+            return new MvcHtmlString($"<h{size} class='panel-heading bold'>{header}</h{size}>");
         }
 
         public static MvcHtmlString DisplayItemWithIcon(this HtmlHelper html, Object text, string icon)
@@ -69,54 +74,15 @@ namespace DrugsProject.Models
             return new MvcHtmlString($"<select class='form-control'>{options}</select>");
         }
 
-        //public static MvcHtmlString ShowPrescription(this HtmlHelper htmlHelper, Prescription prescription)
-        //{
-        //    IBL bl = new BlClass();
-        //    string result = "";
-        //    result += @"< div class='{panel}'>
-        //        <div class='{panel-heading}' role='{tab}' id='{headingOne}'>
-        //            <h4 class='{panel-title}'>
-        //                <div class='{icon-circle}'> <i class='{fa fa-heartbeat}'></i></div>
-        //                <a role = '{button}' data-toggle='{collapse}' data-parent= '{#accordion}' href='{#collapseOne}' aria -expanded='{true}' aria -controls='{collapseOne}'>
-        //                    How do I purchase your product?
-        //                </a>
-        //            </h4>
-        //        </div>
-        //        <div id = '{collapseOne}' class='{panel-collapse collapse}' role ='{tabpanel}' aria -labelledby= '{headingOne}'>
-        //            < div class='{panel -body}'>
-        //                Lorem ipsum dolor sit amet, sed in nostro latine, eu option appetere mediocritatem duo.Pro duis magna perpetua ea. Dicant epicurei gubergren eos ne, ad suas ornatus graecis nam, pri quot liber ignota no.Usu et erat propriae invenire, blandit voluptua
-        //                vim at, iuvaret albucius cu ius. Te integre diceret praesent eos, impetus legimus te vim. Ne mollis veritus est.
-        //            </div>
-        //        </div>
-        //    </div>";
-
-        //    return new MvcHtmlString(result);
-        //}
-
-        //public static MvcHtmlString DropDownListForHositals(this HtmlHelper htmlHelper, string name)
-        //{
-        //    IBL bl = new BlClass();
-        //    string options = "";
-        //    foreach (var hospital in bl.GetHospitals())
-        //    {
-        //        options += $"<option value ='{hospital.HospitalId}'> {hospital.HospitalName} </option>";
-        //    }
-        //    return new MvcHtmlString($"<select class='form-control' name='{name}'>{options}</select>");
-        //}
-
-
-        //public static MvcHtmlString DisplayNameFotInSpan(this HtmlHelper htmlHelper)
-        //{
-        //    string 
-
-
-        //    IBL bl = new BlClass();
-        //    string options = "";
-        //    foreach (var hospital in bl.GetHospitals())
-        //    {
-        //        options += $"<option value ='{hospital.HospitalId}'> {hospital.HospitalName} </option>";
-        //    }
-        //    return new MvcHtmlString($"<select class='form-control' name='{name}'>{options}</select>");
-        //}
+        public static MvcHtmlString DropDownListForMedicines(this HtmlHelper htmlHelper, string name)
+        {
+            IBL bl = new BlClass();
+            string options = "";
+            foreach (var medicine in bl.GetMedicines())
+            {
+                options += $"<option value ='{medicine.Id}'> {medicine.commercialName} </option>";
+            }
+            return new MvcHtmlString($"<select class='form-control' name='{name}'>{options}</select>");
+        }
     }
 }

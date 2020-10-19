@@ -1,0 +1,78 @@
+﻿
+[type="file"] {
+    height: 0;
+    overflow: hidden;
+    width: 0;
+}
+
+[type="file"] + label {
+    background: #f15d22;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Rubik', sans-serif;
+    font-size: inherit;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    outline: none;
+    padding: 1rem 50px;
+    position: relative;
+    transition: all 0.3s;
+    vertical-align: middle;
+}
+
+    [type="file"] + label:hover {
+        background-color: #f15d22;
+    }
+
+    [type="file"] + label.btn-3 {
+        background-color: #f79159;
+        border-radius: 0px;
+        overflow: hidden;
+        height: 40px !important;
+    }
+
+        [type="file"] + label.btn-3 span {
+            display: inline-block;
+            height: 100%;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        [type="file"] + label.btn-3::before {
+            font-family: "Font Awesome 5 Free" !important;
+            font-weight: 400 !important;
+            content: "\f1ea" !important;
+            color: #fff;
+            background-color: #f15d22;
+            font-size: 130%;
+            height: 100%;
+            left: 0;
+            line-height: 2.6;
+            position: absolute;
+            top: -180%;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        [type="file"] + label.btn-3:hover {
+            background-color: #f15d22;
+        }
+
+            [type="file"] + label.btn-3:hover span {
+                transform: translateY(300%);
+            }
+
+            [type="file"] + label.btn-3:hover::before {
+                top: 0;
+            }
+
+.wrapper {
+    background-color: #fff;
+    border-radius: 1rem;
+    max-width: 500px;
+    padding-top: 2rem;
+    width: 100%;
+}

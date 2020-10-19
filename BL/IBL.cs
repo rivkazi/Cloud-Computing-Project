@@ -54,7 +54,7 @@ namespace BL
         void SendMail(string mailAdress,string subject, string receiverName, string message); //This function responsible for sending a mail
 
         //ACCOUNT
-        bool SignIn(string userName, string password); //This function returns rather a person signed in is allowed
+        void SignIn(DoctorSign doctorSign); //This function returns rather a person signed in is allowed
         void SignUp(DoctorSign doctorSign); //This function represent signing up
         void ForgotPassword(string mail); //This function responsible for reseting the password if the person forgot it
 

@@ -3,6 +3,7 @@ using BL;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 
 namespace DrugsProject.Controllers
 {
@@ -20,61 +21,96 @@ namespace DrugsProject.Controllers
             return View();
         }
 
-        public ActionResult Log(string mail, string pass)
+        public ActionResult Log(DoctorSign doctorSign)
         {
-            IBL bl = new BlClass();
-            bool succeeded = bl.SignIn(mail, pass);
-            if (succeeded)
+            try
             {
-                Doctor doctor = bl.GetDoctors(doc => doc.email == mail).FirstOrDefault();
-                RouteConfig.doctor = doctor;
-                return View("~/Views/Home/Index.cshtml");
-            }
-            else
-            {
-                ViewBag.TitlePopUp = "הודעת מערכת";
-                ViewBag.Message = "שגיאת התחברות, אנא נסה שוב.";
+                IBL bl = new BlClass();
+                Dictionary<string, string> errorMessege = bl.SignValidation(doctorSign);
+                if (errorMessege.Count == 1)
+                {
+                    if (doctorSign.email == "MyProject4Ever@gmail.com" && doctorSign.password == "מנהל")
+                    {
+                        RouteConfig.IsManager = true;
+                        return View("~/Views/Home/Index.cshtml");
+                    }
+
+                    bl.SignIn(doctorSign);
+                    Doctor doctor = bl.GetDoctors(doc => doc.email == doctorSign.email).FirstOrDefault();
+                    RouteConfig.doctor = doctor;
+                    return View("~/Views/Home/Index.cshtml");
+                }
+
+                foreach (var item in errorMessege)
+                {
+                    ModelState.AddModelError(item.Key, item.Value);
+                }
+                ViewBag.SigndivActive = "true";
                 return View("LogIn");
             }
+            catch (System.Exception ex)
+            {
+                ViewBag.TitlePopUp = "שגיאה";
+                ViewBag.Message = ex.Message;
+                ViewBag.SigndivActive = "true";
+                return View("LogIn");
+            }     
         }
 
         public ActionResult SignUp(DoctorSign doctorSign)
         {
-            IBL bl = new BlClass();
-            Dictionary<string, string> errorMessege = bl.SignValidation(doctorSign);
-            if (errorMessege.Count == 0)
+            try
             {
-                bl.SignUp(doctorSign);
-                return RedirectToAction("Index");
-            }
+                IBL bl = new BlClass();
+                Dictionary<string, string> errorMessege = bl.SignValidation(doctorSign);
+                if (errorMessege.Count == 0)
+                {
+                    bl.SignUp(doctorSign);
+                    ViewBag.TitlePopUp = "עבר בהצלחה";
+                    ViewBag.Message = "ההרשמה עברה בהצלחה, אישור נוסף תמצא בתיבת המייל האישית שלך.";
+                    return View("~/Views/Home/Index.cshtml");
+                }
 
-            foreach (var item in errorMessege)
-            {
-                ModelState.AddModelError(item.Key, item.Value);
+                foreach (var item in errorMessege)
+                {
+                    ModelState.AddModelError(item.Key, item.Value);
+                }
+                return View("LogIn");
             }
-            return View("LogIn");
+            catch (System.Exception ex)
+            {
+                ViewBag.TitlePopUp = "שגיאה";
+                ViewBag.Message = ex.Message;
+                return View("~/Views/Home/Index.cshtml");
+            }
         }
 
         public ActionResult ForgotPassword(string mail)
         {
-            IBL Bl = new BlClass();
-            Bl.ForgotPassword(mail);
-            return View("~/Views/Home/Index.cshtml");
+            try
+            {
+                IBL Bl = new BlClass();
+                Bl.ForgotPassword(mail);
+                ViewBag.TitlePopUp = "איפוס סיסמה";
+                ViewBag.Message = "ממתינה לך סיסמה חדשה בתיבת המייל איתו נרשמת למערכת";
+                return View("~/Views/Home/Index.cshtml");
+            }
+            catch (System.Exception ex)
+            {
+                ViewBag.TitlePopUp = "שגיאה";
+                ViewBag.Message = ex.Message;
+                return View("~/Views/Home/Index.cshtml");
+            }
+
         }
 
         public ActionResult LogOut()
         {
             RouteConfig.doctor = null;
+            RouteConfig.IsManager = false;
             return View("~/Views/Home/Index.cshtml");
         }
 
-
-
-        public ActionResult Test()
-        {
-          
-            return View();
-        }
 
     }
 }

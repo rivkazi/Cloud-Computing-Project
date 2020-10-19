@@ -5,8 +5,12 @@
     {
         Layout = "~/Views/Shared/DoctorLayoutPage.cshtml";
     }
-    else
+    else if (RouteConfig.IsManager == true)
     {
+        Layout = "~/Views/Shared/ManagerLayoutPage.cshtml";
+    }
+    else
+    { 
         Layout = "~/Views/Shared/LayoutPage.cshtml";
     }
 }

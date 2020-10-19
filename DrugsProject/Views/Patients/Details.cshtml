@@ -1,16 +1,18 @@
 ﻿@model DrugsProject.Models.Patient.PatientVM
 @using DrugsProject.Models
-
 @{ if (RouteConfig.doctor != null)
     {
         Layout = "~/Views/Shared/DoctorLayoutPage.cshtml";
+    }
+    else if (RouteConfig.IsManager == true)
+    {
+        Layout = "~/Views/Shared/ManagerLayoutPage.cshtml";
     }
     else
     {
         Layout = "~/Views/Shared/LayoutPage.cshtml";
     }
 }
-
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -46,7 +48,7 @@
                 <div class="form-group">
                     <div class="m-20">
                         @Html.ActionLink("חזרה לרשימה", "Index", null, new { @class = "btn btn-primary m-0" })
-                        @Html.ActionLink("צפיה במרשמי מטופל", "Index", null, new { @class = "btn btn-default slide lef" })
+                        @Html.ActionLink("צפיה במרשמי מטופל", "../Prescriptions/Index", new { Model.Id }, new { @class = "btn btn-default slide lef" })
                     </div>
                 </div>
             </div>
