@@ -1,12 +1,6 @@
-﻿using BE;
-using BL;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Web;
-using System.Web.Razor.Parser;
 
 namespace DrugsProject.Models
 {
@@ -23,7 +17,7 @@ namespace DrugsProject.Models
         }
 
         [Key]
-        public int Id 
+        public int Id
         {
             get { return Current.Id; }
             set { Current.Id = value; }
@@ -74,6 +68,13 @@ namespace DrugsProject.Models
             get { return Current.properties; }
             set { Current.properties = value; }
         }
+
+        [Required(ErrorMessage = "חובה לבחור תמונה")]
+        public HttpPostedFileBase img
+        {
+            get; set;
+        }
+
 
         [DisplayName("תמונה")]
         public string imagePath

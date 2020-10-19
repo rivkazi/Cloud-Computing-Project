@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using BE;
+﻿using BE;
 using BL;
 using DrugsProject.Models.Patient;
+using System.Net;
+using System.Web.Mvc;
 
 namespace DrugsProject.Controllers
 {
@@ -59,11 +53,10 @@ namespace DrugsProject.Controllers
             if (ModelState.IsValid)
             {
                 IBL bL = new BlClass();
-                bool IsAddOk = bL.AddPrescription(prescription);
+                bool IsAddOk = false;
+                bL.AddPrescription(prescription);
                 if (IsAddOk)
                     return RedirectToAction("Index");
-                else
-                    ViewBag.Error = "שגיאה מצערת בהוספת התרופה";
             }
             return View(prescription);
         }

@@ -1,6 +1,7 @@
 ﻿using BE;
 using DAL;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -13,75 +14,99 @@ namespace BL
     public class BlClass : IBL
     {
         #region ADD
-        public bool AddCronicalDisease(CronicalDisease cronicalDisease)
+        public void AddCronicalDisease(CronicalDisease cronicalDisease)
         {
-            IDAL dal = new DalClass();
-            IEnumerable<CronicalDisease> diseases = dal.GetCronicalDiseases(cd => cd.description == cronicalDisease.description);
-            if (diseases.Count() == 0)
-                return false;
-            return dal.AddCronicalDisease(cronicalDisease);
-        }
-
-        public bool AddDoctor(Doctor doctor)
-        {
-            //Dictionary<string, string> result = PersonValidation(doctor);
-            //if (result.Count != 0)
-            //    return result;
-            IDAL dal = new DalClass();
-            IEnumerable<Doctor> doctors = dal.GetDoctors(doc => doc.idNumber == doctor.idNumber);
-            //if (doctors.Count() == 0)
-            //חלון קופץ משתמש קיים או שגיאת מערכת אם חזר פולס מהדאל
-            //הוספה
-            return dal.AddDoctor(doctor);
-        }
-
-
-        public bool AddMedicine(Medicine medicine, HttpPostedFileBase httpPostedFile)
-        {
-            IDAL dal = new DalClass();
-            medicine.NDC = GetNDCForMedicine(medicine.genericaName);
-            medicine.imagePath = httpPostedFile.FileName;
-            bool IsOkImage = ValidateImage(medicine.imagePath);
-
-            if (IsOkImage)
+            try
             {
-                medicine.manufacturer = medicine.manufacturer == null ? "לא ידוע" : medicine.manufacturer;
-
-                GoogleDriveAPITool.FileUpload(httpPostedFile);
-
-                return dal.AddMedicine(medicine);
+                IDAL dal = new DalClass();
+                IEnumerable<CronicalDisease> diseases = dal.GetCronicalDiseases(cd => cd.description == cronicalDisease.description);
+                if (diseases.Count() == 0)
+               
+                dal.AddCronicalDisease(cronicalDisease);
             }
-            else
-                return false;
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        public bool AddPatient(Patient patient)
+        public void AddDoctor(Doctor doctor)
         {
-            //Dictionary<string, string> result = PersonValidation(patient);
-            //if (result.Count != 0)
-            //    return result;
+            try
+            {
+                IDAL dal = new DalClass();
+                IEnumerable<Doctor> doctors = dal.GetDoctors(doc => doc.idNumber == doctor.idNumber);
+                if (doctors.Count() != 0)
+                    throw new Exception("רופא זה כבר רשום במערכת");
+                dal.AddDoctor(doctor);
+            }
+            catch (Exception ex)
+            {
 
-            patient.medicalHistory = patient.medicalHistory == null ? "לא נמסר מידע" : patient.medicalHistory;
-            IDAL dal = new DalClass();
-            IEnumerable<Patient> patients = dal.GetPatients(p => p.idNumber == patient.idNumber);
-            //if (doctors.Count() == 0)
-            //חלון קופץ משתמש קיים או שגיאת מערכת אם חזר פולס מהדאל
-            //הוספה
-            return dal.AddPatient(patient);
+                throw ex;
+            }        
         }
 
-        public bool AddPrescription(Prescription prescription)
+
+        public void AddMedicine(Medicine medicine, HttpPostedFileBase httpPostedFile)
+        {
+            try
+            {
+                IDAL dal = new DalClass();
+                medicine.NDC = GetNDCForMedicine(medicine.genericaName);
+                bool IsOkImage = ValidateImage(medicine.imagePath);
+
+                if (IsOkImage)
+                {
+                    medicine.manufacturer = medicine.manufacturer == null ? "לא ידוע" : medicine.manufacturer;
+                    dal.AddMedicine(medicine, httpPostedFile);
+                }
+                else
+                    throw new Exception("תמונה זו אינה מתארת תרופה. אנא נסה שוב עם תוכן מתאים יותר." + "\n"
+                         + " המלצתנו היא שתבחר תמונה אחרת לתרופה שברצונך להוסיף למערכת.");
+                    ///throw new Exception($"תמונה זו אינה מתארת תרופה. אנא נסה שוב עם תוכן מתאים יותר.\n המלצתנו היא שתבחר תמונה אחרת לתרופה שברצונך להוסיף למערכת");
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }      
+        }
+
+        public void AddPatient(Patient patient)
+        {
+            try
+            {
+                IDAL dal = new DalClass();
+                IEnumerable<Patient> patients = dal.GetPatients(p => p.idNumber == patient.idNumber);
+                if (patients.Count() != 0)
+                    throw new Exception("מטופל זה כבר רשום במערכת");
+                patient.medicalHistory = patient.medicalHistory == null ? "לא נמסר מידע" : patient.medicalHistory;
+                dal.AddPatient(patient);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public void AddPrescription(Prescription prescription)
         {
             IDAL dal = new DalClass();
             if (prescription.endDate < prescription.startDate)
-                return false;
+                throw new Exception("תאריך תחילת המרשם חייב להיות החל מהיום");
+
+            //Obtaining a NDC number of all active prescriptions for this patient
             List<string> NDCforPatientMedicines = GetNDCForAllActiveMedicine(prescription.PatientId);
+
             List<string> Result = IsConflict(NDCforPatientMedicines);
             bool isConflict = Result[1] == "true" ? true : false;
             if (isConflict)
-                return false;
+                throw new Exception(Result[2]);
             else
-                return dal.AddPrescription(prescription);
+                dal.AddPrescription(prescription);
         }
 
         #endregion
@@ -123,45 +148,59 @@ namespace BL
         #endregion
 
         #region UPDATE
-        public bool UpdateDoctor(Doctor doctor)
+        public void UpdateDoctor(Doctor doctor)
         {
-            //Dictionary<string, string> result = PersonValidation(doctor);
-            //if (result.Count != 0)
-            //    return result;
-            IDAL dal = new DalClass();
-            IEnumerable<Doctor> doctors = dal.GetDoctors(doc => doc.idNumber == doctor.idNumber);
-            //if (doctors.Count() == 0)
-            //חלון קופץ משתמש קיים או שגיאת מערכת אם חזר פולס מהדאל
-            //עדכון
-            return dal.UpdateDoctor(doctor);
-        }
-
-        public bool UpdateMedicine(Medicine medicine)
-        {
-            IDAL dal = new DalClass();
-            bool IsOkImage = ValidateImage(medicine.imagePath);
-            if (IsOkImage)
+            try
             {
-                medicine.manufacturer = medicine.manufacturer == null ? "לא ידוע" : medicine.manufacturer;
-                return dal.UpdateMedicine(medicine);
+                IDAL dal = new DalClass();
+                IEnumerable<Doctor> doctors = dal.GetDoctors(doc => doc.idNumber == doctor.idNumber);
+                if (doctors.Count() == 0)
+                    throw new Exception("רופא זה לא מוכר במערכת, אנא הוסף אותו");
+                dal.UpdateDoctor(doctor);
             }
-            else
-                return false;
+            catch (Exception ex)
+            {
+                throw ex;
+            }          
         }
 
-        public bool UpdatePatient(Patient patient)
+        public void UpdateMedicine(Medicine medicine, HttpPostedFileBase httpPostedFile)
         {
-            //Dictionary<string, string> result = PersonValidation(patient);
-            //if (result.Count != 0)
-            //    return result;
+            try
+            {
+                IDAL dal = new DalClass();
+                medicine.imagePath = httpPostedFile.FileName;
+                bool IsOkImage = ValidateImage(medicine.imagePath);
 
-            patient.medicalHistory = patient.medicalHistory == null ? "לא נמסר מידע" : patient.medicalHistory;
-            IDAL dal = new DalClass();
-            IEnumerable<Patient> patients = dal.GetPatients(p => p.idNumber == patient.idNumber);
-            //if (doctors.Count() != 0)
-            //חלון קופץ משתמש קיים או שגיאת מערכת אם חזר פולס מהדאל
-            //עדכן
-            return dal.UpdatePatient(patient);
+                if (IsOkImage)
+                {
+                    medicine.manufacturer = medicine.manufacturer == null ? "לא ידוע" : medicine.manufacturer;
+
+                    dal.UpdateMedicine(medicine, httpPostedFile);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }  
+        }
+
+        public void UpdatePatient(Patient patient)
+        {
+            try
+            {
+                IDAL dal = new DalClass();
+                IEnumerable<Patient> patients = dal.GetPatients(p => p.idNumber == patient.idNumber);
+                if (patients.Count() == 0)
+                    throw new Exception("מטופל זה לא מוכר במערכת, אנא הוסף אותו");
+                patient.medicalHistory = patient.medicalHistory == null ? "לא נמסר מידע" : patient.medicalHistory;
+                dal.UpdatePatient(patient);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         #endregion
 
@@ -311,18 +350,17 @@ namespace BL
                 dal.UpdateDoctor(doctor);
                 SendMail(doctor.email, doctor.privateName + " " + doctor.familyName, "ההרשמה עברה בהצלחה", "ברוכים הבאים לאתר שלנו, שמחים שהצטרפת." + "<br/>"
                          + "נשמח לעמוד לעזרתך בכל פניה ובקשה ומקווים שתהיה לך חוויה נעימה." + "<br/>" + "תודה, צוות WiseCare");
-                return;
+                throw new Exception("ההרשמה עברה בהצלחה, אישור נוסף תמצא בתיבת המייל האישית שלך.");
             }
             else if(doctor == null)
             {
                 SendMail(doctorSign.email, "ההרשמה נכשלה", "", "לצערנו, נסיון ההרשמה שלך לאתרנו נכשל." + "<br/>"
                          + "אנא נסה שוב בעוד חצי שנה ונשמח לעמוד לעזרתך." + "<br/>" + "תודה, צוות WiseCare");
-                return;
+                throw new Exception("ניסיון הרשמתך לאתרנו נכשל, אנא בדוק את תיבת המייל שלך עבור פרטים נוספים.");
             }
             else
             {
-                throw new NotImplementedException();
-                //הינך כבר רשום למערכת, אנא התחבר
+                throw new Exception("הנך רשום למערכת, אנא בצע התחברות. אם שכחת סיסמא לחץ על 'שכחתי סיסמא'");
             }
         }
         public void ForgotPassword(string mail)
@@ -400,6 +438,7 @@ namespace BL
 
             return flag; /*Result;*/
         }
+
         public string ConvertStringToUrl(string path)
         {
             string imgPath = HttpContext.Current.Server.MapPath($"~/img/{path}");

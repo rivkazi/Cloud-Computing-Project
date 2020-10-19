@@ -1,9 +1,7 @@
 ﻿using BE;
 using BL;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace DrugsProject.Controllers
@@ -13,6 +11,7 @@ namespace DrugsProject.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            
             return View();
         }
 
@@ -24,7 +23,6 @@ namespace DrugsProject.Controllers
         public ActionResult Log(string mail, string pass)
         {
             IBL bl = new BlClass();
-
             bool succeeded = bl.SignIn(mail, pass);
             if (succeeded)
             {
@@ -34,7 +32,8 @@ namespace DrugsProject.Controllers
             }
             else
             {
-                ViewBag.messageError = "שם משתמש או סיסמה שגויים";
+                ViewBag.TitlePopUp = "הודעת מערכת";
+                ViewBag.Message = "שגיאת התחברות, אנא נסה שוב.";
                 return View("LogIn");
             }
         }
@@ -52,7 +51,7 @@ namespace DrugsProject.Controllers
             foreach (var item in errorMessege)
             {
                 ModelState.AddModelError(item.Key, item.Value);
-            }          
+            }
             return View("LogIn");
         }
 
@@ -69,10 +68,11 @@ namespace DrugsProject.Controllers
             return View("~/Views/Home/Index.cshtml");
         }
 
-       
+
 
         public ActionResult Test()
         {
+          
             return View();
         }
 

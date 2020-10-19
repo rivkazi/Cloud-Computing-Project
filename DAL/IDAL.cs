@@ -4,22 +4,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace DAL
 {
     public interface IDAL
     {
         //ADD
-        bool AddDoctor(Doctor doctor);
-        bool AddMedicine(Medicine medicine);
-        bool AddPatient(Patient patient);
-        bool AddPrescription(Prescription prescription);
-        bool AddCronicalDisease(CronicalDisease cronicalDisease);
+        void AddDoctor(Doctor doctor);
+        void AddMedicine(Medicine medicine, HttpPostedFileBase httpPostedFile);
+        void AddPatient(Patient patient);
+        void AddPrescription(Prescription prescription);
+        void AddCronicalDisease(CronicalDisease cronicalDisease);
 
         //UPDATE
-        bool UpdateDoctor(Doctor doctor);
-        bool UpdateMedicine(Medicine medicine);
-        bool UpdatePatient(Patient patient);
+        void UpdateDoctor(Doctor doctor);
+        void UpdateMedicine(Medicine medicine, HttpPostedFileBase httpPostedFile);
+        void UpdatePatient(Patient patient);
 
         //DELETE
         bool DeleteDoctor(int? id);

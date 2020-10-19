@@ -3,12 +3,8 @@ using BL;
 using DrugsProject.Models.Doctor;
 using DrugsProject.Models.Patient;
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Mvc.Html;
 
 namespace DrugsProject.Models
 {
@@ -29,7 +25,7 @@ namespace DrugsProject.Models
             IBL bl = new BlClass();
             return new DoctorVM(bl.GetDoctor(pre.DoctorId));
         }
-        public static MvcHtmlString DisplayImage(this HtmlHelper html, string imgPath, int size = 150, string cla ="")
+        public static MvcHtmlString DisplayImage(this HtmlHelper html, string imgPath, int size = 150, string cla = "")
         {
             return new MvcHtmlString($"<img src='{imgPath}' class='{cla}' height='{size}' width='{size}'/>");
         }
@@ -38,7 +34,7 @@ namespace DrugsProject.Models
         {
             return new MvcHtmlString($"<h{size} class='panel-heading bold'>{textForHeader}</h{size}>");
         }
-        public static MvcHtmlString DisplayHeaderColorful(this HtmlHelper html, string textForBlackHeader, string textForColorHeader, int size, string icon = "", string link = "", string icon2 = "", string link2 ="")
+        public static MvcHtmlString DisplayHeaderColorful(this HtmlHelper html, string textForBlackHeader, string textForColorHeader, int size, string icon = "", string link = "", string icon2 = "", string link2 = "")
         {
             if (icon == "")
                 return new MvcHtmlString($"<h{size} class='panel-heading'>{ textForBlackHeader } <span> { textForColorHeader }</span></h{size}>");

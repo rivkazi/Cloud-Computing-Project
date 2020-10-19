@@ -11,16 +11,16 @@ namespace BL
     public interface IBL
     {
         //ADD
-        bool AddDoctor(Doctor doctor); //This function adds a doctor to the system
-        bool AddMedicine(Medicine medicine, HttpPostedFileBase httpPostedFile); //This function adds a medicine to the system
-        bool AddPatient(Patient patient); //This function adds a patient to the system
-        bool AddPrescription(Prescription prescription); //This function adds a prescription to the system
-        bool AddCronicalDisease(CronicalDisease prescription); //This function adds a chronical disease to the system
+        void AddDoctor(Doctor doctor); //This function adds a doctor to the system
+        void AddMedicine(Medicine medicine, HttpPostedFileBase httpPostedFile); //This function adds a medicine to the system
+        void AddPatient(Patient patient); //This function adds a patient to the system
+        void AddPrescription(Prescription prescription); //This function adds a prescription to the system
+        void AddCronicalDisease(CronicalDisease prescription); //This function adds a chronical disease to the system
 
         //UPDATE
-        bool UpdateDoctor(Doctor doctor); //This function updates a chosen doctor from the system
-        bool UpdateMedicine(Medicine medicine); //This function updates a chosen doctor from the system
-        bool UpdatePatient(Patient patient); //This function updates a chosen patient from the system
+        void UpdateDoctor(Doctor doctor); //This function updates a chosen doctor from the system
+        void UpdateMedicine(Medicine medicine, HttpPostedFileBase httpPostedFile); //This function updates a chosen doctor from the system
+        void UpdatePatient(Patient patient); //This function updates a chosen patient from the system
 
         //DELETE
         bool DeleteDoctor(int? id); //This function deletes a chosen doctor from the system

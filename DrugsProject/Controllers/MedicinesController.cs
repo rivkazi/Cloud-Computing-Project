@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using BE;
+﻿using BE;
 using BL;
 using DrugsProject.Models;
 using DrugsProject.Models.Medicine;
-using DrugsProject.Models.Patient;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Net;
+using System.Web.Mvc;
 
 namespace DrugsProject.Controllers
 {
@@ -26,7 +23,7 @@ namespace DrugsProject.Controllers
 
         // GET: Medicines/Details/5
         public ActionResult Details(int? id)
-        {            
+        {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -53,21 +50,27 @@ namespace DrugsProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(MedicineVM medicine, HttpPostedFileBase img)
+        public ActionResult Create(MedicineVM medicine)
         {
-            if (ModelState.IsValid)
+            try
             {
-                IBL bL = new BlClass();
-                bool IsAddOk = bL.AddMedicine(medicine.Current, img);
-                if (IsAddOk)
-                    return RedirectToAction("Index");
-                else
+                medicine.imagePath = medicine.img.FileName;
+                if (ModelState.IsValid)
                 {
-                    return View(medicine);
+                    IBL bL = new BlClass();
+                    bL.AddMedicine(medicine.Current, medicine.img);
+                    ViewBag.TitlePopUp = "עבר בהצלחה";
+                    ViewBag.Message = "התרופה נוספה בהצלחה למאגר התרופות";
+                    return View("Index", new MedicineModel().getMedicineVms());
                 }
+                return View(medicine);
             }
-
-            return View(medicine);
+            catch (Exception ex)
+            {
+                ViewBag.TitlePopUp = "שגיאה";
+                ViewBag.Message = ex.Message;
+                return View(medicine);
+            }
         }
 
         // GET: Medicines/Edit/5
@@ -95,13 +98,25 @@ namespace DrugsProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(MedicineVM medicine)
         {
-            if (ModelState.IsValid)
+            try
             {
-                IBL bL = new BlClass();
-                bL.UpdateMedicine(medicine.Current);
-                return RedirectToAction("Index");
+                medicine.imagePath = medicine.img.FileName;
+                if (ModelState.IsValid)
+                {
+                    IBL bL = new BlClass();
+                    bL.UpdateMedicine(medicine.Current, medicine.img);
+                    ViewBag.TitlePopUp = "עבר בהצלחה";
+                    ViewBag.Message = "התרופה עודכנה בהצלחה במאגר התרופות";
+                    return View("Index", new MedicineModel().getMedicineVms());
+                }
+                return View(medicine);
             }
-            return View(medicine);
+            catch (Exception ex)
+            {
+                ViewBag.TitlePopUp = "שגיאה";
+                ViewBag.Message = ex.Message;
+                return View(medicine);
+            }
         }
 
         // GET: Medicines/Delete/5
@@ -127,9 +142,20 @@ namespace DrugsProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            IBL bL = new BlClass();
-            bL.DeleteMedicine(id);
-            return RedirectToAction("Index");
+            try
+            {
+                IBL bL = new BlClass();
+                bL.DeleteMedicine(id);
+                ViewBag.TitlePopUp = "עבר בהצלחה";
+                ViewBag.Message = "התרופה נמחקה בהצלחה ממאגר התרופות";
+                return View("Index", new MedicineModel().getMedicineVms());
+            }
+            catch (Exception ex)
+            {
+                ViewBag.TitlePopUp = "שגיאה";
+                ViewBag.Message = ex.Message;
+                return View(id);
+            }
         }
 
         public ActionResult Chart(int? id)
@@ -141,22 +167,15 @@ namespace DrugsProject.Controllers
             Medicine medicine = bl.GetMedicine(id);
             ViewBag.ChartTitle = medicine.commercialName;
 
-            IEnumerable<Prescription> prescriptions = bl.GetPrescriptions(pre => pre.startDate > new DateTime(2020,01,01));
+            IEnumerable<Prescription> prescriptions = bl.GetPrescriptions(pre => pre.startDate > new DateTime(2020, 01, 01));
             var prescriptionsForMedicine = prescriptions.Where(pr => bl.GetMedicine(pr.MedicineId).commercialName == medicine.commercialName);
             foreach (var item in prescriptionsForMedicine)
             {
-                list[item.startDate.Month-1]++;
+                list[item.startDate.Month - 1]++;
 
             }
 
             return View(list);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            IBL bL = new BlClass();
-            bL.Dispose(disposing);
-            base.Dispose(disposing);
         }
     }
 }

@@ -1,38 +1,74 @@
-﻿
-<head>
-    <script>
-        function earase(delete_button) {
-            //alert(delete_button.getAttribute("donation-id"));
-            document.getElementById("modal-donation-id").value = delete_button.getAttribute("donation-id");
+﻿@*@using DrugsProject.Models
 
-        }
-    </script>
-</head>
-<a onclick="earase(this)" donation-id="1" data-toggle="modal" data-target="#popup1" style="color:#C7187D; width:20px; height:20px; font-family:'Segoe UI';right:1000px"><i class="fa fa-trash" style="font-size:24px"></i>בלהבלהלהלה</a>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="~/scss/main.css">
+        <link rel="stylesheet" href="~/scss/skin.css">
+        <link href="~/scss/test.css?v=1" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        <script src="~/script/index.js"></script>
+        <script>
+            function hh() {
 
-<div class="modal fade" id="popup1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" hidden>
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form dir="rtl" style="font-family:'Segoe UI';" name="example" action="~/Management/earaseDonation" method="post">
+            }
+        </script>
+
+    </head>
+    <h1>Popup/Modal Windows without JavaScript</h1>
+    <div class="box">
+        <a class="button" href="#popup1">Let me Pop up</a>
+    </div>
+    <body onpageshow="hh()">
+        <div id="popup1" class="overlay">
+            <div class="popup">
+                <a class="closee" href="#">&times;</a>
+                <h3 dir="rtl"><span>@ViewBag.TitlePopUp</span></h3>
+                <div class="content text-right">
+                    @ViewBag.Message
+                </div>
+            </div>
+        </div>
+    </body>*@
+<script>
+    function c() {
+        /* ----- JavaScript ----- */
+        $(function () {
+            $("#custom-modal").modal("show");
+        });
+
+        /* Close the popup when the a selection is made */
+        $("#selectCity").on("change", function () {
+            $("#custom-modal").modal("hide");
+        });
+    }
+</script>
+
+<!-- Libraries -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/scss/main.css">
+<link rel="stylesheet" href="~/scss/skin.css">
+
+<script src="~/script/index.js"></script>
+<body onpageshow="c()">
+    <!-- A Bootstrap Modal -->
+    <div id="custom-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content" dir="rtl">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="text-align:left" value="מחיקת תרומה">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="close lef" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">@ViewBag.TitlePopUp</h4>
                 </div>
-                <div class="modal-body" style="text-align:center;">
-                    <label>האם אתה בטוח שברצונך למחוק תרומה זו?</label>
-                    <h6>באם תרומה זו משויכת לתורם יישלח מייל לתורם זה</h6>
+                <div class="modal-body text-right">
+                    @ViewBag.Message
                 </div>
-                <div class="modal-footer" style="text-align:left">
-                    @{
-                       <input id="modal-donation-id" name="DonationId" type="hidden" required />
-                            <input class="btn btn-outline-secondary" type="submit" style="background-color:#cff491" value="אישור" />
-                 <input class="btn btn-outline-secondary" data-dismiss="modal" type="button" value="אישור" style="background-color:#cff491" data-toggle="modal" data-target="#popup" />
-                   
-                    }
-                    <button class="btn btn-outline-secondary" data-dismiss="modal">סגור</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default lef" data-dismiss="modal">אישור</button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
+</body>

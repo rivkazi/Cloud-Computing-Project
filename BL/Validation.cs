@@ -115,11 +115,15 @@ namespace BL
                 if (phoneNumber[0] != '0' || phoneNumber[1] != '5')
                     return false;
             }
-            if (phoneNumber.Length == 9)
+            else if (phoneNumber.Length == 9)
             {
                 sub = phoneNumber.Substring(1, 8);
                 if (phoneNumber[0] != '0')
                     return false;
+            }
+            else
+            {
+                return false;
             }
             
             bool flag = true;

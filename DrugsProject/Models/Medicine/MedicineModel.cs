@@ -1,9 +1,5 @@
-﻿using BE;
-using BL;
-using System;
+﻿using BL;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace DrugsProject.Models.Medicine
 {

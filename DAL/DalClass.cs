@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Xml;
 
 namespace DAL
@@ -19,9 +20,8 @@ namespace DAL
     {
 
         #region ADD
-        public bool AddCronicalDisease(CronicalDisease cronicalDisease)
+        public void AddCronicalDisease(CronicalDisease cronicalDisease)
         {
-            bool Result = true;
             try
             {
                 using (var ctx = new DrugsContext())
@@ -30,18 +30,15 @@ namespace DAL
                     ctx.SaveChanges();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                Result = false;
+                throw ex;
             }
-
-            return Result;
         }
 
-        public bool AddDoctor(Doctor doctor)
+        public void AddDoctor(Doctor doctor)
         {
-            bool Result = true;
             try
             {
                 using (var ctx = new DrugsContext())
@@ -50,18 +47,14 @@ namespace DAL
                     ctx.SaveChanges();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                Result = false;
+                throw ex;
             }
-
-            return Result;
         }
 
-        public bool AddMedicine(Medicine medicine)
+        public void AddMedicine(Medicine medicine, HttpPostedFileBase httpPostedFile)
         {
-            bool Result = true;
             try
             {
                 using (var ctx = new DrugsContext())
@@ -69,19 +62,17 @@ namespace DAL
                     ctx.Medicines.Add(medicine);
                     ctx.SaveChanges();
                 }
+                GoogleDriveAPITool.FileUpload(httpPostedFile);
+
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                Result = false;
+                throw ex;
             }
-
-            return Result;
         }
 
-        public bool AddPatient(Patient patient)
+        public void AddPatient(Patient patient)
         {
-            bool Result = true;
             try
             {
                 using (var ctx = new DrugsContext())
@@ -90,18 +81,14 @@ namespace DAL
                     ctx.SaveChanges();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                Result = false;
+                throw ex;
             }
-
-            return Result;
         }
 
-        public bool AddPrescription(Prescription prescription)
+        public void AddPrescription(Prescription prescription)
         {
-            bool Result = true;
             try
             {
                 using (var ctx = new DrugsContext())
@@ -110,13 +97,10 @@ namespace DAL
                     ctx.SaveChanges();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                Result = false;
+                throw ex;
             }
-
-            return Result;
         }
         #endregion
 
@@ -263,9 +247,8 @@ namespace DAL
         #endregion
 
         #region UPDATE
-        public bool UpdateMedicine(Medicine medicine)
+        public void UpdateMedicine(Medicine medicine, HttpPostedFileBase httpPostedFile)
         {
-            bool Result = true;
             try
             {
                 using (var ctx = new DrugsContext())
@@ -273,19 +256,19 @@ namespace DAL
                     ctx.Entry(medicine).State = EntityState.Modified;
                     ctx.SaveChanges();
                 }
+                GoogleDriveAPITool.FileUpload(httpPostedFile);
+                GoogleDriveAPITool.DeleteGoogleFileByName(medicine.imagePath);
+
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                Result = false;
+                throw ex;
             }
-
-            return Result;
         }
 
-        public bool UpdatePatient(Patient patient)
+        public void UpdatePatient(Patient patient)
         {
-            bool Result = true;
             try
             {
                 using (var ctx = new DrugsContext())
@@ -294,18 +277,14 @@ namespace DAL
                     ctx.SaveChanges();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                Result = false;
+                throw ex;
             }
-
-            return Result;
         }
 
-        public bool UpdateDoctor(Doctor doctor)
+        public void UpdateDoctor(Doctor doctor)
         {
-            bool Result = true;
             try
             {
                 using (var ctx = new DrugsContext())
@@ -314,13 +293,11 @@ namespace DAL
                     ctx.SaveChanges();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                Result = false;
+                throw ex;
             }
-
-            return Result;
         }
         #endregion
 

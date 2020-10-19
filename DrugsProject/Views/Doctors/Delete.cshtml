@@ -16,8 +16,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/scss/main.css?v=3">
     <link rel="stylesheet" href="~/scss/skin.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="~/script/index.js?v=2"></script>
 </head>
 
@@ -44,12 +42,18 @@
                     @Html.DisplayItemWithIcon(Model.password, "fa fa-key")
                 </ul>
 
-                <div class="form-group">
-                    <div class="m-20">
-                        @Html.ActionLink("חזרה לרשימה", "Index", null, new { @class = "btn btn-primary m-0" })
-                        @Html.ActionLink("מחיקת רופא", "Delete", new { Model.Id }, new { @class = "btn btn-default lef slide" })
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <div class="m-20">
+                            @Html.ActionLink("חזרה לרשימה", "Index", null, new { @class = "btn btn-primary m-0" })
+                            <input type="submit" value="מחק רופא" class="btn btn-default lef slide" />
+                        </div>
                     </div>
-                </div>
+                }
+
             </div>
         </div>
     </div>
