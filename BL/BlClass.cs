@@ -111,42 +111,6 @@ namespace BL
 
         #endregion
 
-        #region VALIDATION
-        public Dictionary<string, string> PersonValidation(Person person)
-        {
-            Dictionary<string, string> result = new Dictionary<string, string>();
-            if (!Validation.IsId(person.idNumber))
-                result.Add("idNumber", "מספר תעודת הזהות אינו תקין");
-            if (!Validation.IsEmail(person.email))
-                result.Add("email", "כתובת המייל אינה תקינה");
-            if (!Validation.IsPhone(person.phoneNumber))
-                result.Add("phoneNumber", "מספר הטלפון אינו תקין");
-            if (!Validation.IsName(person.familyName))
-                result.Add("familyName", "שם זה אינו תקין");
-            if (!Validation.IsName(person.privateName))
-                result.Add("privateName", "שם זה אינו תקין");
-            return result;
-        }
-
-        public Dictionary<string, string> SignValidation(DoctorSign doctorSign)
-        {
-            Dictionary<string, string> result = new Dictionary<string, string>();
-            if (doctorSign.idNumber == null)
-                result.Add("idNumber", "חובה להזין מספר ת.ז.");
-            else if (!Validation.IsId(doctorSign.idNumber))
-                result.Add("idNumber", "מספר תעודת הזהות אינו תקין");
-            if (doctorSign.email == null)
-                result.Add("email", "חובה להזין כתובת מייל");
-            else if (!Validation.IsEmail(doctorSign.email))
-                result.Add("email", "כתובת המייל אינה תקינה");
-            if (doctorSign.password == null)
-                result.Add("password", "חובה לבחור סיסמה");
-            else if (!Validation.IsPassword(doctorSign.password))
-                result.Add("password", "סיסמה אינה תקינה");
-            return result;
-        }
-        #endregion
-
         #region UPDATE
         public void UpdateDoctor(Doctor doctor)
         {
@@ -331,14 +295,59 @@ namespace BL
         }
         #endregion
 
-        #region ACCOUNT
-        public bool SignIn(string mail, string password)
+        #region VALIDATION
+        public Dictionary<string, string> PersonValidation(Person person)
         {
-            IDAL dal = new DalClass();
-            Doctor doctor = dal.GetDoctors(doc => doc.email == mail).FirstOrDefault();
-            if (doctor != null && doctor.password == password)
-                return true;
-            return false;
+            Dictionary<string, string> result = new Dictionary<string, string>();
+            if (!Validation.IsId(person.idNumber))
+                result.Add("idNumber", "מספר תעודת הזהות אינו תקין");
+            if (!Validation.IsEmail(person.email))
+                result.Add("email", "כתובת המייל אינה תקינה");
+            if (!Validation.IsPhone(person.phoneNumber))
+                result.Add("phoneNumber", "מספר הטלפון אינו תקין");
+            if (!Validation.IsName(person.familyName))
+                result.Add("familyName", "שם זה אינו תקין");
+            if (!Validation.IsName(person.privateName))
+                result.Add("privateName", "שם זה אינו תקין");
+            return result;
+        }
+
+        public Dictionary<string, string> SignValidation(DoctorSign doctorSign)
+        {
+            Dictionary<string, string> result = new Dictionary<string, string>();
+            if (doctorSign.idNumber == null)
+                result.Add("idNumber", "חובה להזין מספר ת.ז.");
+            else if (!Validation.IsId(doctorSign.idNumber))
+                result.Add("idNumber", "מספר תעודת הזהות אינו תקין");
+            if (doctorSign.email == null)
+                result.Add("email", "חובה להזין כתובת מייל");
+            else if (!Validation.IsEmail(doctorSign.email))
+                result.Add("email", "כתובת המייל אינה תקינה");
+            if (doctorSign.password == null)
+                result.Add("password", "חובה לבחור סיסמה");
+            else if (!Validation.IsPassword(doctorSign.password))
+                result.Add("password", "סיסמה אינה תקינה");
+            return result;
+        }
+
+        #endregion
+
+        #region ACCOUNT
+        public void SignIn(DoctorSign doctorSign)
+        {
+            try
+            {
+                IDAL dal = new DalClass();
+                Doctor doctor = dal.GetDoctors(doc => doc.email == doctorSign.email).FirstOrDefault();
+                if (doctor == null)
+                    throw new Exception("כתובת המייל לא זוהתה במערכת. אנא בדוק אותה או בצע הרשמה");
+                else if (doctorSign.password != doctor.password)
+                    throw new Exception("סיסמה שגויה, נסה שנית");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         public void SignUp(DoctorSign doctorSign)
         {
@@ -350,7 +359,6 @@ namespace BL
                 dal.UpdateDoctor(doctor);
                 SendMail(doctor.email, doctor.privateName + " " + doctor.familyName, "ההרשמה עברה בהצלחה", "ברוכים הבאים לאתר שלנו, שמחים שהצטרפת." + "<br/>"
                          + "נשמח לעמוד לעזרתך בכל פניה ובקשה ומקווים שתהיה לך חוויה נעימה." + "<br/>" + "תודה, צוות WiseCare");
-                throw new Exception("ההרשמה עברה בהצלחה, אישור נוסף תמצא בתיבת המייל האישית שלך.");
             }
             else if(doctor == null)
             {
@@ -360,24 +368,33 @@ namespace BL
             }
             else
             {
-                throw new Exception("הנך רשום למערכת, אנא בצע התחברות. אם שכחת סיסמא לחץ על 'שכחתי סיסמא'");
+                throw new Exception("הנך רשום למערכת, אנא בצע התחברות. אם שכחת סיסמא לחץ על 'שכחת סיסמה?'");
             }
         }
         public void ForgotPassword(string mail)
         {
-            IDAL dal = new DalClass();
-            //Person person = GetAllPerson(per=> per.email == mail).FirstOrDefault();
-            Doctor doctor = GetDoctors(doc => doc.email == mail).FirstOrDefault();
-            if (doctor != null)
+            try
             {
-                Random random = new Random();
-                int newPassword = random.Next(10000, 1000000000);
-                SendMail(doctor.email, doctor.privateName + " " + doctor.familyName, "איפוס סיסמה", "הסיסמה שלך אופסה, הסיסמה החדשה היא:" + "<br/>" + newPassword + "<br/>" + "אנא שנה סיסמה בהקדם האפשרי");
-               
-                //Edit Password
-                doctor.password = newPassword.ToString();
-                UpdateDoctor(doctor);
+                IDAL dal = new DalClass();
+                Doctor doctor = GetDoctors(doc => doc.email == mail).FirstOrDefault();
+                if (doctor != null)
+                {
+                    Random random = new Random();
+                    int newPassword = random.Next(10000, 1000000000);
+                    SendMail(doctor.email, doctor.privateName + " " + doctor.familyName, "איפוס סיסמה", "הסיסמה שלך אופסה, הסיסמה החדשה היא:" + "<br/>" + newPassword + "<br/>" + "אנא שנה סיסמה בהקדם האפשרי");
+
+                    //Edit Password
+                    doctor.password = newPassword.ToString();
+                    UpdateDoctor(doctor);
+                }
+                else
+                    throw new Exception("המייל שהוזן שגוי. בדוק אם הינך רשום למערכת (איך?! תפעיל את הזיכרון בבקשה.)");
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+  
         }
         #endregion
 
@@ -390,7 +407,9 @@ namespace BL
             mail.To.Add(mailAdress);
             mail.From = new MailAddress("MyProject4Ever@gmail.com");
             mail.Subject = subject;
-            mail.Body = $"שלום {receiverName}, <br>" + message;
+            mail.Body =
+               "<b> <p style = 'font-size:25px'>" + "שלום " + receiverName + "</p> </b>" +
+               "<b> <p style = 'font-size:20px'>" + message + "</p> </b>";
             mail.IsBodyHtml = true;
             smtp = new SmtpClient();
             smtp.Host = "smtp.gmail.com";

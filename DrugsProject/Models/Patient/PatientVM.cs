@@ -91,6 +91,7 @@ namespace DrugsProject.Models.Patient
         }
 
         [DisplayName("סוג דם")]
+        [EnumDataType(typeof(BloodTypeEnum), ErrorMessage = "בחירה לא חוקית")]
         [Required(ErrorMessage = "חובה לבחור סוג דם. במידה ואינך יודע בחר: לא ידוע")]
         public BloodTypeEnum bloodType
         {
