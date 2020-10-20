@@ -50,3 +50,17 @@ C:\Users\iyar\Documents\תרגילי בית\שנה ג\מיחשוב ענן\Projec
 C:\Users\iyar\Documents\תרגילי בית\שנה ג\מיחשוב ענן\Project\DrugsProject\DAL\obj\Debug\DAL.csproj.CopyComplete
 C:\Users\iyar\Documents\תרגילי בית\שנה ג\מיחשוב ענן\Project\DrugsProject\DAL\obj\Debug\DAL.dll
 C:\Users\iyar\Documents\תרגילי בית\שנה ג\מיחשוב ענן\Project\DrugsProject\DAL\obj\Debug\DAL.pdb
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DAL\bin\Debug\Google.Apis.Auth.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DAL\bin\Debug\Google.Apis.Auth.PlatformServices.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DAL\bin\Debug\Google.Apis.Core.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DAL\bin\Debug\Google.Apis.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DAL\bin\Debug\Google.Apis.Drive.v3.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DAL\bin\Debug\Google.Apis.PlatformServices.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DAL\bin\Debug\Google.Apis.pdb
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DAL\bin\Debug\Google.Apis.xml
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DAL\bin\Debug\Google.Apis.Auth.pdb
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DAL\bin\Debug\Google.Apis.Auth.xml
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DAL\bin\Debug\Google.Apis.Core.pdb
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DAL\bin\Debug\Google.Apis.Core.xml
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DAL\bin\Debug\Google.Apis.Drive.v3.pdb
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DAL\bin\Debug\Google.Apis.Drive.v3.xml

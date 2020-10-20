@@ -68,3 +68,15 @@ C:\Users\iyar\Documents\תרגילי בית\שנה ג\מיחשוב ענן\Projec
 C:\Users\iyar\Documents\תרגילי בית\שנה ג\מיחשוב ענן\Project\DrugsProject\BL\obj\Debug\BL.csproj.CopyComplete
 C:\Users\iyar\Documents\תרגילי בית\שנה ג\מיחשוב ענן\Project\DrugsProject\BL\obj\Debug\BL.dll
 C:\Users\iyar\Documents\תרגילי בית\שנה ג\מיחשוב ענן\Project\DrugsProject\BL\obj\Debug\BL.pdb
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\Google.Apis.Drive.v3.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\Google.Apis.Auth.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\Google.Apis.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\Google.Apis.Core.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\Google.Apis.Drive.v3.pdb
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\Google.Apis.Drive.v3.xml
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\Google.Apis.Auth.pdb
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\Google.Apis.Auth.xml
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\Google.Apis.pdb
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\Google.Apis.xml
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\Google.Apis.Core.pdb
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BL\bin\Debug\Google.Apis.Core.xml

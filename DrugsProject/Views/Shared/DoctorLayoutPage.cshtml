@@ -1,177 +1,171 @@
 ﻿<!DOCTYPE html>
- <html lang="he">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/scss/main.css?v=2">
-        <link rel="stylesheet" href="/scss/skin.css?v=2">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        @if (ViewBag.Message != null)
-        {
-            <script>
-                /*open*/
-                $(function () {
-                    $("#custom-modal").modal("show");
-                });
+<html lang="he">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/scss/main.css?v=2">
+    <link rel="stylesheet" href="/scss/skin.css?v=2">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    @if (ViewBag.Message != null)
+    {
+        <script>
+            /*open*/
+            $(function () {
+                $("#custom-modal").modal("show");
+            });
 
-                /* Close the popup when the a selection is made */
-                $("#selectCity").on("change", function () {
-                    $("#custom-modal").modal("hide");
-                });
+            /* Close the popup when the a selection is made */
+            $("#selectCity").on("change", function () {
+                $("#custom-modal").modal("hide");
+            });
 
-            </script>
-        }
-    </head>
+        </script>
+    }
+</head>
 
-    <body id="wrapper" class="body_main cyan">
-        <div name="popUp" id="custom-modal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content" dir="rtl">
-                    <div class="modal-header">
-                        <button type="button" class="close lef" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">@ViewBag.TitlePopUp</h4>
-                    </div>
-                    <div class="modal-body text-right">
-                        @ViewBag.Message
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default btn-ok lef" data-dismiss="modal">אישור</button>
-                    </div>
+<body id="wrapper" class="body_main cyan">
+    <div name="popUp" id="custom-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content" dir="rtl">
+                <div class="modal-header">
+                    <button type="button" class="close lef" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">@ViewBag.TitlePopUp</h4>
+                </div>
+                <div class="modal-body text-right">
+                    @ViewBag.Message
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-ok lef" data-dismiss="modal">אישור</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <header>
-            <nav class="navbar navbar-inverse navbar-fixed-top">
-                <div class="con">
-                    <div class="navbar-header rig">
-                        <a class="navbar-brand" href="#">
-                            <h1 class="m-20">בולשיט</h1><span>בלה בלה בלה</span>
-                        </a>
-                    </div>
-                    <div id="navbar" class="collapse navbar-collapse navbar-right">
-                        <ul class="nav navbar-nav">
-                            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home"? "active" : "")"><a href="~/Home/index">בית</a></li>
-                            <li class="@(ViewContext.RouteData.Values["controller"].ToString().ToUpper() == "PATIENTS" || ViewContext.RouteData.Values["controller"].ToString().ToUpper() == "PRESCRIPTIONS" ? "active" : "")"><a href="~/Patients/Index">מטופלים</a></li>
-                            <li class="@(ViewContext.RouteData.Values["controller"].ToString().ToUpper() == "MEDICINES" ? "active" : "")"><a href="~/Medicines/Index">תרופות</a></li>
+    <header>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="con">
+                <div class="navbar-header rig">
+                    <a class="navbar-brand" href="#">
+                        <h1 class="m-20">אח לאח</h1><span>המקום בשבילך</span>
+                    </a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home"? "active" : "")"><a href="~/Home/index">בית</a></li>
+                        <li class="@(ViewContext.RouteData.Values["controller"].ToString().ToUpper() == "PATIENTS" || ViewContext.RouteData.Values["controller"].ToString().ToUpper() == "PRESCRIPTIONS" ? "active" : "")"><a href="~/Patients/Index">מטופלים</a></li>
+                        <li class="@(ViewContext.RouteData.Values["controller"].ToString().ToUpper() == "MEDICINES" ? "active" : "")"><a href="~/Medicines/Index">תרופות</a></li>
+                    </ul>
+                </div>
+                <div class="lef m-20">
+                    <a href="~/Account" class="colorful">שלום @RouteConfig.doctor.privateName @RouteConfig.doctor.familyName</a>
+                    <b class="colorful">|</b>
+                    <button type="submit" onclick="location.href='@Url.Action("LogOut","Home")'" class="btn colorful"><i class="fa fa-sign-out"></i>יציאה</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="body_log">
+        @RenderBody()
+    </div>
+
+    <section id="footer" dir="rtl">
+        <div class="contain">
+            <div class="row">
+
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="footer-block">
+                        <h4>צור קשר</h4>
+                        <hr />
+                        <ul class="footer-links">
+                            <li>
+                                <a class="learnmore">myproject4ever@gmail.com<i class="fa fa-caret-right"></i></a>
+                            </li>
+                            <li>
+                                <a class="learnmore">054-4392025<i class="fa fa-caret-right"></i></a>
+                            </li>
                         </ul>
                     </div>
-                    <div class="lef m-20">
-                        <a href="~/Account" class="colorful">שלום @RouteConfig.doctor.privateName @RouteConfig.doctor.familyName</a>
-                        <b class="colorful">|</b>
-                        <button type="submit" onclick="location.href='@Url.Action("LogOut","Home")'" class="btn colorful"><i class="fa fa-sign-out"></i>יציאה</button>
+                </div>
+
+                <div class="col-xs-12 col-sm-3 block">
+                    <div class="footer-block" @*style="width: 285px;*@>
+                        <h4>מידע למשתמש</h4>
+                        <hr />
+                        <p>
+                            המידע הנמצא באתר נועד למסירת מידע מפורט ומעודכן ככל האפשר, לטובת כלל הלקוחות.
+                            מידע זה מוגן על פי חוק בחסיון רפואי לפי סעיף 498 לחוק העונשין,
+                            לגבי כל רופא ומטופל באשר הוא.
+                        </p>
                     </div>
                 </div>
-            </nav>
-        </header>
 
-        <div class="body_log">
-            @RenderBody()
+                <div class="col-md-3 col-sm-3 col-xs-12 block">
+                    <div class="footer-block">
+                        <h4>הבהרה</h4>
+                        <hr />
+                        <p>
+                            כל האפשרויות המוצעות באתר כפופות למפורט בתקנון שירותי הבריאות הנוספים לשנים 2013-2014.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-3 col-xs-12 block">
+                    <div class="footer-block">
+                        <h4>התניידו בקלות</h4>
+                        <hr />
+                        <ul class="footer-links">
+                            <li><a href="/Home">קצת עלינו</a></li>
+                            <li><a href="/Home/LogIn">הרשמה</a></li>
+                            <li><a href="/Home/LogIn">התחברות</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
         </div>
 
-        <section id="footer" dir="rtl">
-            <div class="contain">
-                <div class="row">
-                    <div class="col-md-3 col-sm-3 col-xs-12 block">
-                        <div class="footer-block">
-                            <h4>Address</h4>
-                            <hr />
-                            <p>
-                                Lorem ipsum dolor sit amet sit legimus copiosae instructior ei ut vix denique fierentis ea saperet inimicu ut qui dolor oratio mnesarchum.
-                            </p>
-                            <a href="#" class="learnmore">Learn More <i class="fa fa-caret-right"></i></a>
-                        </div>
-                    </div>
+    </section>
 
-                    <div class="col-md-3 col-sm-3 col-xs-12 block">
-                        <div class="footer-block">
-                            <h4>Useful Links</h4>
-                            <hr />
-                            <ul class="footer-links">
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Features</a></li>
-                                <li><a href="#">Portfolio</a></li>
-                                <li><a href="#">Contact</a></li>
-                                <li><a href="#">Sign In</a></li>
-                                <li><a href="#">Sign Up</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-sm-3 col-xs-12 block">
-                        <div class="footer-block">
-                            <h4>Community</h4>
-                            <hr />
-                            <ul class="footer-links">
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">Forum</a></li>
-                                <li><a href="#">Free Goods</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-sm-3 col-xs-12">
-                        <div class="footer-block">
-                            <h4>Recent Posts</h4>
-                            <hr />
-                            <ul class="footer-links">
-                                <li>
-                                    <a href="#" class="post">Lorem ipsum dolor sit amet</a>
-                                    <p class="post-date">May 25, 2017</p>
-                                </li>
-                                <li>
-                                    <a href="#" class="post">Lorem ipsum dolor sit amet</a>
-                                    <p class="post-date">May 25, 2017</p>
-                                </li>
-                                <li>
-                                    <a href="#" class="post">Lorem ipsum dolor sit amet</a>
-                                    <p class="post-date">May 25, 2017</p>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </div>
+    <section id="bottom-footer">
+        <div class="contain">
+            <div style="align-items:center" class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12 btm-footer-links">
+                    <p>
+                        Developed and designed by Iyar, Efrat and Rivka
+                    </p>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12 copyright">
+                    <p>
+                        All rights reserved
+                    </p>
                 </div>
             </div>
-
-
-        </section>
-
-        <section id="bottom-footer">
-            <div class="contain">
-                <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-12 btm-footer-links">
-                        <a href="#">Privacy Policy</a>
-                        <a href="#">Terms of Use</a>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-12 copyright">
-                        Developed by <a href="#">Aspire Software Solutions</a> designed by <a href="#">Designing Team</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div id="panel">
-            <div id="panel-admin">
-                <div class="panel-admin-box">
-                    <div id="tootlbar_colors">
-                        <button class="color" style="background-color:#1abac8;" onclick="mytheme(0)"></button>
-                        <button class="color" style="background-color:#ff8a00;" onclick="mytheme(1)"> </button>
-                        <button class="color" style="background-color:#b4de50;" onclick="mytheme(2)"> </button>
-                        <button class="color" style="background-color:#e54e53;" onclick="mytheme(3)"> </button>
-                        <button class="color" style="background-color:#1abc9c;" onclick="mytheme(4)"> </button>
-                        <button class="color" style="background-color:#159eee;" onclick="mytheme(5)"> </button>
-                    </div>
-                </div>
-
-            </div>
-            <a class="open" href="#"><span><i class="fa fa-gear fa-spin"></i></span></a>
         </div>
-    </body>
+    </section>
+
+    <div id="panel">
+        <div id="panel-admin">
+            <div class="panel-admin-box">
+                <div id="tootlbar_colors">
+                    <button class="color" style="background-color:#1abac8;" onclick="mytheme(0)"></button>
+                    <button class="color" style="background-color:#ff8a00;" onclick="mytheme(1)"> </button>
+                    <button class="color" style="background-color:#b4de50;" onclick="mytheme(2)"> </button>
+                    <button class="color" style="background-color:#e54e53;" onclick="mytheme(3)"> </button>
+                    <button class="color" style="background-color:#1abc9c;" onclick="mytheme(4)"> </button>
+                    <button class="color" style="background-color:#159eee;" onclick="mytheme(5)"> </button>
+                </div>
+            </div>
+
+        </div>
+        <a class="open" href="#"><span><i class="fa fa-gear fa-spin"></i></span></a>
+    </div>
+</body>
 </html>
 
 

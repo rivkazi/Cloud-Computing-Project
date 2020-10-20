@@ -184,3 +184,15 @@ C:\Users\iyar\Documents\תרגילי בית\שנה ג\מיחשוב ענן\Projec
 C:\Users\iyar\Documents\תרגילי בית\שנה ג\מיחשוב ענן\Project\DrugsProject\DrugsProject\obj\Debug\DrugsProject.csproj.CopyComplete
 C:\Users\iyar\Documents\תרגילי בית\שנה ג\מיחשוב ענן\Project\DrugsProject\DrugsProject\obj\Debug\DrugsProject.dll
 C:\Users\iyar\Documents\תרגילי בית\שנה ג\מיחשוב ענן\Project\DrugsProject\DrugsProject\obj\Debug\DrugsProject.pdb
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DrugsProject\bin\Google.Apis.Drive.v3.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DrugsProject\bin\Google.Apis.Auth.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DrugsProject\bin\Google.Apis.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DrugsProject\bin\Google.Apis.Core.dll
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DrugsProject\bin\Google.Apis.Drive.v3.pdb
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DrugsProject\bin\Google.Apis.Drive.v3.xml
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DrugsProject\bin\Google.Apis.Auth.pdb
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DrugsProject\bin\Google.Apis.Auth.xml
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DrugsProject\bin\Google.Apis.pdb
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DrugsProject\bin\Google.Apis.xml
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DrugsProject\bin\Google.Apis.Core.pdb
+C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\DrugsProject\bin\Google.Apis.Core.xml
