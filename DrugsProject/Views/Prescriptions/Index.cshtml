@@ -24,14 +24,22 @@
 
 <section id="faq">
     <div class="section-heading text-center">
-        @Html.DisplayHeaderColorful("מרשמי", "הפציינט", 2, "fa fa-plus", $"../Create/{Model.FirstOrDefault().PatientId}")
+        @Html.DisplayHeaderColorful("מרשמי", "הפציינט", 2, "fa fa-plus", $"../Create/{ViewBag.Patient}")
     </div>
     <div class="titlebar">
         @{
             foreach (var item in Model)
             {
                 var medicine = item.GetMedicineForPrescription();
-                var doctor = item.GetDoctorForPrescription();
+                DrugsProject.Models.Doctor.DoctorVM d;
+                if (item.DoctorId == -1)
+                {
+                    d = new DrugsProject.Models.Doctor.DoctorVM(RouteConfig.manager);
+                }
+                else
+                {
+                    d = item.GetDoctorForPrescription();
+                }
                 <div class="panel" dir="rtl">
                     <div class="panel-heading" role="tab" id="headingOne">
                         <h4 class="panel-title">
@@ -45,7 +53,7 @@
                     <div id="@item.Id" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                         <div class="panel-body">
                             @medicine.commercialName <br />
-                            הונפק ע"י: ד"ר @doctor.fullName <br />
+                            הונפק ע"י: ד"ר @d.fullName <br />
                             גורם: @item.cause <br />
                             תאריך סיום נטילת התרופה: @item.endDate.ToString("dd/MM/yyyy")
                         </div>

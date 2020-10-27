@@ -61,15 +61,10 @@ namespace DrugsProject.Models
         {
             IBL bl = new BlClass();
             string options = $"<option disabled selected>בחר שם גנרי</option>";
-            /*change the NDC list*/
-            Dictionary<string, string> ndc = new Dictionary<string, string>() {
-                { "advil","01123"},
-                {"acamol","55678"},
-                {"optalgin","98989"},
-                {"med", "65177" } };
+            IEnumerable<MedicineWrraper> ndc = bl.GetAllNDC();
             foreach (var number in ndc)
             {
-                options += $"<option value ='{number.Key}'>{number.Key}</option>";
+                options += $"<option value ='{number.genericName}'>{number.genericName}</option>";
             }
             return new MvcHtmlString($"<select class='form-control'>{options}</select>");
         }
