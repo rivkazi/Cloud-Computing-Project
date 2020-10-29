@@ -1,11 +1,6 @@
-C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BE\bin\Debug\BE.dll
-C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BE\bin\Debug\BE.pdb
-C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BE\obj\Debug\BE.csproj.CoreCompileInputs.cache
-C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BE\obj\Debug\BE.dll
-C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BE\obj\Debug\BE.pdb
 C:\Users\iyar\Documents\תרגילי בית\שנה ג\מיחשוב ענן\Project\DrugsProject\BE\bin\Debug\BE.dll
 C:\Users\iyar\Documents\תרגילי בית\שנה ג\מיחשוב ענן\Project\DrugsProject\BE\bin\Debug\BE.pdb
 C:\Users\iyar\Documents\תרגילי בית\שנה ג\מיחשוב ענן\Project\DrugsProject\BE\obj\Debug\BE.csproj.CoreCompileInputs.cache
 C:\Users\iyar\Documents\תרגילי בית\שנה ג\מיחשוב ענן\Project\DrugsProject\BE\obj\Debug\BE.dll
 C:\Users\iyar\Documents\תרגילי בית\שנה ג\מיחשוב ענן\Project\DrugsProject\BE\obj\Debug\BE.pdb
-C:\Users\zizovirivka\Desktop\לימודים\מחשוב ענן\DrugProject\iyar-avital\Drug-Project\BE\obj\Debug\BE.csprojAssemblyReference.cache
+C:\Users\iyar\Documents\תרגילי בית\שנה ג\מיחשוב ענן\Project\Drug-Project\BE\obj\Debug\BE.csprojAssemblyReference.cache

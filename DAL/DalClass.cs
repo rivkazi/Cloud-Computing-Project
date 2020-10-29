@@ -20,23 +20,6 @@ namespace DAL
     {
 
         #region ADD
-        public void AddCronicalDisease(CronicalDisease cronicalDisease)
-        {
-            try
-            {
-                using (var ctx = new DrugsContext())
-                {
-                    ctx.CronicalDiseases.Add(cronicalDisease);
-                    ctx.SaveChanges();
-                }
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-        }
-
         public void AddDoctor(Doctor doctor)
         {
             try
@@ -233,17 +216,15 @@ namespace DAL
                 return pres;
             }  
         }
-        public IEnumerable<CronicalDisease> GetCronicalDiseases(Func<CronicalDisease, bool> predicat = null)
+
+        public IEnumerable<MedicineWrraper> GetAllNDC()
         {
             using (var ctx = new DrugsContext())
             {
-                if (predicat == null)
-                    return ctx.CronicalDiseases.ToList();
-
-                var pres = ctx.CronicalDiseases.Where(predicat).ToList();
-                return pres;
+                  return ctx.Name_NDC.ToList();
             }
         }
+
         #endregion
 
         #region UPDATE
@@ -440,10 +421,12 @@ namespace DAL
             try
             {
                 Root2 jsonClass = JsonConvert.DeserializeObject<Root2>(jsonText);
-                Comment = Comment + jsonClass.interactiondata.fullInteractionTypeGroup.fullInteractionType.comment;
+                //Comment = Comment + jsonClass.interactiondata.fullInteractionTypeGroup.fullInteractionType.comment;
                 Pair = jsonClass.interactiondata.fullInteractionTypeGroup.fullInteractionType.interactionPair;
+       
                 foreach (var pair in Pair)
                 {
+                    Comment += pair.description;
                     Severity.Add(pair.severity);
                 }
 
@@ -459,7 +442,7 @@ namespace DAL
             bool flag = false;
             for (int i = 0; i < Severity.Count(); i++)
             {
-                if (Severity[i] == "high")
+                if (Severity[i] == "high" || Severity[i] == "N/A")
                     flag = true; //there's dangerous in the interaction between them
             }
             strings.Add(flag.ToString());

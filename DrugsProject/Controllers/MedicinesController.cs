@@ -99,9 +99,10 @@ namespace DrugsProject.Controllers
         {
             try
             {
+                IBL bL = new BlClass();
+                medicine.NDC = bL.GetNDCForMedicine(medicine.genericaName);
                 if (ModelState.IsValid)
                 {
-                    IBL bL = new BlClass();
                     bL.UpdateMedicine(medicine.Current, medicine.img);
                     ViewBag.TitlePopUp = "עבר בהצלחה";
                     ViewBag.Message = "התרופה עודכנה בהצלחה במאגר התרופות";

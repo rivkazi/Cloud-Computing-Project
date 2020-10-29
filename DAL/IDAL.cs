@@ -15,7 +15,6 @@ namespace DAL
         void AddMedicine(Medicine medicine, HttpPostedFileBase httpPostedFile);
         void AddPatient(Patient patient);
         void AddPrescription(Prescription prescription);
-        void AddCronicalDisease(CronicalDisease cronicalDisease);
 
         //UPDATE
         void UpdateDoctor(Doctor doctor);
@@ -37,7 +36,7 @@ namespace DAL
         IEnumerable<Medicine> GetMedicines(Func<Medicine, bool> predicat = null);
         IEnumerable<Patient> GetPatients(Func<Patient, bool> predicat = null);
         IEnumerable<Prescription> GetPrescriptions(Func<Prescription, bool> predicat = null);
-        IEnumerable<CronicalDisease> GetCronicalDiseases(Func<CronicalDisease, bool> predicat = null);
+        IEnumerable<MedicineWrraper> GetAllNDC();
 
         //IMAGE SERVICE
         void GetTags(ImageDetails CurrentImage);

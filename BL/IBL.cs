@@ -15,7 +15,6 @@ namespace BL
         void AddMedicine(Medicine medicine, HttpPostedFileBase httpPostedFile); //This function adds a medicine to the system
         void AddPatient(Patient patient); //This function adds a patient to the system
         void AddPrescription(Prescription prescription); //This function adds a prescription to the system
-        void AddCronicalDisease(CronicalDisease prescription); //This function adds a chronical disease to the system
 
         //UPDATE
         void UpdateDoctor(Doctor doctor); //This function updates a chosen doctor from the system
@@ -38,14 +37,13 @@ namespace BL
         IEnumerable<Medicine> GetMedicines(Func<Medicine, bool> predicat = null); //This function returns a collection of all the medicines in the system
         IEnumerable<Patient> GetPatients(Func<Patient, bool> predicat = null); //This function returns a collection of all the patients in the system
         IEnumerable<Prescription> GetPrescriptions(Func<Prescription, bool> predicat = null); //This function returns a collection of all the prescriptions in the system
-        IEnumerable<CronicalDisease> GetCronicalDiseases(Func<CronicalDisease, bool> predicat = null); //This function returns a collection of all the chronical diseases in the system
+        IEnumerable<MedicineWrraper> GetAllNDC();
         List<string> GetNDCForAllActiveMedicine(int patientID); //This function returns a collection of all the NDC codes of the medicines in the system
 
         //FILTER
         IEnumerable<Prescription> FilterPrescriptionsForPatient(int patientID); //This function returns all the prescriptions of a specific patient by his ID
         IEnumerable<Prescription> FilterActivePrescriptionsForPatient(int patientID); //This function returns all the current prescriptions of a specific patient by his ID
         IEnumerable<Medicine> FilterActiveMedicinesForPatient(int patientID); //This function returns all the current medicines of a specific patient by his ID
-        IEnumerable<CronicalDisease> FilterCronicalDiseasesForPatient(int patientID); //This function returns all the chronical diseases of a specific patient by his ID
 
         //DISPOSE
         void Dispose(bool disp);

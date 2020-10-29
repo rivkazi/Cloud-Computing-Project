@@ -14,23 +14,6 @@ namespace BL
     public class BlClass : IBL
     {
         #region ADD
-        public void AddCronicalDisease(CronicalDisease cronicalDisease)
-        {
-            try
-            {
-                IDAL dal = new DalClass();
-                IEnumerable<CronicalDisease> diseases = dal.GetCronicalDiseases(cd => cd.description == cronicalDisease.description);
-                if (diseases.Count() == 0)
-               
-                dal.AddCronicalDisease(cronicalDisease);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
         public void AddDoctor(Doctor doctor)
         {
             try
@@ -63,7 +46,7 @@ namespace BL
                     dal.AddMedicine(medicine, httpPostedFile);
                 }
                 else
-                    throw new Exception("תמונה זו אינה מתארת תרופה. אנא נסה שוב עם תוכן מתאים יותר." + "\n"
+                    throw new Exception("תמונה זו אינה מתארת תרופה. אנא נסה שוב עם תוכן מתאים יותר." 
                          + " המלצתנו היא שתבחר תמונה אחרת לתרופה שברצונך להוסיף למערכת.");
             }
             catch (Exception ex)
@@ -102,10 +85,13 @@ namespace BL
             //Obtaining a NDC number of all active prescriptions for this patient
             List<string> NDCforPatientMedicines = GetNDCForAllActiveMedicine(prescription.PatientId);
 
+            Medicine med = GetMedicine(prescription.MedicineId);
+            NDCforPatientMedicines.Add(med.NDC);
+
             List<string> Result = IsConflict(NDCforPatientMedicines);
-            bool isConflict = Result[1] == "true" ? true : false;
+            bool isConflict = Result[1] == "True" ? true : false;
             if (isConflict)
-                throw new Exception(Result[2]);
+                throw new Exception("נמצא ניגוד מרכיבים בין התרופות שהמטופל נוטל לבין זו החדשה. מחובתנו לדאוג לבריאות המטופל ולכן לא נוסיף לו מרשם זה. פירוט הודעת השגיאה: "+"\n" + Result[0]);
             else
                 dal.AddPrescription(prescription);
         }
@@ -231,11 +217,13 @@ namespace BL
             IDAL dal = new DalClass();
             return dal.GetPrescriptions(predicat);
         }
-        public IEnumerable<CronicalDisease> GetCronicalDiseases(Func<CronicalDisease, bool> predicat = null)
+
+        public IEnumerable<MedicineWrraper> GetAllNDC()
         {
             IDAL dal = new DalClass();
-            return dal.GetCronicalDiseases(predicat);
+            return dal.GetAllNDC();
         }
+
 
         #endregion
 
@@ -292,11 +280,6 @@ namespace BL
             return medicines;
         }
 
-        public IEnumerable<CronicalDisease> FilterCronicalDiseasesForPatient(int patientID)
-        {
-            IDAL dal = new DalClass();
-            return dal.GetCronicalDiseases(pre => pre.PatientId == patientID);
-        }
         #endregion
 
         #region VALIDATION
@@ -362,12 +345,12 @@ namespace BL
                 doctor.password = doctorSign.password;
                 dal.UpdateDoctor(doctor);
                 SendMail(doctor.email, "ההרשמה עברה בהצלחה", doctor.privateName + " " + doctor.familyName, "ברוכים הבאים לאתר שלנו, שמחים שהצטרפת." + "<br/>"
-                         + "נשמח לעמוד לעזרתך בכל פניה ובקשה ומקווים שתהיה לך חוויה נעימה." + "<br/>" + "תודה, צוות WiseCare");
+                         + "נשמח לעמוד לעזרתך בכל פניה ובקשה ומקווים שתהיה לך חוויה נעימה." + "<br/>" + "תודה, צוות אח לאח");
             }
             else if(doctor == null)
             {
                 SendMail(doctorSign.email, "ההרשמה נכשלה", "", "לצערנו, נסיון ההרשמה שלך לאתרנו נכשל." + "<br/>"
-                         + "אנא נסה שוב בעוד חצי שנה ונשמח לעמוד לעזרתך." + "<br/>" + "תודה, צוות WiseCare");
+                         + "אנא נסה שוב בעוד חצי שנה ונשמח לעמוד לעזרתך." + "<br/>" + "תודה, צוות אח לאח");
                 throw new Exception("ניסיון הרשמתך לאתרנו נכשל, אנא בדוק את תיבת המייל שלך עבור פרטים נוספים.");
             }
             else

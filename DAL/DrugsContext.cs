@@ -16,7 +16,7 @@ namespace DAL
         // For more information refer to the documentation:
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
 
-        public DrugsContext() : base("name=DrugsContext6")
+        public DrugsContext() : base("name=AchDB")
         {
         }
 
@@ -33,7 +33,6 @@ namespace DAL
         public DbSet<BE.Patient> Patients { get; set; }
         public DbSet<BE.Doctor> Doctors { get; set; }
         public DbSet<BE.Prescription> Prescriptions { get; set; }
-        public DbSet<BE.CronicalDisease> CronicalDiseases { get; set; }
         public DbSet<BE.MedicineWrraper> Name_NDC { get; set; }
 
     }

@@ -16,6 +16,7 @@ namespace DrugsProject.Controllers
         {
             IBL bl = new BlClass();
             var prescriptions = bl.GetPrescriptions(pre => pre.PatientId == id).Select(pr => new PrescriptionVM(pr));
+            ViewBag.Patient = id;
             return View(prescriptions);   
         }
 
@@ -57,11 +58,13 @@ namespace DrugsProject.Controllers
                 if (ModelState.IsValid)
                 {
                     IBL bL = new BlClass();
-                    prescription.DoctorId = 1;//RouteConfig.doctor.Id;
+                    prescription.DoctorId = RouteConfig.doctor != null ? RouteConfig.doctor.Id : -1;
                     bL.AddPrescription(prescription.Current);
                     ViewBag.TitlePopUp = "עבר בהצלחה";
                     ViewBag.Message = "המרשם נוסף בהצלחה";
-                    return View("../Home/Index");
+                    var prescriptions = bL.GetPrescriptions(pre => pre.PatientId == prescription.PatientId).Select(pr => new PrescriptionVM(pr));
+                    ViewBag.Patient = prescription.PatientId;
+                    return View("Index", prescriptions);
                 }
                 return View(prescription);
             }
